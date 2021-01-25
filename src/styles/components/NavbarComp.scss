@@ -1,0 +1,12 @@
+@import './variables.scss';
+
+
+.navbarComp{
+    .bg-dark{
+        background-color: $mainBackgroundColor;
+    }
+    .link{
+        margin-left: 15px;
+    }
+    border-bottom: 5px solid $borderColor;
+}
