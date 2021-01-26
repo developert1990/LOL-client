@@ -1,7 +1,8 @@
 export const API_BASE = 'https://react-lol-app.herokuapp.com';
 export const USER_BASE = 'https://react-lol-app.herokuapp.com/user';
+export const TEST_BASE = 'http://localhost:7080';
 export const API = {
-    GET_SUMMONER_BY_NAME: `${API_BASE}/lol/summoner/v4/summoners/by-name`,
+    GET_SUMMONER_BY_NAME: `${TEST_BASE}/lol/summoner/v4/summoners/by-name`,
     GET_SUMMONER_DETAIL_BY_ID: `${API_BASE}/lol/league/v4/entries/by-summoner`,
     GET_CHAMPION_SQUARE_IMG: `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion`,
     GET_ITEMS_IMG: `https://ddragon.leagueoflegends.com/cdn/10.18.1/img/item`,
