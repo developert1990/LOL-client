@@ -8,22 +8,23 @@ import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import { changeRegion } from '../actions/regionAction';
 import { Link } from 'react-router-dom';
 import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
+import { UserMatchHistory } from '../components/UserMatchHistory';
 
 export const SearchPage = () => {
     const USER_ID = 'user account id';
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
-    console.log('region: ', region)
+    // console.log('region: ', region)
     const [summonerID, setSummonerID] = useState('');
     const [errorMsg, setErrorMsg] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [inputText, setInputText] = useState('');
     const [{ id, name, profileIconId, level, accountId }, setSummonerInfo] = useState<SummonerInfoType>({
-        id: undefined,
+        id: '',
         name: '',
         profileIconId: 0,
         level: 0,
-        accountId: undefined,
+        accountId: '',
     });
     const [{ queueType, tier, rank, leaguePoints, wins, losses }, setSummonerDetail] = useState<SummonerDetailType>({
         queueType: '',
@@ -41,20 +42,23 @@ export const SearchPage = () => {
         const newInput = e.target.value;
         setSummonerID(newInput);
     }
-
+    // console.log("1")
+    // console.log("2")
+    // 비동기 - 기다려주지 않는다
+    // 동기 - 기다려준다.
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (summonerID.length > 0) {
-            console.log(`${API.GET_SUMMONER_BY_NAME}/${summonerID}?region=${region}`)
+            // console.log(`${API.GET_SUMMONER_BY_NAME}/${summonerID}?region=${region}`)
             // const response = await fetch(`${API.GET_SUMMONER_BY_NAME}/${summonerID}?region=${region}`);
             const response = await fetch(`${TEST_BASE}/summonorById/proxy/${summonerID}/${region}`);
             const data = await response.json();
             // console.log(summonerID);
             // console.log(data);
             if (data.status === undefined) { // data를 뽑아오면 status 가 나타나지 않고 data가 없을경우에 data.status.status_code: 404 이런식으로 리턴 된다.
-                console.log('data 있음')
+                // console.log('data 있음')
                 // 유저의 고유 아이디를 로컬스토리지에 저장
                 localStorage.setItem(USER_ID, data.id);
-                console.log(data.id);
+                // console.log(data.id);
 
                 setErrorMsg(false)
                 setSummonerInfo({
@@ -65,7 +69,7 @@ export const SearchPage = () => {
                     accountId: data.accountId,
                 });
             } else {
-                console.log('data 없음')
+                // console.log('data 없음')
                 setErrorMsg(true);
             }
         }
@@ -86,10 +90,10 @@ export const SearchPage = () => {
         if (id) {
             (async () => {
                 // const response2 = await fetch(`${API.GET_SUMMONER_DETAIL_BY_ID}/18DGpAfpkizFV_QeZruhnqFhjao8lcwqhzHKxbOcqfFRXA`)
-                console.log(id);
+                // console.log(id);
                 // const response = await fetch(`${API.GET_SUMMONER_DETAIL_BY_ID}/${id}?region=${region}`)
                 const response = await fetch(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-                console.log('3');
+                // console.log('3');
                 const data = await response.json();
                 // console.log(data);
                 const typedData = data as SummonerDetailType[];
@@ -112,11 +116,11 @@ export const SearchPage = () => {
 
     // 해당유저의 게임 했던것들 정보 가져옴 총 100개
     useEffect(() => {
-        console.log('match')
+        // console.log('match')
         if (tier) {
             (
                 async () => {
-                    console.log(accountId)
+                    // console.log(accountId)
                     // const response = await fetch(`${API.GET_MATCH_ID}/${accountId}?region=${region}`)
                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
                     const data = await response.json();
@@ -229,6 +233,13 @@ export const SearchPage = () => {
                                                 />;
                             </div>
                                         </div>
+
+                                        {
+                                            // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
+                                            gameIdInfo.length > 0 && accountId &&
+                                            <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} />
+
+                                        }
                                     </div>
                                 }
                             </div>

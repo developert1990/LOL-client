@@ -1,9 +1,9 @@
 export interface SummonerInfoType {
-    id: string | undefined;
+    id: string;
     name: string;
     profileIconId: number;
     level: number;
-    accountId: string | undefined;
+    accountId: string;
 }
 
 export interface SummonerDetailType {
@@ -29,4 +29,350 @@ export interface GameMatcheType {
     matches: MatchType[];
     startIndex: number;
     totalGames: number;
+}
+
+
+
+// 챔피언 정보 타입
+export interface ChampDetailType {
+    blurb: string;
+    id: string;
+    image: ChampImageType;
+    info: ChampInfo;
+    key: string;
+    name: string;
+    partype: string;
+    stats: ChampStatsType;
+    tags: string[];
+    title: string;
+    version: string;
+}
+
+export interface ChampInfoType {
+    attack: number;
+    defense: number;
+    difficulty: number;
+    magic: number;
+}
+
+export interface ChampImageType {
+    full: string;
+    group: string;
+    h: number;
+    sprite: string;
+    w: number;
+    x: number;
+    y: number;
+}
+
+export interface ChampStatsType {
+    armor: number;
+    armorperlevel: number;
+    attackdamage: number;
+    attackdamageperlevel: number;
+    attackrange: number;
+    attackspeed: number;
+    attackspeedperlevel: number;
+    crit: number;
+    critperlevel: number;
+    hp: number;
+    hpperlevel: number;
+    hpregen: number;
+    hpregenperlevel: number;
+    movespeed: number;
+    mp: number;
+    mpperlevel: number;
+    mpregen: number;
+    mpregenperlevel: number;
+    spellblock: number;
+    spellblockperlevel: number;
+}
+
+
+// 스펠 정보 타입
+
+export interface SpellDetailType {
+    cooldown: [number];
+    cooldownBurn: string;
+    cost: [number];
+    costBurn: string;
+    costType: string;
+    datavalues: {}
+    description: string;
+    effect: null;
+    effectBurn: string[];
+    id: string;
+    image: SpellImageType;
+    key: string;
+    maxammo: string;
+    maxrank: number;
+    modes: string[];
+    name: string;
+    range: [number];
+    rangeBurn: string;
+    resource: string;
+    summonerLevel: 4
+    tooltip: string;
+
+}
+
+export interface SpellImageType {
+    full: string;
+    group: string;
+    h: number;
+    sprite: string;
+    w: number;
+    x: number;
+    y: number;
+}
+
+
+// 룬 정보 타입
+
+export interface RuneBigType {
+    icon: string;
+    id: number;
+    key: string;
+    name: string;
+    slots: RuneSlotsType[];
+}
+
+export interface RuneSlotsType {
+    runes: RuneSmallType[];
+}
+
+export interface RuneSmallType {
+    icon: string;
+    id: number;
+    key: string;
+    longDesc: string;
+    name: string;
+    shortDesc: string;
+}
+
+
+
+// 매치 히스토리에서 게임정보 타입
+export interface MatchedGameType {
+    gameCreation: number;
+    gameDuration: number;
+    gameId: number;
+    gameMode: string;
+    gameType: string;
+    gameVersion: string;
+    mapId: number;
+    participantIdentities: ParticipantIdentitiesType[];
+    participants: ParticipantsType[];
+    platformId: string;
+    queueId: number;
+    seasonId: number;
+    teams: TeamsType[];
+}
+
+export interface ParticipantIdentitiesType {
+    participantId: number;
+    player: PlayerType;
+}
+
+export interface PlayerType {
+    accountId: string;
+    currentAccountId: string;
+    currentPlatformId: string;
+    matchHistoryUri: string;
+    platformId: string;
+    profileIcon: number;
+    summonerId: string;
+    summonerName: string;
+}
+
+
+export interface TeamsType {
+    bans: GameBansType[];
+    baronKills: number;
+    dominionVictoryScore: number;
+    dragonKills: number;
+    firstBaron: boolean;
+    firstBlood: boolean;
+    firstDragon: boolean;
+    firstInhibitor: boolean;
+    firstRiftHerald: boolean;
+    firstTower: boolean;
+    inhibitorKills: number;
+    riftHeraldKills: number;
+    teamId: number;
+    towerKills: number;
+    vilemawKills: number;
+    win: string;
+}
+
+export interface GameBansType {
+    championId: number;
+    pickTurn: number;
+}
+
+export interface ParticipantsType {
+    championId: number;
+    participantId: number;
+    spell1Id: number;
+    spell2Id: number;
+    stats: ParticipantsStatsType;
+    teamId: number;
+    timeline: ParticipantsTimelineType;
+}
+
+export interface ParticipantsStatsType {
+    assists: number;
+    champLevel: number;
+    combatPlayerScore: number;
+    damageDealtToObjectives: number;
+    damageDealtToTurrets: number;
+    damageSelfMitigated: number;
+    deaths: number;
+    doubleKills: number;
+    firstBloodAssist: false
+    firstBloodKill: false
+    firstInhibitorAssist: true
+    firstInhibitorKill: false
+    firstTowerAssist: true
+    firstTowerKill: false
+    goldEarned: number;
+    goldSpent: number;
+    inhibitorKills: number;
+    item0: number;
+    item1: number;
+    item2: number;
+    item3: number;
+    item4: number;
+    item5: number;
+    item6: number;
+    killingSprees: number;
+    kills: number;
+    largestCriticalStrike: number;
+    largestKillingSpree: number;
+    largestMultiKill: number;
+    longestTimeSpentLiving: number;
+    magicDamageDealt: number;
+    magicDamageDealtToChampions: number;
+    magicalDamageTaken: number;
+    neutralMinionsKilled: number;
+    neutralMinionsKilledEnemyJungle: number;
+    neutralMinionsKilledTeamJungle: number;
+    objectivePlayerScore: number;
+    participantId: number;
+    pentaKills: number;
+    perk0: number;
+    perk0Var1: number;
+    perk0Var2: number;
+    perk0Var3: number;
+    perk1: number;
+    perk1Var1: number;
+    perk1Var2: number;
+    perk1Var3: number;
+    perk2: number;
+    perk2Var1: number;
+    perk2Var2: number;
+    perk2Var3: number;
+    perk3: number;
+    perk3Var1: number;
+    perk3Var2: number;
+    perk3Var3: number;
+    perk4: number;
+    perk4Var1: number;
+    perk4Var2: number;
+    perk4Var3: number;
+    perk5: number;
+    perk5Var1: number;
+    perk5Var2: number;
+    perk5Var3: number;
+    perkPrimaryStyle: number;
+    perkSubStyle: number;
+    physicalDamageDealt: number;
+    physicalDamageDealtToChampions: number;
+    physicalDamageTaken: number;
+    playerScore0: number;
+    playerScore1: number;
+    playerScore2: number;
+    playerScore3: number;
+    playerScore4: number;
+    playerScore5: number;
+    playerScore6: number;
+    playerScore7: number;
+    playerScore8: number;
+    playerScore9: number;
+    quadraKills: number;
+    sightWardsBoughtInGame: number;
+    statPerk0: number;
+    statPerk1: number;
+    statPerk2: number;
+    timeCCingOthers: number;
+    totalDamageDealt: number;
+    totalDamageDealtToChampions: number;
+    totalDamageTaken: number;
+    totalHeal: number;
+    totalMinionsKilled: number;
+    totalPlayerScore: number;
+    totalScoreRank: number;
+    totalTimeCrowdControlDealt: number;
+    totalUnitsHealed: number;
+    tripleKills: number;
+    trueDamageDealt: number;
+    trueDamageDealtToChampions: number;
+    trueDamageTaken: number;
+    turretKills: number;
+    unrealKills: number;
+    visionScore: number;
+    visionWardsBoughtInGame: number;
+    wardsKilled: number;
+    wardsPlaced: number;
+    win: boolean;
+}
+
+export interface ParticipantsTimelineType {
+    lane: string;
+    participantId: number;
+    role: string;
+}
+
+
+export interface SpellsIngameType {
+    spell1: number;
+    spell2: number;
+}
+
+export interface RunesIngameType {
+    primaryRune: number;
+    subRune: number;
+}
+
+
+
+
+// game images type
+
+export interface GameImageType {
+    createdGame: number;
+    gameDuration: number;
+    teams: TeamsType[];
+    gameId: number;
+    champImage: string;
+    item0: number;
+    item1: number;
+    item2: number;
+    item3: number;
+    item4: number;
+    item5: number;
+    item6: number;
+    spell1: any;
+    spell2: any;
+    gold: number;
+    ward: number;
+    kills: number;
+    assists: number;
+    deaths: number;
+    minionKillded: number;
+    rate: string;
+    gameResult: string;
+    level: number;
+    mainRune: any;
+    subRune: any;
 }
