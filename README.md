@@ -1,3 +1,6 @@
+<!-- This Application -->
+when this game is updated, I should change the version of items, champs and spells.. at config > index.ts
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

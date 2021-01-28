@@ -1,17 +1,18 @@
 export const API_BASE = 'https://react-lol-app.herokuapp.com';
 export const USER_BASE = 'https://react-lol-app.herokuapp.com/user';
 export const TEST_BASE = 'http://localhost:7080';
+export const GAME_VERSION = "11.2.1";
 export const API = {
     GET_SUMMONER_BY_NAME: `${TEST_BASE}/lol/summoner/v4/summoners/by-name`,
     GET_SUMMONER_DETAIL_BY_ID: `${API_BASE}/lol/league/v4/entries/by-summoner`,
-    GET_CHAMPION_SQUARE_IMG: `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion`,
-    GET_ITEMS_IMG: `https://ddragon.leagueoflegends.com/cdn/10.18.1/img/item`,
-    GET_SPELLS_IMG: `https://ddragon.leagueoflegends.com/cdn/10.18.1/img/spell`,
+    GET_CHAMPION_SQUARE_IMG: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/champion`,
+    GET_ITEMS_IMG: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/item`,
+    GET_SPELLS_IMG: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/spell`,
     GET_RUNES_IMG: `https://ddragon.leagueoflegends.com/cdn/img`,
-    GET_CHAMPIONS: `https://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion`,
+    GET_CHAMPIONS: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/data/en_US/champion`,
     GET_SKINS: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash`,
     GET_RANKS: `${API_BASE}/lol/league-exp/v4/entries/RANKED_SOLO_5x5`,
-    GET_PROFILEICON: `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/profileicon`,
+    GET_PROFILEICON: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/profileicon`,
     GET_MATCH_ID: `${API_BASE}/lol/match/v4/matchlists/by-account`,
     GET_MATCH_DETAILS: `${API_BASE}/lol/match/v4/matches`,
     GET_MASTERY: `${API_BASE}/lol/champion-mastery/v4/champion-masteries/by-summoner`

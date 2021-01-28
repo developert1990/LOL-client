@@ -196,50 +196,62 @@ export const SearchPage = () => {
                                 {
                                     name.length > 0 && tier.length > 0 &&
                                     <div>
-                                        <Link className="logo-name-link link" to={
-                                            {
-                                                pathname: '/search/userInfo/userMatchHistory',
-                                                state: {
-                                                    gameIdInfo: gameIdInfo,
-                                                    accountId: accountId,
-                                                    id: id,
+                                        <div className="summoner_info_top">
+                                            <Link className="logo-name-link link" to={
+                                                {
+                                                    pathname: '/search/userInfo/userMatchHistory',
+                                                    state: {
+                                                        gameIdInfo: gameIdInfo,
+                                                        accountId: accountId,
+                                                        id: id,
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        >
-                                            <img className="logo-img" src={`${API.GET_PROFILEICON}/${profileIconId}.png`} alt="profileIcon" />
-                                            <span className="level">{level}</span>
-                                            <span className="name">{name}</span>
-                                        </Link>
-                                        <div className="detail-info">
-                                            <img className="emblem-img" src={`/images/ranked-emblems/${tier}.png`} alt="tier-emblem" />
-                                            <div className="detail-parent">
-                                                <div className="detail">
-                                                    <span className="tier">{tier}</span>
-
-                                                    <span className="lp">LP: {leaguePoints} LP</span>
-                                                    <span className="win-lost">{`${wins} W ${losses} L`}</span>
-                                                    <span className="rank">{rank}</span>
-                                                    <span className="queue-type">{queueType}</span>
-                                                </div>
-                                            </div>
-                                            <div className="circle">
-                                                {/* https://github.com/kevinsqi/react-circular-progressbar 여기 참고하면됨 */}
-                                                <CircularProgressbar strokeWidth={10}
-                                                    value={Number(`${Math.round(wins / (wins + losses) * 100)}`)}
-                                                    text={`${Math.round(wins / (wins + losses) * 100)}%`} className="percentage-circle"
-                                                    styles={buildStyles({ textColor: 'white', pathColor: '#2E6DEB', trailColor: '#F05950' })}
-                                                />;
-                            </div>
+                                            >
+                                                <img className="logo-img" src={`${API.GET_PROFILEICON}/${profileIconId}.png`} alt="profileIcon" />
+                                                <span className="level">{level}</span>
+                                                <span className="name">{name}</span>
+                                            </Link>
                                         </div>
 
-                                        {
-                                            // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
-                                            gameIdInfo.length > 0 && accountId &&
-                                            <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} />
+                                        <div className="summoner_info_bottom">
+                                            <div className="summoner_info_bottom_left">
 
-                                        }
+                                                <div className="detail-info custom_card">
+                                                    <div className="detail_title">Rank</div>
+                                                    <div className="detail-parent">
+                                                        <img className="emblem-img" src={`/images/ranked-emblems/${tier}.png`} alt="tier-emblem" />
+
+                                                        <div className="detail">
+                                                            <span className="queue-type">{queueType}</span>
+                                                            <div className="tier-lp">
+                                                                <span className="tier">{tier} <span className="rank">{rank}</span> </span>
+                                                                <span className="lp"> / {leaguePoints} LP</span>
+                                                            </div>
+                                                            <span className="win-lost">{`${wins} W ${losses} L`}</span>
+                                                            <div className="winRate-totalGame">
+                                                                <span className="winRate">{`${Math.round(wins / (wins + losses) * 100)}%`}</span>
+                                                                <span className="totalGame">{wins + losses} games</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="custom_card detail_graph">
+                                                    역대 기록 그래프
+                                                </div>
+
+                                            </div>
+                                            <div className="summoner_info_bottom_right">
+                                                {
+                                                    // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
+                                                    gameIdInfo.length > 0 && accountId &&
+                                                    <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} />
+
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                 }
                             </div>

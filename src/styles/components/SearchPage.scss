@@ -1,5 +1,3 @@
-
-
 body {
     background: #f2f2f2;
     font-family: 'Open Sans', sans-serif;
@@ -15,7 +13,7 @@ body {
 
 .searchTerm {
     width: 100%;
-    border: 3px solid #00B4CC;
+    border: 3px solid $cardColor_1;
     border-right: none;
     padding: 5px;
     height: 36px;
@@ -25,14 +23,14 @@ body {
 }
 
 .searchTerm:focus {
-    color: #00B4CC;
+    color:$cardColor_1;
 }
 
 .searchButton {
     width: 40px;
     height: 36px;
-    border: 1px solid #00B4CC;
-    background: #00B4CC;
+    border: 1px solid $cardColor_1;
+    background:$cardColor_1;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -40,116 +38,153 @@ body {
     font-size: 20px;
     padding: 0 1px 4px 0;
 }
-.summoner-info{
-    
+
+.summoner-info {
+
     display: flex;
     flex-direction: column;
     align-items: center;
 
     margin-bottom: 60px;
 
-.logo-img{
-    display: inline-block;
-    width: 80px;
-    border-radius: 10px;
-    border: 2px solid rgb(122, 247, 184);
-}
-.level{
-    position: absolute;
-    left: 603px;
-    top: 465px;
-    font-weight: bolder;
-    background-color: black;
-    padding: 3px;
-    border-radius: 20px;
-    font-size: 10px;
-    color: gold;
-}
-
-.name{
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
-    margin-left: 20px;
-}
-
-.detail-info{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    .emblem-img{
-        width: 120px;
-        // margin-top: 80px;
+    .logo-name-link {
+        position: relative;
     }
-    .detail-parent{
+
+
+    .logo-img {
         display: inline-block;
-        margin-left: 20px;
-        margin-top: 20px;
-    }
-    .detail{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-    }
-    .tier{
-    background: -webkit-linear-gradient(rgb(255, 255, 255),  rgb(218, 73, 140));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    }
-    .lp{
-        display: block;
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(218, 73, 140));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    }
-    .win-lost{
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(218, 73, 140));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+        width: 80px;
+        border-radius: 10px;
+        border: 4px solid rgb(245, 35, 20);
     }
 
-    .rank{
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(218, 73, 140));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    }
-
-    .queue-type{
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(218, 73, 140));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    }
-    
-}
-
-.percentage-circle{
-    margin-top: 50px;
-    margin-left: 20px;
-}
-}
-
-.wrap {
-    .summoner-error{
+    .level {
+        position: absolute;
+        left: 30px;
+        top: 43px;
+        font-weight: bolder;
+        background-color: black;
+        padding: 3px;
+        border-radius: 20px;
+        font-size: 10px;
         color: white;
-        text-align: center;
-        margin-bottom: 25px;
     }
+
+    .name {
+        background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
+        font-weight: bolder;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 30px;
+        margin-left: 20px;
+    }
+
+
+    .custom_card {
+        // border: 3px solid plum;
+        margin: 5px;
+        background-color: $cardColor_1;
+        color: white;
+        border-radius: $borderRadius;
+    }
+
+    .summoner_info_top {
+        // border: 2px solid yellow;
+        margin: 20px;
+        background-color: $cardColor_1;
+        width: 350px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .summoner_info_bottom {
+        // border: 2px solid white;
+        display: flex;
+
+    }
+
+    .summoner_info_bottom_left {
+        // border: 2px solid red;
+        margin: $margin_padding15;
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            font-size: 15px;
+                padding-top: $margin_padding15;
+            .detail_title{
+                font-size: 20px;
+                font-weight: bolder;
+                display: flex;
+                padding-left: $margin_padding15;
+            }
+            .detail-parent {
+                border-radius: 10px;
+                padding: $margin_padding15;
+                background-color: $mainBackgroundColor;
+                margin: $margin_padding15;
+                display: flex;
+
+                .emblem-img {
+                    width: 120px;
+                    // margin-top: 80px;
+                }
+
+                .detail {
+                    margin-left: $margin_padding15;
+                    align-items: flex-start;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    span{
+                        margin-top: $margin_padding15;
+                    }
+
+                    .queue-type{
+                        font-size: 13px;
+                        color: $lightBlueFontColor;
+                    }
+                    .tier {
+                        color: red;
+                        font-weight: bolder;
+                    }
+
+                    .lp {
+                        font-weight: bolder;
+                    }
+
+                    .winRate{
+                        margin-right: 10px;
+                        color: #fff
+                    }
+                    .totalGame{
+                        color: $lightBlueFontColor;
+                    }
+
+                }
+
+                .percentage-circle {
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+
+        .detail_graph{
+            padding: $margin_padding15;
+        }
+
+    }
+
+    .summoner_info_bottom_right {
+        // border: 2px solid green;
+        margin: 15px;
+    }
+
 }
 
 
 
 
-
-
-.percentage-circle{
-    width: 60px;
-}

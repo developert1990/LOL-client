@@ -153,6 +153,8 @@ export interface RuneSmallType {
 
 
 // 매치 히스토리에서 게임정보 타입
+
+
 export interface MatchedGameType {
     gameCreation: number;
     gameDuration: number;
@@ -210,11 +212,13 @@ export interface GameBansType {
     pickTurn: number;
 }
 
+
+
 export interface ParticipantsType {
-    championId: number;
-    participantId: number;
-    spell1Id: number;
-    spell2Id: number;
+    championId: number | string;
+    participantId: number | string;
+    spell1Id: number | string;
+    spell2Id: number | string;
     stats: ParticipantsStatsType;
     teamId: number;
     timeline: ParticipantsTimelineType;
@@ -284,8 +288,8 @@ export interface ParticipantsStatsType {
     perk5Var1: number;
     perk5Var2: number;
     perk5Var3: number;
-    perkPrimaryStyle: number;
-    perkSubStyle: number;
+    perkPrimaryStyle: number | string;
+    perkSubStyle: number | string;
     physicalDamageDealt: number;
     physicalDamageDealtToChampions: number;
     physicalDamageTaken: number;

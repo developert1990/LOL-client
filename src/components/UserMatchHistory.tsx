@@ -9,10 +9,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import { MatchedGameDetail } from './MatchedGameDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import darkgrey from '../images/darkgrey.png';
 import { Loading } from './Loading';
 import { initialAppStateType } from '../store';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType, ParticipantsType, RuneBigType, RunesIngameType, SpellDetailType, SpellsIngameType } from '../types';
+import darkgery from '../images/darkgrey.png';
 
 export interface LocationType {
     gameIdInfo: number[];
@@ -80,7 +80,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
         (
             async () => {
                 console.log('data 받음  3');
-                console.log('gameIdInfo ==>> ', gameIdInfo)
                 // console.log(start, start + 3)
                 for (let i = start; i < start + 3; i++) {
                     // console.log(start)
@@ -89,7 +88,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                     // const response = await fetch(`${API.GET_MATCH_DETAILS}/${gameIds[i]}?region=${region}`);
                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
                     const data = await response.json();
-                    console.log(data);
                     matchesData.push(data);
 
                 }
@@ -97,7 +95,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
                 const newData = matchesAllInfo.concat(matchesData);
 
-                // console.log(newData);
                 setMatchesAllInfo(newData);
 
                 setMatchesInfo(matchesData);
@@ -110,20 +107,20 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     useEffect(() => {
-        console.log('loaded 되서 들어옴  4');
-        console.log(matchesInfo)
-        console.log(loaded)
+        // console.log('loaded 되서 들어옴  4');
+        // console.log(matchesInfo)
+        // console.log(loaded)
         if (loaded) {
-            console.log('matchesinfo check')
-            console.log(matchesInfo)
+            // console.log('matchesinfo check')
+            // console.log(matchesInfo)
             const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-            console.log(participantId);
+            // console.log(participantId);
             const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
-            console.log("매치 디테일: ", summonorMatchDetail);
+            // console.log("매치 디테일: ", summonorMatchDetail);
             setSummonerDetail(summonorMatchDetail);
 
             const playResult = summonorMatchDetail.map((data) => data.stats.win)
-            console.log(playResult);
+            // console.log(playResult);
             setResult(playResult);
 
         }
@@ -134,26 +131,19 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     useEffect(() => {
-        console.log('isLoading', isLoading)
-        console.log('summonerDetail', summonerDetail)
+        // console.log('isLoading', isLoading)
+        // console.log('summonerDetail', summonerDetail)
 
         console.log('룬, 스펠, 챔프 뽑음. 5')
         if (!isLoading && summonerDetail.length > 0) {
             // console.log('룬, 스펠, 챔프 뽑으러 if 문안에 들어옴')
-            console.log(summonerDetail);
             // console.log(allChampsData);
             // console.log(allRunesData);
-            console.log('allRunesData ==>>> ', allRunesData)
-            const a = summonerDetail.map((data) => data.championId);
-            const b = allChampsData.map((data) => data.key);
-
-            // console.log(a);
-            // console.log(b);
 
             for (let i = 0; i < 3; i++) {
                 spellsArr.push({
-                    spell1: summonerDetail[i].spell1Id,
-                    spell2: summonerDetail[i].spell2Id,
+                    spell1: summonerDetail[i].spell1Id as number,
+                    spell2: summonerDetail[i].spell2Id as number,
                 });
             }
 
@@ -162,15 +152,15 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
             for (let i = 0; i < 3; i++) {
                 runesArr.push({
-                    primaryRune: summonerDetail[i].stats.perkPrimaryStyle,
-                    subRune: summonerDetail[i].stats.perkSubStyle,
+                    primaryRune: summonerDetail[i].stats.perkPrimaryStyle as number,
+                    subRune: summonerDetail[i].stats.perkSubStyle as number,
                 })
             };
             console.log(runesArr);
 
             // // 해당하는 룬 뽑는 함수
             const usedRunes: any[] = runesArr.map(rune => {
-                console.log('Object.entries(rune) ==> ', Object.entries(rune))
+                // console.log('Object.entries(rune) ==> ', Object.entries(rune))
                 const obj: any = {};
                 for (const [key, value] of Object.entries(rune)) {
                     obj[key] = allRunesData.find(data => data.id === value)?.icon
@@ -182,7 +172,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             // // 해당하는 스펠 뽑는 함수
             // console.log(spellsArr)
             const usedSpells: any[] = spellsArr.map(spell => {
-                console.log(Object.entries(spell));
+                // console.log(Object.entries(spell));
                 const obj: any = {}
                 for (const [key, value] of Object.entries(spell)) {
                     obj[key] = allSpellsData.find(data => Number(data.key) === value)?.id;
@@ -197,7 +187,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             for (let j = 0; j < 3; j++) {
                 for (let i = 0; i < 150; i++) {
                     if (Number(allChampsData[i].key) === summonerDetail[j].championId) {
-                        console.log('같은거 있음')
+                        // console.log('같은거 있음')
                         champImages.push(
                             {
                                 createdGame: matchesAllInfo[j].gameCreation,
@@ -221,7 +211,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                                 deaths: summonerDetail[j].stats.deaths,
                                 minionKillded: summonerDetail[j].stats.totalMinionsKilled,
                                 rate: ((summonerDetail[j].stats.kills + summonerDetail[j].stats.assists) / summonerDetail[j].stats.deaths).toFixed(2),
-                                gameResult: result[j] ? 'Win' : 'Defeat',
+                                gameResult: result[j] ? 'Victory' : 'Defeat',
                                 level: summonerDetail[j].stats.champLevel,
                                 mainRune: usedRunes[j].primaryRune,
                                 subRune: usedRunes[j].subRune,
@@ -232,7 +222,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                 }
             }
             const newData = information.concat(champImages);
-            console.log(newData);
 
 
             setInformation(newData);
@@ -261,11 +250,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
         const hour = 3600;
         const min = 60;
 
-        if (stime >= year) return (`${stime / year === 1 ? `${stime / year} year ago` : `${stime / year} years ago`}`);
-        if (stime >= month) return (`${stime / month === 1 ? `${stime / month} month ago` : `${stime / month} months ago`}`);
-        if (stime >= day) return (`${stime / day === 1 ? `${stime / day} day ago` : `${stime / day} days ago`}`);
-        if (stime >= hour) return (`${stime / hour === 1 ? `${stime / hour} hour ago` : `${stime / hour} hours ago`}`);
-        return (stime / min) + "minutes ago";
+        if (stime >= year) return (`${stime / year === 1 ? `${(stime / year).toFixed(0)} year ago` : `${(stime / year).toFixed(0)} years ago`}`);
+        if (stime >= month) return (`${stime / month === 1 ? `${(stime / month).toFixed(0)} month ago` : `${(stime / month).toFixed(0)} months ago`}`);
+        if (stime >= day) return (`${stime / day === 1 ? `${(stime / day).toFixed(0)} day ago` : `${(stime / day).toFixed(0)} days ago`}`);
+        if (stime >= hour) return (`${stime / hour === 1 ? `${(stime / hour).toFixed(0)} hour ago` : `${(stime / hour).toFixed(0)} hours ago`}`);
+        return (stime / min).toFixed(0) + "minutes ago";
     }
 
     // 게임 시간 뽑아내는 함수
@@ -275,7 +264,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             const minutes = Math.floor((duration - 3600) / 60);
             const seconds = duration - 3600 - (minutes * 60);
             return (
-                `${hours === 1 ? hours.toFixed(0) + ' hour' : hours.toFixed(0) + ' hours'} ${minutes === 1 ? minutes.toFixed(0) + ' min' : minutes.toFixed(0) + ' mins'} ${seconds === 1 || seconds === 0 ? seconds.toFixed(0) + ' sec' : seconds.toFixed(0) + ' secs'}`
+                `${hours === 1 ? hours + ' hour' : hours + ' hours'} ${minutes === 1 ? minutes + ' min' : minutes + ' mins'} ${seconds === 1 || seconds === 0 ? seconds + ' sec' : seconds + ' secs'}`
             )
         } else {
             const minutes = Math.floor(duration / 60);
@@ -303,20 +292,20 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                         </div>
                         :
                         <div>
-                            {console.log(information)}
                             {
                                 information.map((data, index) => {
                                     return (
                                         <div className="accordion-page" key={index}>
                                             <Accordion key={index} className="accordion">
                                                 <div className="card">
-                                                    <div className={`card-header ${data.gameResult === 'Win' ? 'win' : 'lose'} `}>
+                                                    {console.log('data.gameResult: ==> ', data.gameResult)}
+                                                    <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={data.gameId.toString()} className="accordion-toggle link">
                                                             <div className="first-info">
                                                                 {console.log('getPlayGameDate(data.createdGame) ==>> ', getPlayGameDate(data.createdGame))}
                                                                 <span className="created-game">{getPlayGameDate(data.createdGame)}</span>
                                                                 <span className="game-duration">{getPlayDuration(data.gameDuration)}</span>
-                                                                <span className="game-result">{data.gameResult}</span>
+                                                                <span className={`game-result ${data.gameResult === "Win" ? 'win_text' : 'lose_text'}`}>{data.gameResult}</span>
                                                             </div>
                                                             <div className="second-info">
                                                                 <div className="level-champ">
@@ -346,26 +335,22 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
                                                             <div className="forth-info">
                                                                 <div>
-                                                                    {data.item0 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item0}.png`} alt="images" /></span>}
-                                                                    {data.item1 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item1}.png`} alt="images" /></span>}
-                                                                    {data.item2 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item2}.png`} alt="images" /></span>}
+                                                                    {data.item0 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item0}.png`} alt="images" /></span>}
+                                                                    {data.item1 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item1}.png`} alt="images" /></span>}
+                                                                    {data.item2 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item2}.png`} alt="images" /></span>}
                                                                 </div>
                                                                 <div>
-                                                                    {data.item3 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item3}.png`} alt="images" /></span>}
-                                                                    {data.item4 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item4}.png`} alt="images" /></span>}
-                                                                    {data.item5 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span> <img className="item" src={`${API.GET_ITEMS_IMG}/${data.item5}.png`} alt="images" /></span>}
-                                                                    {data.item6 === 0 ? <span><img className="item" src={darkgrey} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item6}.png`} alt="images" /></span>}
+                                                                    {data.item3 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item3}.png`} alt="images" /></span>}
+                                                                    {data.item4 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item4}.png`} alt="images" /></span>}
+                                                                    {data.item5 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span> <img className="item" src={`${API.GET_ITEMS_IMG}/${data.item5}.png`} alt="images" /></span>}
+                                                                    {data.item6 === 0 ? <span><img className="item" src={darkgery} alt="empty" /></span> : <span><img className="item" src={`${API.GET_ITEMS_IMG}/${data.item6}.png`} alt="images" /></span>}
                                                                 </div>
                                                             </div>
-
-
-
                                                         </Accordion.Toggle>
                                                     </div>
-                                                    {console.log(matchesAllInfo)}
-                                                    {/* <Accordion.Collapse eventKey={data.gameId.toString()}>
-                                            <div className="card-body"><MatchedGameDetail clickedData={data} matchesInfo={matchesAllInfo[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
-                                        </Accordion.Collapse> */}
+                                                    <Accordion.Collapse eventKey={data.gameId.toString()}>
+                                                        <div className="card-body"><MatchedGameDetail clickedData={data} matchesInfo={matchesAllInfo[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
+                                                    </Accordion.Collapse>
                                                 </div>
 
                                             </Accordion>
@@ -374,10 +359,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
                                     )
 
-                                })}
+                                }
+                                )
+                            }
 
                             <div className="load-data-button">
-                                {/* <Loading /> 이거 넣을 거임 */}
                                 {loadMore ? <Loading /> : <button className="load-button" onClick={() => handleStartClicked()}>button</button>}
 
                             </div>
