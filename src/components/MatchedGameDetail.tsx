@@ -15,8 +15,7 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ matche
 
     // const newObj = Object.assign({}, matchesInfo); 이렇게도 객체 깊은 복사를 할 수 있다.(참조를 하는 것이 아니라 새로운 객체를 만들어낸다.), spread operation을 통해서도 가능하다.
 
-    const matchedInformation: MatchedGameType = JSON.parse(JSON.stringify(matchesInfo)); // 객체 깊은 복사.
-    console.log(matchedInformation);
+    const matchedInformation: MatchedGameType = JSON.parse(JSON.stringify(matchesInfo)); // Object deep copy
     const { participants, participantIdentities } = matchedInformation;
 
 
@@ -72,8 +71,10 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ matche
                     {/* <span>Champ ID: {data.championId}</span> */}
                     <div className="users-info">
                         <div className="first-part">
-
-                            <img src={`${API.GET_CHAMPION_SQUARE_IMG}/${data.championId}.png`} alt="images" />
+                            <div className="img-level">
+                                <img src={`${API.GET_CHAMPION_SQUARE_IMG}/${data.championId}.png`} alt="images" />
+                                <span className="level">{champLevel}</span>
+                            </div>
                             <div className="spells-runes">
                                 <div className="spells">
                                     <img src={`${API.GET_SPELLS_IMG}/${data.spell1Id}`} alt="images" />
@@ -84,14 +85,12 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ matche
                                     <img src={`${API.GET_RUNES_IMG}/${perkSubStyle}`} alt="images" />
                                 </div>
                             </div>
-                            <div className="id-level">
-                                <span className="id">{data.participantId}</span>
-                                <span className="level">{champLevel} LV</span>
-                            </div>
+                            <span className="id">{data.participantId}</span>
                         </div>
 
                         {/* <span> 승패: {data.stats.win ? 'WIN' : 'DEFEAT'}</span> */}
                         <div className="second-part">
+                            {/* <div>{data.stats}</div> */}
                             <span>{`${((kills + assists) / deaths).toFixed(2)}` === 'Infinity' ? 'Perfect' : `${((kills + assists) / deaths).toFixed(2)}`}</span>
                             <div className="kda">
                                 <span className="kills">{kills}</span> / <span className="deaths">{deaths}</span> / <span className="assists">{assists}</span>

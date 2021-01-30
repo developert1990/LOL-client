@@ -23,13 +23,12 @@ color: red;
 }
 
 .win::after {
-    background-color: rgb(23, 51, 128);
-    border-radius:0 0;
+    background-color: rgb(30, 55, 124);
     top: 0;
     left: 0;
     position: absolute;
     background-size: 100%;
-    opacity: 0.8 !important;
+    opacity: 0.9 !important;
     filter: alpha(opacity=50);
     z-index: -1;
     content: "";
@@ -66,17 +65,26 @@ color: red;
 .users-info {
     display: flex;
     flex-direction: row;
-    // justify-content: space-between;
     font-size: 10px;
+    font-weight: bolder;
 
     .first-part {
         display: flex;
         flex-direction: row;
         width: 250px;
+
+        .img-level{
+            position: relative;
+        }
+        .level{
+            position: relative;
+            top: 20px;
+            left: -15px;
+        }
     }
 
     .first-part img {
-        width: 40px;
+        width: 50px;
         margin: 1px;
 
     }
@@ -88,19 +96,18 @@ color: red;
     .runes img {
         width: 20px;
         background-color: black;
-        border-radius: 50%;
+        border-radius: 5px;
     }
 
-    .id-level {
+    .id {
         display: flex;
         flex-direction: column;
         justify-content: center;
         margin-left: 30px;
         color: white;
+        font-size: 10px;
 
-        .level {
-            display: flex;
-        }
+ 
     }
 
     .second-part {

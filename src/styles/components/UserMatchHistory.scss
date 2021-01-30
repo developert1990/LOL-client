@@ -6,7 +6,6 @@
     border-radius: 20px;
     padding: 20px;
 
-
     .load-data-button {
         display: flex;
         justify-content: center;
@@ -107,14 +106,15 @@
                 .level-champ {
                     display: flex;
                     flex-direction: column;
+                    position: relative;
 
                     .level {
                         position: absolute;
-                        top: 82px;
-                        left: 290px;
+                        top: 40px;
+                        left: 22px;
                         background-color: black;
-                        border-radius: 10px;
                         font-size: 10px;
+                        width: 17px;
                         padding: 1px;
                     }
 
@@ -211,16 +211,3 @@
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

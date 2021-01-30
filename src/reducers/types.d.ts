@@ -17,3 +17,8 @@ export interface spellsActionType {
     payload: any;
     type: string;
 }
+
+export interface getSummonerActionType {
+    payload: any;
+    type: string;
+}

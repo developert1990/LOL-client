@@ -49,6 +49,16 @@ body {
 
     .logo-name-link {
         position: relative;
+        margin: 20px;
+        background-color: $cardColor_1;
+        width: 350px;
+        padding: 10px;
+        border-radius: 10px;
+        flex: 1;
+    }
+
+    .summoer_menu{
+        flex: 3;
     }
 
 
@@ -61,8 +71,8 @@ body {
 
     .level {
         position: absolute;
-        left: 30px;
-        top: 43px;
+        left: 75px;
+        top: 0;
         font-weight: bolder;
         background-color: black;
         padding: 3px;
@@ -90,12 +100,9 @@ body {
     }
 
     .summoner_info_top {
-        // border: 2px solid yellow;
-        margin: 20px;
-        background-color: $cardColor_1;
-        width: 350px;
-        padding: 10px;
-        border-radius: 10px;
+       display: flex;
+       flex-direction: row;
+    //    justify-content: flex-start;
     }
 
     .summoner_info_bottom {

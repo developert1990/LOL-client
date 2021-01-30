@@ -69,6 +69,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     // console.log(start)
 
 
+
     useEffect(() => {
         // console.log('fetch 한거 set한다. 2')
         setAllChampsData(Object.values(champs))

@@ -31,6 +31,15 @@ export interface GameMatcheType {
     totalGames: number;
 }
 
+export interface SummonerReduxtype {
+    accountId: string;
+    id: string;
+    name: string;
+    profileIconId: number;
+    puuid: string;
+    revisionDate: number;
+    summonerLevel: number;
+}
 
 
 // 챔피언 정보 타입

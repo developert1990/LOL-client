@@ -3,6 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { changeRegion } from '../actions/regionAction';
+import logo from '../images/cat.png';
 
 export const NavbarComp = () => {
 
@@ -17,7 +18,7 @@ export const NavbarComp = () => {
     return (
         <div className="navbarComp">
             <Navbar variant="dark">
-                <Link className="link" to="/"><img src="/images/cat.png" style={{ width: "30px", height: "40px", marginRight: "20px" }} alt="penguin" />H.gg</Link>
+                <Link className="link" to="/"><img src={logo} style={{ width: "30px", height: "40px", marginRight: "20px" }} alt="cat" />H.gg</Link>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <Link className="link" to="/search">
