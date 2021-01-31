@@ -23,8 +23,7 @@ export default () => {
                     <img src={lolLogo} alt="main-logo-img" />
                 </div>
                 <Route path="/" component={MainPage} exact />
-                <Route path="/search" component={SearchPage} exact />
-                {/* <Route path="/search/userInfo" component={UserMenuBar} /> */}
+                <Route path="/search" component={SearchPage} />
                 <Route path="/search/userInfo/:region/name=:id/history" component={ProfilePage} />
                 <Route path="/search/userInfo/:region/name=:id/masteries" component={Masteries} />
             </div>
