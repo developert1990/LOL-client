@@ -7,7 +7,7 @@ export interface ProfilePropsType {
     name: string;
 }
 
-export const Profile: React.FC<ProfilePropsType> = ({ level, name, profileIconId }) => {
+export const ProfileMenu: React.FC<ProfilePropsType> = ({ level, name, profileIconId }) => {
     return (
         <div className="logo-name-link link">
             <img className="logo-img" src={`${API.GET_PROFILEICON}/${profileIconId}.png`} alt="profileIcon" />

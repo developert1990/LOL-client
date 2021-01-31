@@ -15,4 +15,7 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
     } catch (error) {
         dispatch({ type: GET_SUMMONER_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
+    // finally {
+    //     dispatch({ type: NOTIFY_USERS })
+    // }
 }

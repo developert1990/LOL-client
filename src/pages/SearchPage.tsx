@@ -36,7 +36,7 @@ export const SearchPage = () => {
             return alert("Should enter summoner's id")
         }
         dispatch(getSummoner(summonerID, region));
-        history.push(`/search/userInfo/${region}/name=${summonerID}/history`)
+        history.push(`/search/userInfo/history/${region}?name=${summonerID}`)
 
     }
 
