@@ -22,12 +22,12 @@ export const UserMenuBar = () => {
             {/* {console.log(id)} */}
             <Link className="link" to={
                 {
-                    pathname: `/search/userInfo/history/${region}?name=${summonerInfo?.name}/`,
+                    pathname: `/search/userInfo/overview/${region}?name=${summonerInfo?.name}/`,
                     // state: {
                     //     gameIdInfo: gameIds,
                     //     accountId: accountId,
                     // }
-                }}><span className='span'>Match History</span></Link>
+                }}><span className='span'>Overview</span></Link>
             <Link className="link" to={
                 {
                     pathname: `/search/userInfo/masteries/${region}?name=${summonerInfo?.name}`,

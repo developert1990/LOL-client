@@ -1,0 +1,59 @@
+.logo-name-link {
+    position: relative;
+    margin: 20px;
+    background-color: $cardColor_1;
+    width: 350px;
+    padding: 10px;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.summoner_info_top {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    //    justify-content: flex-start;
+
+    .summoner_profile{
+        flex: 1;
+    }
+    .summoner_menu{
+        flex: 2;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: flex-end;
+    }
+
+
+    
+
+.logo-img {
+    display: inline-block;
+    width: 80px;
+    border-radius: 10px;
+    border: 4px solid rgb(245, 35, 20);
+}
+
+.level {
+    position: absolute;
+    left: 62px;
+    top: 0;
+    font-weight: bolder;
+    background-color: black;
+    padding: 3px;
+    border-radius: 20px;
+    font-size: 10px;
+    color: white;
+}
+
+.name {
+    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
+    font-weight: bolder;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+    margin-left: 20px;
+}
+}
+

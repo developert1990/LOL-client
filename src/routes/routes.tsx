@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Footer, NavbarComp } from '../components/index';
+import { Footer, NavbarComp, ProfileMenu } from '../components/index';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { MainPage, SearchPage } from '../pages/index'
 import { UserMatchHistory } from '../components/UserMatchHistory';
@@ -44,7 +44,8 @@ const SearchWrapper = () => {
     return (
         <>
             <SearchPage />
-            <Route path="/search/userInfo/history/:region" component={ProfilePage} />
+            <Route path="/search/userInfo/" component={ProfileMenu} />
+            <Route path="/search/userInfo/overview/:region" component={ProfilePage} />
             <Route path="/search/userInfo/masteries/:region" component={Masteries} />
         </>
     )

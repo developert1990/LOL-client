@@ -133,13 +133,6 @@ export const ProfilePage = () => {
                                 {
                                     name.length > 0 && tier.length > 0 &&
                                     <div>
-                                        <div className="summoner_info_top">
-                                            <ProfileMenu profileIconId={profileIconId} level={level} name={name} />
-                                            <div className="summoer_menu">
-                                                <UserMenuBar />
-                                            </div>
-                                        </div>
-
                                         <div className="summoner_info_bottom">
                                             <div className="summoner_info_bottom_left">
 

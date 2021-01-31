@@ -10,11 +10,7 @@ export const Masteries = () => {
     // const {profileIconId, id, name, summonerLevel:level} = summonerInfo;
     return (
         <div className="summoner_info_top">
-
-            {/* <Profile profileIconId={profileIconId} level={level} name={name} /> */}
-            <div className="summoer_menu">
-                <UserMenuBar />
-            </div>
+            마스터리
         </div>
     )
 }
