@@ -4,11 +4,9 @@ body {
 }
 
 .search {
-    width: 30%;
     position: relative;
     display: flex;
     margin: 0 auto;
-    margin-bottom: 25px;
 }
 
 .searchTerm {
@@ -23,14 +21,14 @@ body {
 }
 
 .searchTerm:focus {
-    color:$cardColor_1;
+    color: $cardColor_1;
 }
 
 .searchButton {
     width: 40px;
     height: 36px;
     border: 1px solid $cardColor_1;
-    background:$cardColor_1;
+    background: $cardColor_1;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -43,111 +41,30 @@ body {
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-
     margin-bottom: 60px;
+    padding: 25px;
 
-
-    .summoer_menu{
+    .summoer_menu {
         flex: 3;
     }
 
 
-    .custom_card {
+   
+    .summoner_info_bottom {
+        // border: 2px solid white;
+        display: grid;
+        grid-template-columns: 2fr 4fr 2fr;
+        column-gap: 4rem;
+    }
+
+
+
+}
+
+ .custom_card {
         // border: 3px solid plum;
         margin: 5px;
         background-color: $cardColor_1;
         color: white;
         border-radius: $borderRadius;
     }
-
-    .summoner_info_bottom {
-        // border: 2px solid white;
-        display: flex;
-
-    }
-
-    .summoner_info_bottom_left {
-        // border: 2px solid red;
-        margin: $margin_padding15;
-
-        .detail-info {
-            display: flex;
-            flex-direction: column;
-            font-size: 15px;
-                padding-top: $margin_padding15;
-            .detail_title{
-                font-size: 20px;
-                font-weight: bolder;
-                display: flex;
-                padding-left: $margin_padding15;
-            }
-            .detail-parent {
-                border-radius: 10px;
-                padding: $margin_padding15;
-                background-color: $mainBackgroundColor;
-                margin: $margin_padding15;
-                display: flex;
-
-                .emblem-img {
-                    width: 120px;
-                    // margin-top: 80px;
-                }
-
-                .detail {
-                    margin-left: $margin_padding15;
-                    align-items: flex-start;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-
-                    span{
-                        margin-top: $margin_padding15;
-                    }
-
-                    .queue-type{
-                        font-size: 13px;
-                        color: $lightBlueFontColor;
-                    }
-                    .tier {
-                        color: red;
-                        font-weight: bolder;
-                    }
-
-                    .lp {
-                        font-weight: bolder;
-                    }
-
-                    .winRate{
-                        margin-right: 10px;
-                        color: #fff
-                    }
-                    .totalGame{
-                        color: $lightBlueFontColor;
-                    }
-
-                }
-
-                .percentage-circle {
-                    width: 60px;
-                    height: 60px;
-                }
-            }
-        }
-
-        .detail_graph{
-            padding: $margin_padding15;
-        }
-
-    }
-
-    .summoner_info_bottom_right {
-        // border: 2px solid green;
-        margin: 15px;
-    }
-
-}
-
-
-
-

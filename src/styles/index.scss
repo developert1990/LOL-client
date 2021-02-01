@@ -5,8 +5,8 @@
 @import './components/UserMatchHistory.scss';
 @import './components/MatchedGameDetail.scss';
 @import './components/ProfileMenu.scss';
-
-
+@import './components/ProfilePage.scss';
+@import './components/SideAdvertisement.scss';
 
 
 
@@ -66,4 +66,10 @@ body {
     .jumbotron{
     background-color: $mainBackgroundColor;
     }
+}
+
+
+.searchOuter{
+    display: grid;
+    grid-template-columns: 4fr 2fr;
 }

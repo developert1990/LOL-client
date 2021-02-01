@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { initialAppStateType } from '../store';
 import { ProfileMenu } from './ProfileMenu'
+import { SideAdvertisement } from './SideAdvertisement';
 import { UserMenuBar } from './UserMenuBar'
 
 export const Masteries = () => {
@@ -10,7 +11,9 @@ export const Masteries = () => {
     // const {profileIconId, id, name, summonerLevel:level} = summonerInfo;
     return (
         <div className="summoner_info_top">
-            마스터리
+            <div className="summoner_masteries">
+                마스터리
+            </div>
         </div>
     )
 }

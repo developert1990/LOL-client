@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { changeRegion } from '../actions/regionAction';
 import logo from '../images/cat.png';
+import { SearchPage } from '../pages';
 
 export const NavbarComp = () => {
 
@@ -31,7 +32,10 @@ export const NavbarComp = () => {
                             <li>Ranks</li>
                         </Link>
                     </Nav>
-                    <Nav className="ml-auto">
+                    <Nav className="ml-auto" style={{ width: "400px" }}>
+                        <SearchPage />
+                    </Nav>
+                    <Nav>
                         <select className="select-region" onChange={handleChange}>
                             <option value="" className="">Select Region</option>
                             <option value="na1" className="na1">North America</option>

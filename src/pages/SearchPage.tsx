@@ -23,10 +23,6 @@ export const SearchPage = () => {
     const [summonerID, setSummonerID] = useState('');
     const [errorMsg, setErrorMsg] = useState(false);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const newInput = e.target.value;
-        setSummonerID(newInput);
-    }
     // console.log("1")
     // console.log("2")
     // 비동기 - 기다려주지 않는다
@@ -37,7 +33,7 @@ export const SearchPage = () => {
         }
         dispatch(getSummoner(summonerID, region));
         history.push(`/search/userInfo/overview/${region}?name=${summonerID}`)
-
+        setSummonerID("");
     }
 
 
@@ -59,12 +55,12 @@ export const SearchPage = () => {
 
             <div className="search">
                 {/* <input type="text" className="summoner-id" placeholder="Enter the Summoner's ID" onChange={e => setSummonerID(e.target.value)} value={summonerID} /> */}
-                <input type="text" className="searchTerm" placeholder="Enter the Summoner's ID" onChange={handleChange} onKeyPress={
+                <input type="text" className="searchTerm" placeholder="Enter the Summoner's ID" onChange={(e: ChangeEvent<HTMLInputElement>) => setSummonerID(e.target.value)} onKeyPress={
                     (e) => {
                         if (e.key === 'Enter')
                             handleClick(e);
                     }
-                } ref={focusRef} />
+                } value={summonerID} ref={focusRef} />
                 <button type="submit" className="searchButton" onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e as any)}>
                     <FaSearch />
                 </button>

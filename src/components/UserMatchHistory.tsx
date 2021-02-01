@@ -113,9 +113,10 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
         // console.log(loaded)
         if (loaded) {
             // console.log('matchesinfo check')
-            // console.log(matchesInfo)
+            console.log(matchesInfo)
+            console.log('accountId==>> ', accountId)
             const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-            // console.log(participantId);
+            console.log("participantId ==>> ", participantId);
             const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
             // console.log("매치 디테일: ", summonorMatchDetail);
             setSummonerDetail(summonorMatchDetail);

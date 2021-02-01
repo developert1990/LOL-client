@@ -1,0 +1,75 @@
+    .summoner_info_bottom_left {
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            font-size: 15px;
+                padding-top: $margin_padding15;
+            .detail_title{
+                font-size: 20px;
+                font-weight: bolder;
+                display: flex;
+                padding-left: $margin_padding15;
+            }
+            .detail-parent {
+                border-radius: 10px;
+                padding: $margin_padding15;
+                background-color: $mainBackgroundColor;
+                margin: $margin_padding15;
+                display: flex;
+
+                .emblem-img {
+                    width: 120px;
+                    // margin-top: 80px;
+                }
+
+                .detail {
+                    margin-left: $margin_padding15;
+                    align-items: flex-start;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    span{
+                        margin-top: $margin_padding15;
+                    }
+
+                    .queue-type{
+                        font-size: 13px;
+                        color: $lightBlueFontColor;
+                    }
+                    .tier {
+                        color: red;
+                        font-weight: bolder;
+                    }
+
+                    .lp {
+                        font-weight: bolder;
+                    }
+
+                    .winRate{
+                        margin-right: 10px;
+                        color: #fff
+                    }
+                    .totalGame{
+                        color: $lightBlueFontColor;
+                    }
+
+                }
+
+                .percentage-circle {
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+
+        .detail_graph{
+            padding: $margin_padding15;
+        }
+
+    }
+
+    
+    .summoner_info_bottom_right {
+    }

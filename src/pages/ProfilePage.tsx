@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ProfileMenu } from '../components';
+import { ProfileMenu, SideAdvertisement } from '../components';
 import { Loading } from '../components/Loading';
 import { UserMatchHistory } from '../components/UserMatchHistory';
 import { UserMenuBar } from '../components/UserMenuBar';
@@ -158,9 +158,10 @@ export const ProfilePage = () => {
 
                                                 <div className="custom_card detail_graph">
                                                     역대 기록 그래프
-                                    </div>
+                                                </div>
 
                                             </div>
+
                                             <div className="summoner_info_bottom_right">
                                                 {
                                                     // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
