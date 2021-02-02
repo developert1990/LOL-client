@@ -61,7 +61,7 @@ export const SearchPage = () => {
                             handleClick(e);
                     }
                 } value={summonerID} ref={focusRef} />
-                <button type="submit" className="searchButton" onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e as any)}>
+                <button type="submit" className="searchButton" onClick={(e: any) => handleClick(e)}>
                     <FaSearch />
                 </button>
             </div>

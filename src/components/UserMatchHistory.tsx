@@ -1,7 +1,7 @@
 
 
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { API, TEST_BASE } from '../config';
@@ -29,9 +29,14 @@ export interface UserMatchHistoryPropsType {
     gameIdInfo: number[];
     accountId: string;
     id: string;
+    loaded: boolean;
+    setLoaded: Dispatch<SetStateAction<boolean>>;
+
 }
 
-export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id }) => {
+export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id, loaded, setLoaded }) => {
+    console.log("유즈메치히스토리 렌더 하러 들어옴")
+    console.log('loaded ==>>>> ', loaded)
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
     const { isLoading, champs } = useSelector((state: initialAppStateType) => state.champsStore);
@@ -43,7 +48,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     // const accountId = location.state.accountId;
     // console.log(accountId)
     const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
-    const [loaded, setLoaded] = useState(false);
+    // const [loaded, setLoaded] = useState(false);
     // const [...gameIds] = location.state.gameIdInfo;
     // console.log(gameIds);
 
@@ -84,7 +89,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                 // console.log(start, start + 3)
                 for (let i = start; i < start + 3; i++) {
                     // console.log(start)
-                    // console.log('for문들어옴')
+                    console.log('for문들어옴 id ==> ', gameIdInfo)
                     // server 측에 path 가 '/' 이곳으로 들어와서 프록시 서버를 통해서 정보를 호출한다.
                     // const response = await fetch(`${API.GET_MATCH_DETAILS}/${gameIds[i]}?region=${region}`);
                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
@@ -92,7 +97,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                     matchesData.push(data);
 
                 }
-                // console.log(matchesData);
+                console.log("매치히스토리 다시 뽑음: ", matchesData);
 
                 const newData = matchesAllInfo.concat(matchesData);
 
@@ -108,7 +113,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     useEffect(() => {
-        // console.log('loaded 되서 들어옴  4');
+        console.log('loaded 되서 들어옴  4');
         // console.log(matchesInfo)
         // console.log(loaded)
         if (loaded) {
@@ -116,7 +121,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             console.log(matchesInfo)
             console.log('accountId==>> ', accountId)
             const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-            console.log("participantId ==>> ", participantId);
+            // console.log("participantId ==>> ", participantId);
             const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
             // console.log("매치 디테일: ", summonorMatchDetail);
             setSummonerDetail(summonorMatchDetail);
@@ -126,7 +131,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             setResult(playResult);
 
         }
-
     }, [matchesInfo, loaded, accountId])
     // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
 
@@ -143,9 +147,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             // console.log(allRunesData);
 
             for (let i = 0; i < 3; i++) {
+                const spell1: any = summonerDetail[i].spell1Id;
+                const spell2: any = summonerDetail[i].spell2Id;
                 spellsArr.push({
-                    spell1: summonerDetail[i].spell1Id as number,
-                    spell2: summonerDetail[i].spell2Id as number,
+                    spell1,
+                    spell2,
                 });
             }
 
@@ -153,9 +159,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             // console.log(spellsArr);
 
             for (let i = 0; i < 3; i++) {
+                const primaryRune: any = summonerDetail[i].stats.perkPrimaryStyle;
+                const subRune: any = summonerDetail[i].stats.perkSubStyle;
                 runesArr.push({
-                    primaryRune: summonerDetail[i].stats.perkPrimaryStyle as number,
-                    subRune: summonerDetail[i].stats.perkSubStyle as number,
+                    primaryRune,
+                    subRune,
                 })
             };
             console.log(runesArr);
@@ -182,9 +190,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                 // console.log(obj)
                 return obj
             });
-            console.log(usedSpells);
+            // console.log(usedSpells);
 
-            console.log(matchesInfo);
+            // console.log(matchesInfo);
 
             for (let j = 0; j < 3; j++) {
                 for (let i = 0; i < 150; i++) {
@@ -229,9 +237,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             setInformation(newData);
             setPageLoading(false);
             setLoadMore(false) // 로드하는 버튼 누르면 로딩이 시작되기 때문에 데이터를 다 로드하면 false로 해서 로딩 컴포넌트가 종료되고 다시 버튼이 뜬다.
-            console.log(champImages);
+            // console.log(champImages);
 
-
+            setLoaded(false);
         }
 
 
@@ -278,7 +286,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     }
 
     const handleStartClicked = () => {
-        console.log('button clicked')
         setLoadMore(true);
         setStart(start + 3);
     }
@@ -300,11 +307,10 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                                         <div className="accordion-page" key={index}>
                                             <Accordion key={index} className="accordion">
                                                 <div className="card">
-                                                    {console.log('data.gameResult: ==> ', data.gameResult)}
                                                     <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={data.gameId.toString()} className="accordion-toggle link">
                                                             <div className="first-info">
-                                                                {console.log('getPlayGameDate(data.createdGame) ==>> ', getPlayGameDate(data.createdGame))}
+                                                                {/* {console.log('getPlayGameDate(data.createdGame) ==>> ', getPlayGameDate(data.createdGame))} */}
                                                                 <span className="created-game">{getPlayGameDate(data.createdGame)}</span>
                                                                 <span className="game-duration">{getPlayDuration(data.gameDuration)}</span>
                                                                 <span className={`game-result ${data.gameResult === "Win" ? 'win_text' : 'lose_text'}`}>{data.gameResult}</span>

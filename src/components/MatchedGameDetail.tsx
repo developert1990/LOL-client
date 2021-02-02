@@ -19,7 +19,7 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ matche
     const { participants, participantIdentities } = matchedInformation;
 
 
-    const getSummonersInfo = (data: ParticipantsType, index: number) => {
+    const getSummonersInfo = (data: any, index: number) => {
         const { assists, champLevel, deaths, doubleKills, goldEarned, item0, item1, item2, item3, item4, item5, item6, kills, totalMinionsKilled, tripleKills, wardsPlaced } = data.stats;
         let { perkPrimaryStyle, perkSubStyle } = data.stats;
 

@@ -11,7 +11,6 @@ import { initialAppStateType } from '../store';
 import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
 
 
-
 export const ProfilePage = () => {
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
@@ -43,6 +42,10 @@ export const ProfilePage = () => {
 
     const gameId: number[] = [];
     const [gameIdInfo, setGameIdInfo] = useState<number[]>([]);
+    const [gameIdInfoLoaded, setGameIdInfoLoaded] = useState<boolean>(false); // gameInfo가 다 로드 되면 userMatchHistroy 컴포넌트 실행시켜 주기 위해서 생성함.
+
+
+    const [loaded, setLoaded] = useState(false);
 
 
     useEffect(() => {
@@ -73,10 +76,10 @@ export const ProfilePage = () => {
                 // const response = await fetch(`${API.GET_SUMMONER_DETAIL_BY_ID}/${id}?region=${region}`)
                 const response = await fetch(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
                 // console.log('3');
-                const data = await response.json();
+                const data: SummonerDetailType[] = await response.json();
                 // console.log(data);
-                const typedData = data as SummonerDetailType[];
-                const [details] = typedData;
+                // const typedData = data as SummonerDetailType[];
+                const [details] = data;
                 // console.log(details);
                 setSummonerDetail({
                     queueType: details.queueType,
@@ -87,6 +90,8 @@ export const ProfilePage = () => {
                     losses: details.losses,
                 });
                 setIsLoading(false)
+                setLoaded(false);
+                setGameIdInfoLoaded(false);
             })();
         }
     }, [id, region]);
@@ -102,14 +107,15 @@ export const ProfilePage = () => {
                     // console.log(accountId)
                     // const response = await fetch(`${API.GET_MATCH_ID}/${accountId}?region=${region}`)
                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
-                    const data = await response.json();
-                    const typedData = data as GameMatcheType;
-                    const { matches } = typedData;
+                    const data: GameMatcheType = await response.json();
+                    // const typedData = data as GameMatcheType;
+                    const { matches } = data;
                     // for (let i = 0; i < 100; i++) {
                     //     gameId.push(matches[i].gameId);
                     // }
                     matches.map((match) => gameId.push(match.gameId));
                     setGameIdInfo([...gameId]);
+                    setGameIdInfoLoaded(true);
                 }
             )();
         }
@@ -117,66 +123,71 @@ export const ProfilePage = () => {
 
 
 
+
     return (
         <div>
             {
-                !errorMsg ?
-                    (
-                        // 이렇게 하면 반드시 id가 존재하고 isLoading 이 true 인 경우에 아래 식을 실행 시키도록 한다 즉, 검색어에 유저의 이름을 입력하고 검색을 해야 loading이나 결과가 나타난다.
-                        getSummonerIsLoading ?
 
-                            <div className="loading" >
-                                <Loading />
-                            </div>
-                            :
-                            <div className="summoner-info">
-                                {
-                                    name.length > 0 && tier.length > 0 &&
-                                    <div>
-                                        <div className="summoner_info_bottom">
-                                            <div className="summoner_info_bottom_left">
+                // 이렇게 하면 반드시 id가 존재하고 isLoading 이 true 인 경우에 아래 식을 실행 시키도록 한다 즉, 검색어에 유저의 이름을 입력하고 검색을 해야 loading이나 결과가 나타난다.
+                getSummonerIsLoading ?
 
-                                                <div className="detail-info custom_card">
-                                                    <div className="detail_title">Rank</div>
-                                                    <div className="detail-parent">
-                                                        <img className="emblem-img" src={require(`../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" />
+                    <div className="loading" >
+                        <Loading />
+                    </div>
+                    :
+                    !error ?
+                        <div className="summoner-info">
+                            {
+                                name.length > 0 && tier.length > 0 &&
+                                <div>
+                                    <div className="summoner_info_bottom">
+                                        <div className="summoner_info_bottom_left">
 
-                                                        <div className="detail">
-                                                            <span className="queue-type">{queueType}</span>
-                                                            <div className="tier-lp">
-                                                                <span className="tier">{tier} <span className="rank">{rank}</span> </span>
-                                                                <span className="lp"> / {leaguePoints} LP</span>
-                                                            </div>
-                                                            <span className="win-lost">{`${wins} W ${losses} L`}</span>
-                                                            <div className="winRate-totalGame">
-                                                                <span className="winRate">{`${Math.round(wins / (wins + losses) * 100)}%`}</span>
-                                                                <span className="totalGame">{wins + losses} games</span>
-                                                            </div>
+                                            <div className="detail-info custom_card">
+                                                <div className="detail_title">Rank</div>
+                                                <div className="detail-parent">
+                                                    <img className="emblem-img" src={require(`../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" />
+
+                                                    <div className="detail">
+                                                        <span className="queue-type">{queueType}</span>
+                                                        <div className="tier-lp">
+                                                            <span className="tier">{tier} <span className="rank">{rank}</span> </span>
+                                                            <span className="lp"> / {leaguePoints} LP</span>
+                                                        </div>
+                                                        <span className="win-lost">{`${wins} W ${losses} L`}</span>
+                                                        <div className="winRate-totalGame">
+                                                            <span className="winRate">{`${Math.round(wins / (wins + losses) * 100)}%`}</span>
+                                                            <span className="totalGame">{wins + losses} games</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div className="custom_card detail_graph">
-                                                    역대 기록 그래프
+                                            <div className="custom_card detail_graph">
+                                                역대 기록 그래프
                                                 </div>
 
-                                            </div>
+                                        </div>
 
-                                            <div className="summoner_info_bottom_right">
-                                                {
-                                                    // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
-                                                    gameIdInfo.length > 0 && accountId &&
-                                                    <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} />
+                                        <div className="summoner_info_bottom_right">
+                                            {
+                                                // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
+                                                gameIdInfo.length > 0 && accountId && gameIdInfoLoaded &&
+                                                <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} setLoaded={setLoaded} loaded={loaded} />
 
-                                                }
-                                            </div>
+                                            }
                                         </div>
                                     </div>
-                                }
+                                </div>
+                            }
+                        </div>
+                        :
+                        <>
+                            <div style={{ color: "red" }} className="summoner-error">
+                                {error}
+                                <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
                             </div>
-                    )
-                    :
-                    <div className="summoner-error">This summoner is not registered at POPO.GG.<br /> Please check spelling and region</div>
+                        </>
             }
         </div>
     )
