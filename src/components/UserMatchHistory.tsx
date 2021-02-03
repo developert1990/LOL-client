@@ -15,6 +15,7 @@ import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType,
 import darkgery from '../images/darkgrey.png';
 import { getPlayGameDate, getPlayDuration } from '../libs/index';
 import { champs, runes, spells } from '../data/index';
+import { useChampsData, useRunesData, useSpellsData } from '../hooks/index';
 export interface LocationType {
     gameIdInfo: number[];
     accountId: string;
@@ -40,24 +41,7 @@ export interface UserMatchHistoryPropsType {
 // } 
 
 
-interface hardCodingSpellType {
-    "SummonerBarrier": SpellDetailType;
-    "SummonerBoost": SpellDetailType;
-    "SummonerDot": SpellDetailType;
-    "SummonerExhaust": SpellDetailType;
-    "SummonerFlash": SpellDetailType;
-    "SummonerHaste": SpellDetailType;
-    "SummonerHeal": SpellDetailType;
-    "SummonerMana": SpellDetailType;
-    "SummonerPoroRecall": SpellDetailType;
-    "SummonerPoroThrow": SpellDetailType;
-    "SummonerSmite": SpellDetailType;
-    "SummonerSnowURFSnowball_Mark": SpellDetailType;
-    "SummonerSnowball": SpellDetailType;
-    "SummonerTeleport": SpellDetailType;
-}
 
-interface SpellsType { [key: string]: SpellDetailType }; // 위에 선언한거랑 같은거임
 
 export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id }) => {
     console.log("유즈메치히스토리 렌더 하러 들어옴")
@@ -83,11 +67,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const [summonerDetail, setSummonerDetail] = useState<ParticipantsType[]>([]);
     const [result, setResult] = useState<boolean[]>([]);
 
-    const dispatch = useDispatch();
-    const [allChampsData, setAllChampsData] = useState<ChampDetailType[]>([]);
-    const [allSpellsData, setAllSpellsData] = useState<SpellDetailType[]>([]);
-    const [allRunesData, setAllRunesData] = useState<RuneBigType[]>([]);
 
+    // 커스텀 훅 사용해서 chams, spells, runes 정보 받아옴
+    const allChampsData = useChampsData();
+    const allSpellsData = useSpellsData();
+    const allRunesData = useRunesData();
 
 
     const champImages: GameImageType[] = [];
@@ -101,18 +85,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     // console.log(start)
 
 
-
-    const spellsData: SpellsType = spells;
-    const champsData = champs.data;
-
-    useEffect(() => {
-        // console.log('fetch 한거 set한다. 2')
-        console.log('spells===>>> ', spells)
-        // console.log('spellsRedux ????? ', spellsRedux);
-        setAllChampsData(Object.values(champsData))
-        setAllSpellsData(Object.values(spellsData)); // 형님 이부분 81 번줄에 spells랑 82번줄 spellsRedux 랑 완전 같은데 js파일에서 뽑은 spells를 Object.values(spells를) 이렇게 넣으면 에러가 납니다...ㅜㅜ 
-        setAllRunesData(runes);
-    }, [champs, spells, runes]);
 
     useEffect(() => {
         (
