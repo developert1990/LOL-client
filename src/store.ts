@@ -1,3 +1,4 @@
+import { GetSummonerDetailInitialStateType, getSummonerDetailInitialState, getSummonerDetailReducer } from './reducers/getSummonerDetailReducer';
 import { GetSummonerInitialStateType, getSummonerInitialState, getSummonerReducer } from './reducers/getSummonerReducer';
 import { ChampsInitialStateType, champsInitialState, champsReducer, RunesInitialStateType, runesInitialState, runesReducer, SpellsInitialStateType, spellsInitialState, spellReducer } from './reducers/initialDataReducer';
 import { regionReducer, regionInitialStateType, regionInitialState } from './reducers/regionReducer';
@@ -14,6 +15,7 @@ export interface initialAppStateType {
     runesStore: RunesInitialStateType,
     spellsStore: SpellsInitialStateType,
     getSummonerStore: GetSummonerInitialStateType,
+    getSummonerDetailStore: GetSummonerDetailInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -22,6 +24,7 @@ export const initialAppState: initialAppStateType = {
     runesStore: runesInitialState,
     spellsStore: spellsInitialState,
     getSummonerStore: getSummonerInitialState,
+    getSummonerDetailStore: getSummonerDetailInitialState,
 
 }
 
@@ -31,6 +34,7 @@ const reducer = combineReducers({
     runesStore: runesReducer,
     spellsStore: spellReducer,
     getSummonerStore: getSummonerReducer,
+    getSummonerDetailStore: getSummonerDetailReducer,
 })
 
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(promise, thunk)))

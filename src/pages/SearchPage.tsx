@@ -16,16 +16,12 @@ export const SearchPage = () => {
     const { region } = regionStore;
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
-    console.log('summonerInfo ==> ', summonerInfo)
 
-    // console.log('region: ', region)
+
+
     const [summonerID, setSummonerID] = useState('');
     const [errorMsg, setErrorMsg] = useState(false);
 
-    // console.log("1")
-    // console.log("2")
-    // 비동기 - 기다려주지 않는다
-    // 동기 - 기다려준다.
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (!(summonerID.length > 0)) {
             return alert("Should enter summoner's id")
@@ -42,9 +38,6 @@ export const SearchPage = () => {
         if (focusRef && focusRef.current !== null) {
             focusRef.current.focus();
         }
-        // return () => {
-        //     dispatch({ type: GET_SUMMONER_RESET });
-        // }
     }, [dispatch])
 
 

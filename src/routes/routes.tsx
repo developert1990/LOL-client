@@ -18,9 +18,9 @@ export default () => {
 
 
     const query = useQuery();
-    useEffect(() => {
-        console.log(query);
-    }, [query])
+    // useEffect(() => {
+    //     console.log(query);
+    // }, [query])
 
 
     useEffect(() => {

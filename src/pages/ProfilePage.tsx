@@ -1,13 +1,9 @@
 import axios from 'axios';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { ProfileMenu, SideAdvertisement } from '../components';
 import { Loading } from '../components/Loading';
 import { UserMatchHistory } from '../components/UserMatchHistory';
-import { UserMenuBar } from '../components/UserMenuBar';
-import { API, TEST_BASE } from '../config';
-import { GET_SUMMONER_RESET } from '../constants/getSummonerConstants';
+import { TEST_BASE } from '../config';
 import { initialAppStateType } from '../store';
 import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
 
@@ -22,7 +18,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
     const { region } = regionStore;
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
-    const USER_ID = 'user account id';
+
 
     const dispatch = useDispatch();
     const [errorMsg, setErrorMsg] = useState(false);
@@ -56,9 +52,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
 
     useEffect(() => {
         if (summonerInfo) {
-            console.log("서머너 받아오고 실행됨")
-            localStorage.setItem(USER_ID, summonerInfo.id);
-            // console.log(data.id);
+            console.log("summonerInfo redux로 받고 실행됨")
 
             setErrorMsg(false)
             setSummonerInfo({
@@ -75,17 +69,14 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
     // 두번 setState를 불러 오게 되면 랜더링 때문에 문제가 발생한다. 그래서 의존성배열에 id값을 두고 id값이 변하게 되면 fetch를 통해 setState 를 하게 된다.
     // 검색한 유저의 세부 정보 가져옴
     useEffect(() => {
-        console.log('id 확인  ==??? ', id)
         if (id) {
+            console.log('summonerDetail뽑으러옴');
             (async () => {
 
                 try {
-                    // const response = await fetch(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
                     const { data } = await axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-                    // const data: SummonerDetailType[] = await response.json();
                     console.log('data ??????', data)
                     const [details] = data;
-                    // console.log(details);
 
                     setSummonerDetail({
                         queueType: details.queueType,
@@ -99,7 +90,6 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
                     setLoaded(false);
                     setGameIdInfoLoaded(false);
                 } catch (error) {
-
                     console.log("405에러 발생해서 들어옴")
                     setProfileError("No rank information for current filters.");
                 }
@@ -112,14 +102,13 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
 
     // 해당유저의 게임 했던것들 정보 가져옴 총 100개
     useEffect(() => {
-        console.log('match', tier)
         if (tier) {
+            console.log('해당유저의 게임했던 모든 정보 가지러 들어옴 총 100개');
             (
                 async () => {
 
                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
                     const data: GameMatcheType = await response.json();
-                    // const typedData = data as GameMatcheType;
                     const { matches } = data;
 
                     matches.map((match) => gameId.push(match.gameId));
