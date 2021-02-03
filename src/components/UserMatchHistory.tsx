@@ -30,8 +30,8 @@ export interface UserMatchHistoryPropsType {
     gameIdInfo: number[];
     accountId: string;
     id: string;
-    loaded: boolean;
-    setLoaded: Dispatch<SetStateAction<boolean>>;
+    // loaded: boolean;
+    // setLoaded: Dispatch<SetStateAction<boolean>>;
 
 }
 
@@ -59,7 +59,7 @@ interface hardCodingSpellType {
 
 interface SpellsType { [key: string]: SpellDetailType }; // 위에 선언한거랑 같은거임
 
-export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id, loaded, setLoaded }) => {
+export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id }) => {
     console.log("유즈메치히스토리 렌더 하러 들어옴")
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
@@ -136,7 +136,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                 setMatchesAllInfo(newData);
 
                 setMatchesInfo(matchesData);
-                setLoaded(true);
+                // setLoaded(true);
             }
 
         )();
@@ -145,22 +145,22 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     useEffect(() => {
-        if (loaded) {
-            console.log('loaded 되서 들어옴  4');
-            // console.log(matchesInfo)
-            // console.log('accountId==>> ', accountId)
-            const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-            // console.log("participantId ==>> ", participantId);
-            const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
-            // console.log("매치 디테일: ", summonorMatchDetail);
-            setSummonerDetail(summonorMatchDetail);
+        // if (loaded) {
+        console.log('loaded 되서 들어옴  4');
+        // console.log(matchesInfo)
+        // console.log('accountId==>> ', accountId)
+        const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
+        // console.log("participantId ==>> ", participantId);
+        const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
+        // console.log("매치 디테일: ", summonorMatchDetail);
+        setSummonerDetail(summonorMatchDetail);
 
-            const playResult = summonorMatchDetail.map((data) => data.stats.win)
-            // console.log(playResult);
-            setResult(playResult);
+        const playResult = summonorMatchDetail.map((data) => data.stats.win)
+        // console.log(playResult);
+        setResult(playResult);
 
-        }
-    }, [matchesInfo, loaded, accountId])
+        // }
+    }, [matchesInfo, accountId])
     // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
 
 
@@ -266,7 +266,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             setLoadMore(false) // 로드하는 버튼 누르면 로딩이 시작되기 때문에 데이터를 다 로드하면 false로 해서 로딩 컴포넌트가 종료되고 다시 버튼이 뜬다.
             // console.log(champImages);
 
-            setLoaded(false);
+            // setLoaded(false);
         }
 
 

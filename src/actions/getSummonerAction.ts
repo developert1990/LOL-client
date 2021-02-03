@@ -12,18 +12,15 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
     dispatch({ type: GET_SUMMONER_REQUEST });
     try {
         const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${summonerId}/${region}`);
-        console.log('data ==>> ', data)
         dispatch({ type: GET_SUMMONER_SUCCESS, payload: data });
         localStorage.setItem(USER_ID, data.id);
         const id: string = data.id;
         const accountId: string = data.accountId;
-        console.log('id', id)
-        console.log('accountId', accountId)
 
         // summoner 기본 정보 받았으니 => summoner 디테일 뽑기
         try {
             const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-            const detail: SummonerDetailType = data;
+            const detail: SummonerDetailType = data[0];
             dispatch({ type: GET_SUMMONER_DETAIL_SUCCESS, payload: detail });
 
             // 해당유저의 게임 했던것들 정보 가져옴 총 100개
@@ -31,12 +28,12 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
                 const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
                 const matches: MatchType[] = data.matches;
 
+                // 게임 id(number)만 뽑아서 길이가 100인 배열을 만든다. 
                 const matchIds = matches.reduce((a: number[], c) => {
                     a.push(c.gameId)
                     return a;
                 }, [])
 
-                console.log('matchIds *********************************************', matchIds)
 
                 dispatch({ type: GET_SUMMONER_GAMES_100_SUCCESS, payload: matches, matchIds: matchIds });
             } catch (error) {
