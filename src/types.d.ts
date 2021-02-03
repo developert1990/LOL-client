@@ -101,15 +101,15 @@ export interface ChampStatsType {
 // 스펠 정보 타입
 
 export interface SpellDetailType {
-    cooldown: [number];
+    cooldown: number[];
     cooldownBurn: string;
-    cost: [number];
+    cost: number[];
     costBurn: string;
     costType: string;
     datavalues: {}
     description: string;
-    effect: null;
-    effectBurn: string[];
+    effect: (number[] | null)[];
+    effectBurn: (string | null)[];
     id: string;
     image: SpellImageType;
     key: string;
@@ -117,10 +117,10 @@ export interface SpellDetailType {
     maxrank: number;
     modes: string[];
     name: string;
-    range: [number];
+    range: number[];
     rangeBurn: string;
     resource: string;
-    summonerLevel: 4
+    summonerLevel: number;
     tooltip: string;
 
 }

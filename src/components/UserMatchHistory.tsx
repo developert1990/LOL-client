@@ -35,13 +35,34 @@ export interface UserMatchHistoryPropsType {
 
 }
 
+// {
+//     [key: string]: DataType
+// } 
+interface SpellJsonType {
+    "SummonerBarrier": SpellDetailType;
+    "SummonerBoost": SpellDetailType;
+    "SummonerDot": SpellDetailType;
+    "SummonerExhaust": SpellDetailType;
+    "SummonerFlash": SpellDetailType;
+    "SummonerHaste": SpellDetailType;
+    "SummonerHeal": SpellDetailType;
+    "SummonerMana": SpellDetailType;
+    "SummonerPoroRecall": SpellDetailType;
+    "SummonerPoroThrow": SpellDetailType;
+    "SummonerSmite": SpellDetailType;
+    "SummonerSnowURFSnowball_Mark": SpellDetailType;
+    "SummonerSnowball": SpellDetailType;
+    "SummonerTeleport": SpellDetailType;
+
+}
+
 export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id, loaded, setLoaded }) => {
     console.log("유즈메치히스토리 렌더 하러 들어옴")
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
-    const { isLoading, champs } = useSelector((state: initialAppStateType) => state.champsStore);
-    const { spells: spellsRedux } = useSelector((state: initialAppStateType) => state.spellsStore);
-    console.log(' 바로 spellsOriginal', spellsRedux)
+    const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
+    // const { spells: spellsRedux } = useSelector((state: initialAppStateType) => state.spellsStore);
+    // console.log(' 바로 spellsOriginal', spellsRedux)
     const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
     // const location = useLocation<LocationType>();
     const [pageLoading, setPageLoading] = useState(true);
@@ -74,14 +95,15 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const [matchesAllInfo, setMatchesAllInfo] = useState<MatchedGameType[]>([]);
     // console.log(start)
 
-
+    const spellsData: SpellJsonType = spells;
+    const champsData = champs.data;
 
     useEffect(() => {
         // console.log('fetch 한거 set한다. 2')
         console.log('spells===>>> ', spells)
-        console.log('spellsRedux ????? ', spellsRedux);
-        setAllChampsData(Object.values(champs))
-        setAllSpellsData(Object.values(spellsRedux)); // 형님 이부분 81 번줄에 spells랑 82번줄 spellsRedux 랑 완전 같은데 js파일에서 뽑은 spells를 Object.values(spells를) 이렇게 넣으면 에러가 납니다...ㅜㅜ 
+        // console.log('spellsRedux ????? ', spellsRedux);
+        setAllChampsData(Object.values(champsData))
+        setAllSpellsData(Object.values(spellsData)); // 형님 이부분 81 번줄에 spells랑 82번줄 spellsRedux 랑 완전 같은데 js파일에서 뽑은 spells를 Object.values(spells를) 이렇게 넣으면 에러가 납니다...ㅜㅜ 
         setAllRunesData(runes);
     }, [champs, spells, runes]);
 
