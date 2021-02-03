@@ -40,10 +40,10 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
     const { isLoading, champs } = useSelector((state: initialAppStateType) => state.champsStore);
-    const { spells: spellsOriginal } = useSelector((state: initialAppStateType) => state.spellsStore);
+    const { spells: spellsRedux } = useSelector((state: initialAppStateType) => state.spellsStore);
+    console.log(' 바로 spellsOriginal', spellsRedux)
     const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
     // const location = useLocation<LocationType>();
-
     const [pageLoading, setPageLoading] = useState(true);
     // console.log(location.state)
     // const accountId = location.state.accountId;
@@ -79,9 +79,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     useEffect(() => {
         // console.log('fetch 한거 set한다. 2')
         console.log('spells===>>> ', spells)
-        console.log('spellsOriginal ????? ', spellsOriginal);
+        console.log('spellsRedux ????? ', spellsRedux);
         setAllChampsData(Object.values(champs))
-        setAllSpellsData(Object.values(spellsOriginal));
+        setAllSpellsData(Object.values(spellsRedux)); // 형님 이부분 81 번줄에 spells랑 82번줄 spellsRedux 랑 완전 같은데 js파일에서 뽑은 spells를 Object.values(spells를) 이렇게 넣으면 에러가 납니다...ㅜㅜ 
         setAllRunesData(runes);
     }, [champs, spells, runes]);
 
