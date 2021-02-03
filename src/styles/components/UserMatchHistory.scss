@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import './constants/variables';
 
 .matchHistory-page {
     background-color: $cardColor_1;
@@ -36,7 +36,7 @@
 
     .accordion {
         text-align: center;
-        width: 800px;
+        width: 700px;
         padding: 5px 10px 5px 10px;
 
         .card-header {
@@ -54,7 +54,7 @@
         }
 
         .win_text {
-            font-size: 20px;
+            font-size: 15px;
             color: rgb(2, 32, 122);
             font-weight: bolder;
         }
@@ -87,7 +87,7 @@
             justify-content: space-evenly;
             align-items: center;
             width: 700px;
-            font-size: 15px;
+            font-size: 0.7rem;
             font-weight: bolder;
             cursor: url('../../images/mouse-cursor-click.png'), auto;
 
@@ -175,8 +175,8 @@
                 align-items: flex-start;
 
                 .item {
-                    width: 30px;
-                    height: 30px;
+                    width: 20px;
+                    height: 20px;
                     margin: 1px 0 0 2px;
                     border-radius: 5px;
 

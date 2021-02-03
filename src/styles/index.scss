@@ -1,7 +1,7 @@
-@import './components/variables.scss';
+@import './components/constants/mixin';
+@import './components/constants/variables';
 @import './components/NavbarComp.scss';
 @import './components/MainPage.scss';
-@import './components/SearchPage.scss';
 @import './components/UserMatchHistory.scss';
 @import './components/MatchedGameDetail.scss';
 @import './components/ProfileMenu.scss';
@@ -30,8 +30,7 @@ body {
     margin: 0;
     height: 100vh;
     background-color: $mainBackgroundColor;
-    font-size: 1.3rem;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -43,18 +42,16 @@ body {
 
 }
 
-.link{
+.link {
     color: $whiteColor;
     text-decoration: none;
+    font-weight: bolder;
 }
 
-.logo-img img{
+.logo-img img {
     margin-top: 20px;
     width: 300px;
 }
-
-
-
 
 .footer {
     border-top: 5px solid $borderColor;
@@ -63,13 +60,50 @@ body {
     width: 100%;
     height: 0.1rem;
     color: $whiteColor;
-    .jumbotron{
-    background-color: $mainBackgroundColor;
+
+    .jumbotron {
+        background-color: $mainBackgroundColor;
     }
 }
 
+@include desktop {
 
-.searchOuter{
-    display: grid;
-    grid-template-columns: 4fr 2fr;
+    body {
+        font-size: 1.3rem;
+    }
+
+    .searchWrapper {
+        width: 1308.72px;
+    }
+
+    .searchOuter {
+        display: grid;
+        grid-template-columns: 6fr 2fr;
+    }
+
+}
+
+@include tablet{
+    body {
+        font-size: 1.0rem;
+    }
+
+
+    .searchOuter {
+        display: grid;
+        grid-template-columns: 6fr 2fr;
+    }
+
+}
+
+@include mobile{
+    body {
+        font-size: 0.8rem;
+    }
+    
+
+    .searchOuter {
+        display: grid;
+        grid-template-columns: 6fr 2fr;
+    }
 }

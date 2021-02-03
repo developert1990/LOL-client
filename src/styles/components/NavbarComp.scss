@@ -1,12 +1,236 @@
-@import './variables.scss';
+@import './constants/variables';
+@import './constants/mixin';
+
+.hamburger_bar {
+    display: none;
+    color: #9696eb;
+}
+
+.navbarComp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $margin_padding15;
+
+    .menus{
+        list-style: none;
+    }
 
 
-.navbarComp{
-    .bg-dark{
-        background-color: $mainBackgroundColor;
+}
+
+@include desktop {
+
+    .navbarComp {
+
+        .link {
+            margin-left: 15px;
+        }
+
+        border-bottom: 5px solid $borderColor;
     }
-    .link{
-        margin-left: 15px;
+
+    .search_box {
+        width: 400px;
     }
-    border-bottom: 5px solid $borderColor;
+
+    .menus{
+        display: flex;
+    }
+
+    .search {
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .searchTerm {
+        width: 100%;
+        border: 3px solid $cardColor_1;
+        border-right: none;
+        padding: 5px;
+        height: 36px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+    }
+
+    .searchTerm:focus {
+        color: $cardColor_1;
+    }
+
+    .searchButton {
+        width: 40px;
+        height: 36px;
+        border: 1px solid $cardColor_1;
+        background: $cardColor_1;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0 1px 4px 0;
+    }
+
+}
+
+
+
+
+
+@include tablet {
+    .navbarComp {
+
+        .link {
+            margin-left: 15px;
+        }
+
+        border-bottom: 5px solid $borderColor;
+    }
+
+    .menus{
+        display: flex;
+    }
+
+    .search {
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .searchTerm {
+        width: 100%;
+        border: 3px solid $cardColor_1;
+        border-right: none;
+        padding: 5px;
+        height: 36px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+    }
+
+    .searchTerm:focus {
+        color: $cardColor_1;
+    }
+
+    .searchButton {
+        width: 40px;
+        height: 36px;
+        border: 1px solid $cardColor_1;
+        background: $cardColor_1;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0 1px 4px 0;
+    }
+
+}
+
+
+
+
+
+@include mobile {
+
+
+    .navbarComp {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        .link {
+            margin-left: 15px;
+        }
+
+        border-bottom: 5px solid $borderColor;
+    }
+
+    .menus {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .menus a{
+        
+        font-size: 20px;
+        padding: 8px 24px;
+    }
+
+    .menus.active{
+        display: flex;
+        transition-duration: 2s;
+        transition-timing-function: ease-in-out;
+    }
+
+
+    .search_box {
+        position: absolute;
+        left: 120px;
+        font-size: 10px;
+        margin-top: 5px;
+        // margin: 0 auto;
+    }
+
+    .select-region {
+        position: absolute;
+        right: 40px;
+        top: 23px;
+        margin-right: 15px;
+    }
+
+    .hamburger_link{
+        position: absolute;
+        right: 13px;
+    }
+    
+    .hamburger_link:hover{
+        text-decoration: none;
+    }
+
+    .hamburger_bar {
+        display: block;
+        font-size: 30px;
+    }
+
+
+    .search {
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .searchTerm {
+        width: 100%;
+        border: 3px solid $cardColor_1;
+        border-right: none;
+        padding: 5px;
+        height: 26px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+    }
+
+    .searchTerm:focus {
+        color: $cardColor_1;
+    }
+
+    .searchButton {
+        width: 40px;
+        height: 26px;
+        border: 1px solid $cardColor_1;
+        background: $cardColor_1;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0 1px 4px 0;
+        svg{
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+    }
 }

@@ -1,76 +1,242 @@
+@import './constants/mixin';
+@import './constants/variables';
+
+
 .logo-name-link {
-    position: relative;
-    margin: 20px;
-    background-color: $cardColor_1;
-    width: 350px;
-    padding: 10px;
-    border-radius: 10px;
-    flex: 1;
-}
-
-.summoner_info_top {
-    margin-left: 10px;
-    display: flex;
-    flex-direction: row;
-    //    justify-content: flex-start;
-
-    .summoner_profile{
+        position: relative;
+        margin: 20px;
+        background-color: $cardColor_1;
+        width: 350px;
+        padding: 10px;
+        border-radius: 10px;
         flex: 1;
     }
-    .summoner_menu{
-        flex: 2;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-end;
-        margin-bottom: 15px;
 
-        .user-nav{
+@include desktop {
+
+    .summoner_info_top {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        //    justify-content: flex-start;
+
+        .summoner_profile {}
+
+        .summoner_menu {
+            margin-left: 20px;
             display: flex;
             flex-direction: row;
-            width: 100%;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
 
-            a{
-                margin-right:25px;
-                height: 40px;
+            .user-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                a {
+                    margin-right: 25px;
+                    height: 40px;
+                }
+
+                a:hover {
+                    border-bottom: 2px solid red;
+                    text-decoration: none;
+                }
             }
-            a:hover{
-                border-bottom: 2px solid red;
-                text-decoration: none;
-            }
+
         }
 
+
+
+        .level_img {
+            position: relative;
+            display: inline-block;
+
+            .logo-img {
+                width: 80px;
+                border-radius: 10px;
+                border: 4px solid rgb(245, 35, 20);
+            }
+
+            .level {
+                position: absolute;
+                right: 30px;
+                top: -8px;
+                font-weight: bolder;
+                background-color: black;
+                padding: 3px;
+                border-radius: 20px;
+                font-size: 10px;
+                color: white;
+            }
+
+        }
+
+        .name {
+            background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
+            font-weight: bolder;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 30px;
+            margin-left: 20px;
+        }
     }
 
 
-    
-
-.logo-img {
-    display: inline-block;
-    width: 80px;
-    border-radius: 10px;
-    border: 4px solid rgb(245, 35, 20);
 }
 
-.level {
-    position: absolute;
-    left: 62px;
-    top: 0;
-    font-weight: bolder;
-    background-color: black;
-    padding: 3px;
-    border-radius: 20px;
-    font-size: 10px;
-    color: white;
+
+
+
+
+@include tablet {
+
+    .summoner_info_top {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        //    justify-content: flex-start;
+
+        .summoner_profile {}
+
+        .summoner_menu {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
+
+            .user-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                a {
+                    margin-right: 25px;
+                    height: 40px;
+                }
+
+                a:hover {
+                    border-bottom: 2px solid red;
+                    text-decoration: none;
+                }
+            }
+
+        }
+
+
+
+        .level_img {
+            position: relative;
+            display: inline-block;
+
+            .logo-img {
+                width: 80px;
+                border-radius: 10px;
+                border: 4px solid rgb(245, 35, 20);
+            }
+
+            .level {
+                position: absolute;
+                right: 30px;
+                top: -8px;
+                font-weight: bolder;
+                background-color: black;
+                padding: 3px;
+                border-radius: 20px;
+                font-size: 10px;
+                color: white;
+            }
+
+        }
+
+        .name {
+            background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
+            font-weight: bolder;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 30px;
+            margin-left: 20px;
+        }
+    }
+
 }
 
-.name {
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
-    font-weight: bolder;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
-    margin-left: 20px;
-}
-}
 
+
+
+
+@include mobile {
+        .summoner_info_top {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        //    justify-content: flex-start;
+
+        .summoner_profile {}
+
+        .summoner_menu {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
+
+            .user-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                a {
+                    margin-right: 25px;
+                    height: 40px;
+                }
+
+                a:hover {
+                    border-bottom: 2px solid red;
+                    text-decoration: none;
+                }
+            }
+
+        }
+
+
+
+        .level_img {
+            position: relative;
+            display: inline-block;
+
+            .logo-img {
+                width: 80px;
+                border-radius: 10px;
+                border: 4px solid rgb(245, 35, 20);
+            }
+
+            .level {
+                position: absolute;
+                right: 30px;
+                top: -8px;
+                font-weight: bolder;
+                background-color: black;
+                padding: 3px;
+                border-radius: 20px;
+                font-size: 10px;
+                color: white;
+            }
+
+        }
+
+        .name {
+            background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
+            font-weight: bolder;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 30px;
+            margin-left: 20px;
+        }
+    }
+}

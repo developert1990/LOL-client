@@ -92,9 +92,13 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                     console.log('for문들어옴 id ==> ', gameIdInfo)
                     // server 측에 path 가 '/' 이곳으로 들어와서 프록시 서버를 통해서 정보를 호출한다.
                     // const response = await fetch(`${API.GET_MATCH_DETAILS}/${gameIds[i]}?region=${region}`);
-                    const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
-                    const data = await response.json();
-                    matchesData.push(data);
+                    try {
+                        const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
+                        const data = await response.json();
+                        matchesData.push(data);
+                    } catch (error) {
+                        return;
+                    }
 
                 }
                 console.log("매치히스토리 다시 뽑음: ", matchesData);
@@ -266,6 +270,31 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
         if (stime >= hour) return (`${stime / hour === 1 ? `${(stime / hour).toFixed(0)} hour ago` : `${(stime / hour).toFixed(0)} hours ago`}`);
         return (stime / min).toFixed(0) + "minutes ago";
     }
+
+
+
+    // 훅
+    //     const usePlayGameDate = (unixTime: number) => {
+    //         const [time, setTime] = useState('');
+    //         useEffect(() => {
+    //             const timeGap: number = Number(new Date()) - unixTime;
+    //             let stime = timeGap / 1000;
+    //             const year = 86400 * (365.25);
+    //             const month = 86400 * 30.4375;
+    //             const day = 86400;
+    //             const hour = 3600;
+    //             const min = 60;
+
+    //             if (stime >= year) return (`${stime / year === 1 ? `${(stime / year).toFixed(0)} year ago` : `${(stime / year).toFixed(0)} years ago`}`);
+    //             if (stime >= month) return (`${stime / month === 1 ? `${(stime / month).toFixed(0)} month ago` : `${(stime / month).toFixed(0)} months ago`}`);
+    //             if (stime >= day) return (`${stime / day === 1 ? `${(stime / day).toFixed(0)} day ago` : `${(stime / day).toFixed(0)} days ago`}`);
+    //             if (stime >= hour) return (`${stime / hour === 1 ? `${(stime / hour).toFixed(0)} hour ago` : `${(stime / hour).toFixed(0)} hours ago`}`);
+    //             const timeStr = (stime / min).toFixed(0) + "minutes ago";
+    //             setTime(timeStr);
+    //         }, []);
+    //         return { time };
+    //     }
+    //    const { time } = usePlayGameDate(500000);
 
     // 게임 시간 뽑아내는 함수
     const getPlayDuration = (duration: number) => {

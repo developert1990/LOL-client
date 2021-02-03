@@ -19,8 +19,10 @@ export const ProfileMenu = () => {
                     <div className="summoner_info_top">
                         <div className="summoner_profile">
                             <div className="logo-name-link link">
-                                <img className="logo-img" src={`${API.GET_PROFILEICON}/${summonerInfo?.profileIconId}.png`} alt="profileIcon" />
-                                <span className="level">{summonerInfo?.summonerLevel}</span>
+                                <div className="level_img">
+                                    <span className="level">{summonerInfo?.summonerLevel}</span>
+                                    <img className="logo-img" src={`${API.GET_PROFILEICON}/${summonerInfo?.profileIconId}.png`} alt="profileIcon" />
+                                </div>
                                 <span className="name">{summonerInfo?.name}</span>
                             </div>
                         </div>

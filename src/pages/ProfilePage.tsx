@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ProfileMenu, SideAdvertisement } from '../components';
@@ -11,7 +12,12 @@ import { initialAppStateType } from '../store';
 import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
 
 
-export const ProfilePage = () => {
+interface ProfilePagePropsType {
+    profileError: string;
+    setProfileError: Dispatch<SetStateAction<string>>;
+}
+
+export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setProfileError }) => {
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
@@ -69,57 +75,60 @@ export const ProfilePage = () => {
     // 두번 setState를 불러 오게 되면 랜더링 때문에 문제가 발생한다. 그래서 의존성배열에 id값을 두고 id값이 변하게 되면 fetch를 통해 setState 를 하게 된다.
     // 검색한 유저의 세부 정보 가져옴
     useEffect(() => {
+        console.log('id 확인  ==??? ', id)
         if (id) {
             (async () => {
-                // const response2 = await fetch(`${API.GET_SUMMONER_DETAIL_BY_ID}/18DGpAfpkizFV_QeZruhnqFhjao8lcwqhzHKxbOcqfFRXA`)
-                // console.log(id);
-                // const response = await fetch(`${API.GET_SUMMONER_DETAIL_BY_ID}/${id}?region=${region}`)
-                const response = await fetch(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-                // console.log('3');
-                const data: SummonerDetailType[] = await response.json();
-                // console.log(data);
-                // const typedData = data as SummonerDetailType[];
-                const [details] = data;
-                // console.log(details);
-                setSummonerDetail({
-                    queueType: details.queueType,
-                    tier: details.tier,
-                    rank: details.rank,
-                    leaguePoints: details.leaguePoints,
-                    wins: details.wins,
-                    losses: details.losses,
-                });
-                setIsLoading(false)
-                setLoaded(false);
-                setGameIdInfoLoaded(false);
+
+                try {
+                    // const response = await fetch(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
+                    const { data } = await axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
+                    // const data: SummonerDetailType[] = await response.json();
+                    console.log('data ??????', data)
+                    const [details] = data;
+                    // console.log(details);
+
+                    setSummonerDetail({
+                        queueType: details.queueType,
+                        tier: details.tier,
+                        rank: details.rank,
+                        leaguePoints: details.leaguePoints,
+                        wins: details.wins,
+                        losses: details.losses,
+                    });
+                    setIsLoading(false)
+                    setLoaded(false);
+                    setGameIdInfoLoaded(false);
+                } catch (error) {
+
+                    console.log("405에러 발생해서 들어옴")
+                    setProfileError("No rank information for current filters.");
+                }
             })();
         }
-    }, [id, region]);
+
+    }, [id]);
 
 
 
     // 해당유저의 게임 했던것들 정보 가져옴 총 100개
     useEffect(() => {
-        // console.log('match')
+        console.log('match', tier)
         if (tier) {
             (
                 async () => {
-                    // console.log(accountId)
-                    // const response = await fetch(`${API.GET_MATCH_ID}/${accountId}?region=${region}`)
+
                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
                     const data: GameMatcheType = await response.json();
                     // const typedData = data as GameMatcheType;
                     const { matches } = data;
-                    // for (let i = 0; i < 100; i++) {
-                    //     gameId.push(matches[i].gameId);
-                    // }
+
                     matches.map((match) => gameId.push(match.gameId));
                     setGameIdInfo([...gameId]);
                     setGameIdInfoLoaded(true);
                 }
             )();
         }
-    }, [accountId, region, tier]);
+    }, [accountId, tier]);
 
 
 
@@ -136,51 +145,59 @@ export const ProfilePage = () => {
                     </div>
                     :
                     !error ?
-                        <div className="summoner-info">
-                            {
-                                name.length > 0 && tier.length > 0 &&
-                                <div>
-                                    <div className="summoner_info_bottom">
-                                        <div className="summoner_info_bottom_left">
+                        profileError == "" ?
+                            <div className="summoner-info">
+                                {
+                                    name.length > 0 && tier.length > 0 &&
+                                    <div>
+                                        <div className="summoner_info_bottom">
+                                            <div className="summoner_info_bottom_left">
+                                                <div className="detail-info custom_card">
 
-                                            <div className="detail-info custom_card">
-                                                <div className="detail_title">Rank</div>
-                                                <div className="detail-parent">
-                                                    <img className="emblem-img" src={require(`../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" />
+                                                    <div>
+                                                        <div className="detail_title">Rank</div>
+                                                        <div className="detail-parent">
+                                                            <img className="emblem-img" src={require(`../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" />
 
-                                                    <div className="detail">
-                                                        <span className="queue-type">{queueType}</span>
-                                                        <div className="tier-lp">
-                                                            <span className="tier">{tier} <span className="rank">{rank}</span> </span>
-                                                            <span className="lp"> / {leaguePoints} LP</span>
-                                                        </div>
-                                                        <span className="win-lost">{`${wins} W ${losses} L`}</span>
-                                                        <div className="winRate-totalGame">
-                                                            <span className="winRate">{`${Math.round(wins / (wins + losses) * 100)}%`}</span>
-                                                            <span className="totalGame">{wins + losses} games</span>
+                                                            <div className="detail">
+                                                                <span className="queue-type">{queueType}</span>
+                                                                <div className="tier-lp">
+                                                                    <span className="tier">{tier} <span className="rank">{rank}</span> </span>
+                                                                    <span className="lp"> / {leaguePoints} LP</span>
+                                                                </div>
+                                                                <span className="win-lost">{`${wins} W ${losses} L`}</span>
+                                                                <div className="winRate-totalGame">
+                                                                    <span className="winRate">{`${Math.round(wins / (wins + losses) * 100)}%`}</span>
+                                                                    <span className="totalGame">{wins + losses} games</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
+
+
+                                                <div className="custom_card detail_graph">
+                                                    역대 기록 그래프
+                                            </div>
                                             </div>
 
-                                            <div className="custom_card detail_graph">
-                                                역대 기록 그래프
-                                                </div>
 
-                                        </div>
 
-                                        <div className="summoner_info_bottom_right">
-                                            {
-                                                // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
-                                                gameIdInfo.length > 0 && accountId && gameIdInfoLoaded &&
-                                                <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} setLoaded={setLoaded} loaded={loaded} />
+                                            <div className="summoner_info_bottom_right">
+                                                {
+                                                    // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
+                                                    gameIdInfo.length > 0 && accountId && gameIdInfoLoaded && gameIdInfo &&
+                                                    <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} setLoaded={setLoaded} loaded={loaded} />
 
-                                            }
+                                                }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
-                        </div>
+                                }
+                            </div>
+                            :
+                            <div style={{ color: "red" }}>{profileError}</div>
                         :
                         <>
                             <div style={{ color: "red" }} className="summoner-error">

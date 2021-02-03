@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Footer, NavbarComp, ProfileMenu, SideAdvertisement } from '../components/index';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { MainPage, SearchPage } from '../pages/index'
@@ -8,16 +8,27 @@ import { useSelector } from 'react-redux';
 import { initialAppStateType } from '../store';
 import { Masteries } from '../components/Masteries';
 import { useQuery } from '../hooks/useQuery';
+import { profile } from 'console';
 
 export default () => {
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
 
-    const query = useQuery();
+    const [profileError, setProfileError] = useState<string>("");
 
+
+    const query = useQuery();
     useEffect(() => {
         console.log(query);
     }, [query])
+
+
+    useEffect(() => {
+        console.log("라우터 유즈이펙트 *********************", profileError)
+        if (profileError !== "") {
+            setProfileError("");
+        }
+    }, [summonerInfo])
 
     // drill down
     return (
@@ -29,7 +40,7 @@ export default () => {
                 </div>
 
                 <div className="searchOuter">
-                    <SearchWrapper />
+                    <SearchWrapper profileError={profileError} setProfileError={setProfileError} />
                     <Route path="/search/userInfo/" component={SideAdvertisement} />
                 </div>
 
@@ -40,11 +51,22 @@ export default () => {
     )
 }
 
-const SearchWrapper = () => {
+interface SearchWrapperPropsType {
+    profileError: string;
+    setProfileError: Dispatch<SetStateAction<string>>;
+}
+
+const SearchWrapper: React.FC<SearchWrapperPropsType> = ({ profileError, setProfileError }) => {
+
+
     return (
         <div className="searchWrapper">
             <Route path="/search/userInfo/" component={ProfileMenu} />
-            <Route path="/search/userInfo/overview/:region" component={ProfilePage} />
+            <Route path="/search/userInfo/overview/:region" render={() => {
+                return (
+                    <ProfilePage setProfileError={setProfileError} profileError={profileError} />
+                )
+            }} />
             <Route path="/search/userInfo/masteries/:region" component={Masteries} />
         </div>
     )

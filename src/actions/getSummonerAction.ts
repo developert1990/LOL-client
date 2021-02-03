@@ -13,6 +13,8 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
         console.log('data ==>> ', data)
         dispatch({ type: GET_SUMMONER_SUCCESS, payload: data });
 
+
+
     } catch (error) {
         dispatch({ type: GET_SUMMONER_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message });
     }
