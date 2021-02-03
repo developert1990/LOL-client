@@ -9,7 +9,6 @@ import { ProfilePage } from './ProfilePage';
 import { GET_SUMMONER_RESET } from '../constants/getSummonerConstants';
 
 
-
 export const SearchPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
