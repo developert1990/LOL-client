@@ -38,7 +38,9 @@ export interface UserMatchHistoryPropsType {
 // {
 //     [key: string]: DataType
 // } 
-interface SpellJsonType {
+
+
+interface hardCodingSpellType {
     "SummonerBarrier": SpellDetailType;
     "SummonerBoost": SpellDetailType;
     "SummonerDot": SpellDetailType;
@@ -53,8 +55,9 @@ interface SpellJsonType {
     "SummonerSnowURFSnowball_Mark": SpellDetailType;
     "SummonerSnowball": SpellDetailType;
     "SummonerTeleport": SpellDetailType;
-
 }
+
+interface SpellsType { [key: string]: SpellDetailType }; // 위에 선언한거랑 같은거임
 
 export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id, loaded, setLoaded }) => {
     console.log("유즈메치히스토리 렌더 하러 들어옴")
@@ -95,7 +98,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const [matchesAllInfo, setMatchesAllInfo] = useState<MatchedGameType[]>([]);
     // console.log(start)
 
-    const spellsData: SpellJsonType = spells;
+
+
+    const spellsData: SpellsType = spells;
     const champsData = champs.data;
 
     useEffect(() => {
