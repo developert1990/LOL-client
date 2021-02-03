@@ -16,8 +16,18 @@ interface ProfilePagePropsType {
 export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setProfileError }) => {
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
+
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
+
+    const getSummonerDetailStore = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
+    const { error: detailError, summonerDetail } = getSummonerDetailStore;
+
+    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
+    const { error: games100Error, games100, gameIdInfo: reduxGameIdInfo } = getGames100Store;
+
+    console.log('reduxGameIdInfo', reduxGameIdInfo);
+
 
 
     const dispatch = useDispatch();
@@ -50,74 +60,74 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
     const [loaded, setLoaded] = useState(false);
 
 
-    useEffect(() => {
-        if (summonerInfo) {
-            console.log("summonerInfo redux로 받고 실행됨")
+    // useEffect(() => {
+    //     if (summonerInfo) {
+    //         console.log("summonerInfo redux로 받고 실행됨")
 
-            setErrorMsg(false)
-            setSummonerInfo({
-                id: summonerInfo.id,
-                name: summonerInfo.name,
-                profileIconId: summonerInfo.profileIconId,
-                level: summonerInfo.summonerLevel,
-                accountId: summonerInfo.accountId,
-            });
-        }
-    }, [summonerInfo])
-
-
-    // 두번 setState를 불러 오게 되면 랜더링 때문에 문제가 발생한다. 그래서 의존성배열에 id값을 두고 id값이 변하게 되면 fetch를 통해 setState 를 하게 된다.
-    // 검색한 유저의 세부 정보 가져옴
-    useEffect(() => {
-        if (id) {
-            console.log('summonerDetail뽑으러옴');
-            (async () => {
-
-                try {
-                    const { data } = await axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-                    console.log('data ??????', data)
-                    const [details] = data;
-
-                    setSummonerDetail({
-                        queueType: details.queueType,
-                        tier: details.tier,
-                        rank: details.rank,
-                        leaguePoints: details.leaguePoints,
-                        wins: details.wins,
-                        losses: details.losses,
-                    });
-                    setIsLoading(false)
-                    setLoaded(false);
-                    setGameIdInfoLoaded(false);
-                } catch (error) {
-                    console.log("405에러 발생해서 들어옴")
-                    setProfileError("No rank information for current filters.");
-                }
-            })();
-        }
-
-    }, [id]);
+    //         setErrorMsg(false)
+    //         setSummonerInfo({
+    //             id: summonerInfo.id,
+    //             name: summonerInfo.name,
+    //             profileIconId: summonerInfo.profileIconId,
+    //             level: summonerInfo.summonerLevel,
+    //             accountId: summonerInfo.accountId,
+    //         });
+    //     }
+    // }, [summonerInfo])
 
 
+    // // 두번 setState를 불러 오게 되면 랜더링 때문에 문제가 발생한다. 그래서 의존성배열에 id값을 두고 id값이 변하게 되면 fetch를 통해 setState 를 하게 된다.
+    // // 검색한 유저의 세부 정보 가져옴
+    // useEffect(() => {
+    //     if (id) {
+    //         console.log('summonerDetail뽑으러옴');
+    //         (async () => {
 
-    // 해당유저의 게임 했던것들 정보 가져옴 총 100개
-    useEffect(() => {
-        if (tier) {
-            console.log('해당유저의 게임했던 모든 정보 가지러 들어옴 총 100개');
-            (
-                async () => {
+    //             try {
+    //                 const { data } = await axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
+    //                 console.log('data ??????', data)
+    //                 const [details] = data;
 
-                    const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
-                    const data: GameMatcheType = await response.json();
-                    const { matches } = data;
+    //                 setSummonerDetail({
+    //                     queueType: details.queueType,
+    //                     tier: details.tier,
+    //                     rank: details.rank,
+    //                     leaguePoints: details.leaguePoints,
+    //                     wins: details.wins,
+    //                     losses: details.losses,
+    //                 });
+    //                 setIsLoading(false)
+    //                 setLoaded(false);
+    //                 setGameIdInfoLoaded(false);
+    //             } catch (error) {
+    //                 console.log("405에러 발생해서 들어옴")
+    //                 setProfileError("No rank information for current filters.");
+    //             }
+    //         })();
+    //     }
 
-                    matches.map((match) => gameId.push(match.gameId));
-                    setGameIdInfo([...gameId]);
-                    setGameIdInfoLoaded(true);
-                }
-            )();
-        }
-    }, [accountId, tier]);
+    // }, [id]);
+
+
+
+    // // 해당유저의 게임 했던것들 정보 가져옴 총 100개
+    // useEffect(() => {
+    //     if (tier) {
+    //         console.log('해당유저의 게임했던 모든 정보 가지러 들어옴 총 100개');
+    //         (
+    //             async () => {
+
+    //                 const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
+    //                 const data: GameMatcheType = await response.json();
+    //                 const { matches } = data;
+
+    //                 matches.map((match) => gameId.push(match.gameId));
+    //                 setGameIdInfo([...gameId]);
+    //                 setGameIdInfoLoaded(true);
+    //             }
+    //         )();
+    //     }
+    // }, [accountId, tier]);
 
 
 
@@ -173,14 +183,14 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
 
 
 
-                                            <div className="summoner_info_bottom_right">
+                                            {/* <div className="summoner_info_bottom_right">
                                                 {
                                                     // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
                                                     gameIdInfo.length > 0 && accountId && gameIdInfoLoaded && gameIdInfo &&
                                                     <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} setLoaded={setLoaded} loaded={loaded} />
 
                                                 }
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 }

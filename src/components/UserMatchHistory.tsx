@@ -63,10 +63,12 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     console.log("유즈메치히스토리 렌더 하러 들어옴")
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
+
+    // 이거 챔피언 json받는데 사용됨
     const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
     // const { spells: spellsRedux } = useSelector((state: initialAppStateType) => state.spellsStore);
     // console.log(' 바로 spellsOriginal', spellsRedux)
-    const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
+    // const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
     // const location = useLocation<LocationType>();
     const [pageLoading, setPageLoading] = useState(true);
     // console.log(location.state)

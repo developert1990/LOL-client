@@ -1,3 +1,4 @@
+import { GetGames100InitialStateType, getGames100InitialState, getGames100Reducer } from './reducers/getGames100Reducer';
 import { GetSummonerDetailInitialStateType, getSummonerDetailInitialState, getSummonerDetailReducer } from './reducers/getSummonerDetailReducer';
 import { GetSummonerInitialStateType, getSummonerInitialState, getSummonerReducer } from './reducers/getSummonerReducer';
 import { ChampsInitialStateType, champsInitialState, champsReducer, RunesInitialStateType, runesInitialState, runesReducer, SpellsInitialStateType, spellsInitialState, spellReducer } from './reducers/initialDataReducer';
@@ -16,6 +17,7 @@ export interface initialAppStateType {
     spellsStore: SpellsInitialStateType,
     getSummonerStore: GetSummonerInitialStateType,
     getSummonerDetailStore: GetSummonerDetailInitialStateType,
+    getGames100Store: GetGames100InitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -25,7 +27,7 @@ export const initialAppState: initialAppStateType = {
     spellsStore: spellsInitialState,
     getSummonerStore: getSummonerInitialState,
     getSummonerDetailStore: getSummonerDetailInitialState,
-
+    getGames100Store: getGames100InitialState,
 }
 
 const reducer = combineReducers({
@@ -35,6 +37,7 @@ const reducer = combineReducers({
     spellsStore: spellReducer,
     getSummonerStore: getSummonerReducer,
     getSummonerDetailStore: getSummonerDetailReducer,
+    getGames100Store: getGames100Reducer,
 })
 
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(promise, thunk)))

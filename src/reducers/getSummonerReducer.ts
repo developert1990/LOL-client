@@ -17,11 +17,11 @@ export const getSummonerInitialState: GetSummonerInitialStateType = {
 export const getSummonerReducer = (state = getSummonerInitialState, action: getSummonerActionType) => {
     switch (action.type) {
         case GET_SUMMONER_REQUEST:
-            return { isLoading: true }
+            return { ...state, isLoading: true }
         case GET_SUMMONER_SUCCESS:
-            return { isLoading: false, summonerInfo: action.payload };
+            return { ...state, isLoading: false, summonerInfo: action.payload };
         case GET_SUMMONER_FAIL:
-            return { isLoading: false, error: action.payload };
+            return { ...state, isLoading: false, error: action.payload };
         case GET_SUMMONER_RESET:
             return {};
         default:

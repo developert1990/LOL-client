@@ -13,6 +13,13 @@ export interface SummonerDetailType {
     leaguePoints: number;
     wins: number;
     losses: number;
+    leagueId?: string;
+    summonerId?: string;
+    summonerName?: string;
+    veteran?: boolean;
+    inactive?: boolean;
+    freshBlood?: boolean;
+    hotStreak?: boolean;
 }
 export interface MatchType {
     champion: number;

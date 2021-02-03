@@ -1,5 +1,6 @@
+import { MatchType, SummonerDetailType } from './../types.d';
 import { TEST_BASE } from './../config/index';
-import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_REQUEST, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL } from './../constants/getSummonerConstants';
+import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL, GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL } from './../constants/getSummonerConstants';
 import { ThunkDispatch } from 'redux-thunk';
 import Axios from 'axios';
 
@@ -14,13 +15,33 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
         console.log('data ==>> ', data)
         dispatch({ type: GET_SUMMONER_SUCCESS, payload: data });
         localStorage.setItem(USER_ID, data.id);
-        const id = data.id;
-        dispatch({ type: GET_SUMMONER_DETAIL_REQUEST });
+        const id: string = data.id;
+        const accountId: string = data.accountId;
+        console.log('id', id)
+        console.log('accountId', accountId)
 
         // summoner 기본 정보 받았으니 => summoner 디테일 뽑기
         try {
             const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-            dispatch({ type: GET_SUMMONER_DETAIL_SUCCESS, payload: data });
+            const detail: SummonerDetailType = data;
+            dispatch({ type: GET_SUMMONER_DETAIL_SUCCESS, payload: detail });
+
+            // 해당유저의 게임 했던것들 정보 가져옴 총 100개
+            try {
+                const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
+                const matches: MatchType[] = data.matches;
+
+                const matchIds = matches.reduce((a: number[], c) => {
+                    a.push(c.gameId)
+                    return a;
+                }, [])
+
+                console.log('matchIds *********************************************', matchIds)
+
+                dispatch({ type: GET_SUMMONER_GAMES_100_SUCCESS, payload: matches, matchIds: matchIds });
+            } catch (error) {
+                dispatch({ type: GET_SUMMONER_GAMES_100_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message });
+            }
         } catch (error) {
             dispatch({ type: GET_SUMMONER_DETAIL_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message });
         }
@@ -32,4 +53,5 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
     // finally {
     //     dispatch({ type: NOTIFY_USERS })
     // }
+
 }

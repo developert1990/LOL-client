@@ -9,11 +9,11 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchChamps());
-    dispatch(fetchSpells());
-    dispatch(fetchRunes())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchChamps());
+  //   dispatch(fetchSpells());
+  //   dispatch(fetchRunes())
+  // }, [dispatch])
 
   return (
     <div className="App">
