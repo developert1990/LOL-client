@@ -1,5 +1,5 @@
 import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_SUCCESS, THREE_GAMES_DETAIL_FAIL } from './../constants/getGamesDetailConstants';
-import { MatchedGameType, ParticipantsType } from './../types.d';
+import { MatchedGameType, ParticipantsType, GameImageType } from './../types.d';
 import { getGameDetailAction } from './types';
 
 export interface GetGameDetailsInitialStateType {
@@ -7,6 +7,7 @@ export interface GetGameDetailsInitialStateType {
     error: string;
     games: MatchedGameType[] | undefined;
     summonerMatchDetail: ParticipantsType[];
+    detailedImageData: GameImageType[];
 }
 
 export const getGameDetailsInitialState: GetGameDetailsInitialStateType = {
@@ -14,6 +15,7 @@ export const getGameDetailsInitialState: GetGameDetailsInitialStateType = {
     error: "",
     games: undefined,
     summonerMatchDetail: [],
+    detailedImageData: [],
 }
 
 export const getGameDetailsReducer = (state = getGameDetailsInitialState, action: getGameDetailAction) => {
@@ -21,7 +23,7 @@ export const getGameDetailsReducer = (state = getGameDetailsInitialState, action
         case THREE_GAMES_DETAIL_REQUEST:
             return { ...state, isLoading: true };
         case THREE_GAMES_DETAIL_SUCCESS:
-            return { ...state, isLoading: false, games: action.payload, summonerMatchDetail: action.summonerMatchDetail };
+            return { ...state, isLoading: false, games: action.payload, summonerMatchDetail: action.summonerMatchDetail, detailedImageData: action.detailedImageData };
         case THREE_GAMES_DETAIL_FAIL:
             return { ...state, isLoading: false, error: action.payload };
         default:

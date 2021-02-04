@@ -47,7 +47,12 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
 
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
-    const { error, games, isLoading: gamesDetailLoading } = getGamesDetailStore;
+    const { error, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
+
+    console.log('games +++++++++++++++++++++++++++++++++ ', games)
+    console.log('detailedImageData +++++++++++++++++++++++++++++++++ ', detailedImageData)
+    console.log('summonerMatchDetail +++++++++++++++++++++++++++++++++ ', summonerMatchDetail)
+
 
     const [pageLoading, setPageLoading] = useState(true);
 
@@ -58,7 +63,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     // const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
     const matchesInfo: MatchedGameType[] = []
 
-    // 커스텀 훅 사용해서 chams, spells, runes 정보 받아옴
+    // 커스텀훅을 리덕스 내부에서 사용불가능 해서 일반 함수호출로 바꿔줫음
     const allChampsData = getChampsData();
     const allSpellsData = getSpellsData();
     const allRunesData = getRunesData();
@@ -67,7 +72,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const champImages: GameImageType[] = [];
     const spellsArr: SpellsIngameType[] = [];
     const runesArr: RunesIngameType[] = [];
-    const [information, setInformation] = useState<GameImageType[]>([]);
+    // const [information, setInformation] = useState<GameImageType[]>([]);
 
     const [start, setStart] = useState(0);
     const [loadMore, setLoadMore] = useState(false);
@@ -78,7 +83,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
         if (allChampsData.length > 0) {
             console.log("디스패치 들어옴")
             console.log('allChampsData', allChampsData);
-            dispatch(getGameDetail(start, gameIdInfo, region, accountId, allChampsData, allSpellsData, allRunesData));
+            dispatch(getGameDetail(start, gameIdInfo, region, accountId));
         }
     }, [start])
 
@@ -257,9 +262,8 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                         </div>
                         :
                         <div>
-                            {console.log(matchesInfo)}
                             {
-                                information.map((data, index) => {
+                                detailedImageData.map((data, index) => {
                                     return (
                                         <div className="accordion-page" key={index}>
                                             <Accordion key={index} className="accordion">
