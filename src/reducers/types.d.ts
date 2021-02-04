@@ -37,4 +37,5 @@ export interface getGames100ActionType {
 export interface getGameDetailAction {
     payload: any;
     type: string;
+    summonerMatchDetail: any;
 }

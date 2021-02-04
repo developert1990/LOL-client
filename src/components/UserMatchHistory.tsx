@@ -14,7 +14,7 @@ import { initialAppStateType } from '../store';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType, ParticipantsType, RuneBigType, RunesIngameType, SpellDetailType, SpellsIngameType } from '../types';
 import darkgery from '../images/darkgrey.png';
 import { getPlayGameDate, getPlayDuration } from '../libs/index';
-import { useChampsData, useRunesData, useSpellsData } from '../hooks/index';
+import { getChampsData, getRunesData, getSpellsData } from '../libs/index';
 import { getGameDetail } from '../actions/getGameDetailAction';
 export interface LocationType {
     gameIdInfo: number[];
@@ -59,9 +59,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const matchesInfo: MatchedGameType[] = []
 
     // 커스텀 훅 사용해서 chams, spells, runes 정보 받아옴
-    const allChampsData = useChampsData();
-    const allSpellsData = useSpellsData();
-    const allRunesData = useRunesData();
+    const allChampsData = getChampsData();
+    const allSpellsData = getSpellsData();
+    const allRunesData = getRunesData();
 
 
     const champImages: GameImageType[] = [];
@@ -74,10 +74,12 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     const dispatch = useDispatch();
-
     useEffect(() => {
-        console.log("디스패치 들어옴")
-        dispatch(getGameDetail(start, gameIdInfo, region, accountId));
+        if (allChampsData.length > 0) {
+            console.log("디스패치 들어옴")
+            console.log('allChampsData', allChampsData);
+            dispatch(getGameDetail(start, gameIdInfo, region, accountId, allChampsData, allSpellsData, allRunesData));
+        }
     }, [start])
 
     // useEffect(() => {

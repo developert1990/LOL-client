@@ -1,11 +1,12 @@
+import { getChampsData, getRunesData } from '../libs/index';
 import { TEST_BASE } from './../config/index';
-import { MatchedGameType } from './../types.d';
+import { MatchedGameType, ChampDetailType, SpellDetailType, RuneBigType } from './../types.d';
 import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_FAIL, THREE_GAMES_DETAIL_SUCCESS } from './../constants/getGamesDetailConstants';
 import { ThunkDispatch } from 'redux-thunk';
-import { getSummonerMatchDetail } from '../libs/index';
+import { getDetailedImageData, getSummonerMatchDetail } from '../libs/index';
 
 
-export const getGameDetail = (start: number, gameIdInfo: number[], region: string, accountId: string) => async (dispatch: ThunkDispatch<any, any, any>) => {
+export const getGameDetail = (start: number, gameIdInfo: number[], region: string, accountId: string, allChampsData: ChampDetailType[], allSpellsData: SpellDetailType[], allRunesData: RuneBigType[]) => async (dispatch: ThunkDispatch<any, any, any>) => {
     dispatch({ type: THREE_GAMES_DETAIL_REQUEST });
     const matchesData: MatchedGameType[] = [];
     try {
@@ -14,8 +15,11 @@ export const getGameDetail = (start: number, gameIdInfo: number[], region: strin
             const data = await response.json();
             matchesData.push(data);
         }
-        dispatch({ type: THREE_GAMES_DETAIL_SUCCESS, payload: matchesData });
+
         const summonerMatchDetail = getSummonerMatchDetail(matchesData, accountId); // 검색한 유저가 경기한 디테일을 가져옴
+        const detailedImageData = getDetailedImageData(summonerMatchDetail, matchesData, allChampsData, allSpellsData, allRunesData);
+        console.log('detailedImageData @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', detailedImageData);
+        dispatch({ type: THREE_GAMES_DETAIL_SUCCESS, payload: matchesData, summonerMatchDetail: summonerMatchDetail });
         console.log('summonerMatchDetail  **************************', summonerMatchDetail);
 
     } catch (error) {
