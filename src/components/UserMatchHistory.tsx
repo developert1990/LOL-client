@@ -14,8 +14,8 @@ import { initialAppStateType } from '../store';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType, ParticipantsType, RuneBigType, RunesIngameType, SpellDetailType, SpellsIngameType } from '../types';
 import darkgery from '../images/darkgrey.png';
 import { getPlayGameDate, getPlayDuration } from '../libs/index';
-import { champs, runes, spells } from '../data/index';
-import { useChampsData, useRunesData, useSpellsData } from '../hooks/index';
+import { useChampsData, useRunesData, useSpellsData, use_3MatchedGames } from '../hooks/index';
+import { getGameDetail } from '../actions/getGameDetailAction';
 export interface LocationType {
     gameIdInfo: number[];
     accountId: string;
@@ -31,14 +31,9 @@ export interface UserMatchHistoryPropsType {
     gameIdInfo: number[];
     accountId: string;
     id: string;
-    // loaded: boolean;
-    // setLoaded: Dispatch<SetStateAction<boolean>>;
+
 
 }
-
-// {
-//     [key: string]: DataType
-// } 
 
 
 
@@ -50,18 +45,13 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
     // 이거 챔피언 json받는데 사용됨
     const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
-    // const { spells: spellsRedux } = useSelector((state: initialAppStateType) => state.spellsStore);
-    // console.log(' 바로 spellsOriginal', spellsRedux)
-    // const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
-    // const location = useLocation<LocationType>();
+
+    const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
+    const { error, games, isLoading: gamesDetailLoading } = getGamesDetailStore;
+
     const [pageLoading, setPageLoading] = useState(true);
-    // console.log(location.state)
-    // const accountId = location.state.accountId;
-    // console.log(accountId)
-    const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
-    // const [loaded, setLoaded] = useState(false);
-    // const [...gameIds] = location.state.gameIdInfo;
-    // console.log(gameIds);
+
+    // const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
 
     const matchesData: MatchedGameType[] = [];
     const [summonerDetail, setSummonerDetail] = useState<ParticipantsType[]>([]);
@@ -81,168 +71,165 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
     const [start, setStart] = useState(0);
     const [loadMore, setLoadMore] = useState(false);
-    const [matchesAllInfo, setMatchesAllInfo] = useState<MatchedGameType[]>([]);
-    // console.log(start)
 
+    let matchesInfo: MatchedGameType[] = []
 
-
-    useEffect(() => {
-        (
-            async () => {
-                console.log('gameId 쭉 뽑은걸로 matchList 3개 뽑으러 들어옴');
-                for (let i = start; i < start + 3; i++) {
-                    // server 측에 path 가 '/' 이곳으로 들어와서 프록시 서버를 통해서 정보를 호출한다.
-                    // const response = await fetch(`${API.GET_MATCH_DETAILS}/${gameIds[i]}?region=${region}`);
-                    try {
-                        const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
-                        const data = await response.json();
-                        matchesData.push(data);
-                    } catch (error) {
-                        return;
-                    }
-
-                }
-
-                const newData = matchesAllInfo.concat(matchesData);
-
-                setMatchesAllInfo(newData);
-
-                setMatchesInfo(matchesData);
-                // setLoaded(true);
-            }
-
-        )();
-    }, [start]);
-
-
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        // if (loaded) {
-        console.log('loaded 되서 들어옴  4');
-        // console.log(matchesInfo)
-        // console.log('accountId==>> ', accountId)
-        const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-        // console.log("participantId ==>> ", participantId);
-        const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
-        // console.log("매치 디테일: ", summonorMatchDetail);
-        setSummonerDetail(summonorMatchDetail);
+        console.log("디스패치 들어옴")
+        dispatch(getGameDetail(start, gameIdInfo, region));
+    }, [start])
 
-        const playResult = summonorMatchDetail.map((data) => data.stats.win)
-        // console.log(playResult);
-        setResult(playResult);
+    // useEffect(() => {
+    //     (
+    //         async () => {
+    //             console.log('gameId 쭉 뽑은걸로 matchList 3개 뽑으러 들어옴');
+    //             for (let i = start; i < start + 3; i++) {
+    //                 try {
+    //                     const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
+    //                     const data = await response.json();
+    //                     matchesData.push(data);
+    //                 } catch (error) {
+    //                     return;
+    //                 }
 
-        // }
-    }, [matchesInfo, accountId])
-    // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
+    //             }
+    //             setMatchesInfo(matchesData);
+    //         }
 
-
-
-    useEffect(() => {
-
-        if (!isLoading && summonerDetail.length > 0) {
-            console.log('룬, 스펠, 챔프 뽑음. ')
-            // console.log('룬, 스펠, 챔프 뽑으러 if 문안에 들어옴')
-            // console.log(allChampsData);
-            // console.log(allRunesData);
-
-            for (let i = 0; i < 3; i++) {
-                const spell1: any = summonerDetail[i].spell1Id;
-                const spell2: any = summonerDetail[i].spell2Id;
-                spellsArr.push({
-                    spell1,
-                    spell2,
-                });
-            }
-
-            // console.log(allSpellsData);
-            // console.log(spellsArr);
-
-            for (let i = 0; i < 3; i++) {
-                const primaryRune: any = summonerDetail[i].stats.perkPrimaryStyle;
-                const subRune: any = summonerDetail[i].stats.perkSubStyle;
-                runesArr.push({
-                    primaryRune,
-                    subRune,
-                })
-            };
-            // console.log(runesArr);
-
-            // // 해당하는 룬 뽑는 함수
-            const usedRunes: any[] = runesArr.map(rune => {
-                // console.log('Object.entries(rune) ==> ', Object.entries(rune))
-                const obj: any = {};
-                for (const [key, value] of Object.entries(rune)) {
-                    obj[key] = allRunesData.find(data => data.id === value)?.icon
-                }
-                return obj
-            });
-            // console.log(usedRunes);
-
-            // // 해당하는 스펠 뽑는 함수
-            // console.log(spellsArr)
-            const usedSpells: any[] = spellsArr.map(spell => {
-                // console.log(Object.entries(spell));
-                const obj: any = {}
-                for (const [key, value] of Object.entries(spell)) {
-                    obj[key] = allSpellsData.find(data => Number(data.key) === value)?.id;
-                }
-                // console.log(obj)
-                return obj
-            });
-            // console.log(usedSpells);
-
-            // console.log(matchesInfo);
-
-            for (let j = 0; j < 3; j++) {
-                for (let i = 0; i < 150; i++) {
-                    if (Number(allChampsData[i].key) === summonerDetail[j].championId) {
-                        // console.log('같은거 있음')
-                        champImages.push(
-                            {
-                                createdGame: matchesAllInfo[j].gameCreation,
-                                gameDuration: matchesAllInfo[j].gameDuration,
-                                teams: matchesAllInfo[j].teams,
-                                gameId: matchesAllInfo[j].gameId,
-                                champImage: allChampsData[i].image.full,
-                                item0: summonerDetail[j].stats.item0,
-                                item1: summonerDetail[j].stats.item1,
-                                item2: summonerDetail[j].stats.item2,
-                                item3: summonerDetail[j].stats.item3,
-                                item4: summonerDetail[j].stats.item4,
-                                item5: summonerDetail[j].stats.item5,
-                                item6: summonerDetail[j].stats.item6,
-                                spell1: usedSpells[j].spell1,
-                                spell2: usedSpells[j].spell2,
-                                gold: summonerDetail[j].stats.goldEarned,
-                                ward: summonerDetail[j].stats.wardsPlaced,
-                                kills: summonerDetail[j].stats.kills,
-                                assists: summonerDetail[j].stats.assists,
-                                deaths: summonerDetail[j].stats.deaths,
-                                minionKillded: summonerDetail[j].stats.totalMinionsKilled,
-                                rate: ((summonerDetail[j].stats.kills + summonerDetail[j].stats.assists) / summonerDetail[j].stats.deaths).toFixed(2),
-                                gameResult: result[j] ? 'Victory' : 'Defeat',
-                                level: summonerDetail[j].stats.champLevel,
-                                mainRune: usedRunes[j].primaryRune,
-                                subRune: usedRunes[j].subRune,
-
-                            }
-                        )
-                    }
-                }
-            }
-            const newData = information.concat(champImages);
+    //     )();
+    // }, [start]);
 
 
-            setInformation(newData);
-            setPageLoading(false);
-            setLoadMore(false) // 로드하는 버튼 누르면 로딩이 시작되기 때문에 데이터를 다 로드하면 false로 해서 로딩 컴포넌트가 종료되고 다시 버튼이 뜬다.
-            // console.log(champImages);
 
-            // setLoaded(false);
-        }
+    // useEffect(() => {
+    //     // if (loaded) {
+    //     console.log('loaded 되서 들어옴  4');
+    //     // console.log(matchesInfo)
+    //     // console.log('accountId==>> ', accountId)
+    //     const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
+    //     console.log("participantId ==>> ", participantId);
+    //     const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
+    //     console.log("매치 디테일: ", summonorMatchDetail);
+    //     setSummonerDetail(summonorMatchDetail);
+
+    //     const playResult = summonorMatchDetail.map((data) => data.stats.win)
+    //     // console.log(playResult);
+    //     setResult(playResult);
+
+    //     // }
+    // }, [matchesInfo, accountId])
+    // // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
 
 
-    }, [allChampsData, summonerDetail])
+
+    // useEffect(() => {
+
+    //     if (!isLoading && summonerDetail.length > 0) {
+    //         console.log('룬, 스펠, 챔프 뽑음. ')
+    //         // console.log('룬, 스펠, 챔프 뽑으러 if 문안에 들어옴')
+    //         // console.log(allChampsData);
+    //         // console.log(allRunesData);
+
+    //         for (let i = 0; i < 3; i++) {
+    //             const spell1: any = summonerDetail[i].spell1Id;
+    //             const spell2: any = summonerDetail[i].spell2Id;
+    //             spellsArr.push({
+    //                 spell1,
+    //                 spell2,
+    //             });
+    //         }
+
+    //         // console.log(allSpellsData);
+    //         // console.log(spellsArr);
+
+    //         for (let i = 0; i < 3; i++) {
+    //             const primaryRune: any = summonerDetail[i].stats.perkPrimaryStyle;
+    //             const subRune: any = summonerDetail[i].stats.perkSubStyle;
+    //             runesArr.push({
+    //                 primaryRune,
+    //                 subRune,
+    //             })
+    //         };
+    //         // console.log(runesArr);
+
+    //         // // 해당하는 룬 뽑는 함수
+    //         const usedRunes: any[] = runesArr.map(rune => {
+    //             // console.log('Object.entries(rune) ==> ', Object.entries(rune))
+    //             const obj: any = {};
+    //             for (const [key, value] of Object.entries(rune)) {
+    //                 obj[key] = allRunesData.find(data => data.id === value)?.icon
+    //             }
+    //             return obj
+    //         });
+    //         // console.log(usedRunes);
+
+    //         // // 해당하는 스펠 뽑는 함수
+    //         // console.log(spellsArr)
+    //         const usedSpells: any[] = spellsArr.map(spell => {
+    //             // console.log(Object.entries(spell));
+    //             const obj: any = {}
+    //             for (const [key, value] of Object.entries(spell)) {
+    //                 obj[key] = allSpellsData.find(data => Number(data.key) === value)?.id;
+    //             }
+    //             // console.log(obj)
+    //             return obj
+    //         });
+    //         // console.log(usedSpells);
+
+    //         // console.log(matchesInfo);
+
+    //         for (let j = 0; j < 3; j++) {
+    //             for (let i = 0; i < 150; i++) {
+    //                 if (Number(allChampsData[i].key) === summonerDetail[j].championId) {
+    //                     // console.log('같은거 있음')
+    //                     champImages.push(
+    //                         {
+    //                             createdGame: matchesInfo[j].gameCreation,
+    //                             gameDuration: matchesInfo[j].gameDuration,
+    //                             teams: matchesInfo[j].teams,
+    //                             gameId: matchesInfo[j].gameId,
+    //                             champImage: allChampsData[i].image.full,
+    //                             item0: summonerDetail[j].stats.item0,
+    //                             item1: summonerDetail[j].stats.item1,
+    //                             item2: summonerDetail[j].stats.item2,
+    //                             item3: summonerDetail[j].stats.item3,
+    //                             item4: summonerDetail[j].stats.item4,
+    //                             item5: summonerDetail[j].stats.item5,
+    //                             item6: summonerDetail[j].stats.item6,
+    //                             spell1: usedSpells[j].spell1,
+    //                             spell2: usedSpells[j].spell2,
+    //                             gold: summonerDetail[j].stats.goldEarned,
+    //                             ward: summonerDetail[j].stats.wardsPlaced,
+    //                             kills: summonerDetail[j].stats.kills,
+    //                             assists: summonerDetail[j].stats.assists,
+    //                             deaths: summonerDetail[j].stats.deaths,
+    //                             minionKillded: summonerDetail[j].stats.totalMinionsKilled,
+    //                             rate: ((summonerDetail[j].stats.kills + summonerDetail[j].stats.assists) / summonerDetail[j].stats.deaths).toFixed(2),
+    //                             gameResult: result[j] ? 'Victory' : 'Defeat',
+    //                             level: summonerDetail[j].stats.champLevel,
+    //                             mainRune: usedRunes[j].primaryRune,
+    //                             subRune: usedRunes[j].subRune,
+
+    //                         }
+    //                     )
+    //                 }
+    //             }
+    //         }
+    //         const newData = information.concat(champImages);
+
+
+    //         setInformation(newData);
+    //         setPageLoading(false);
+    //         setLoadMore(false) // 로드하는 버튼 누르면 로딩이 시작되기 때문에 데이터를 다 로드하면 false로 해서 로딩 컴포넌트가 종료되고 다시 버튼이 뜬다.
+    //         // console.log(champImages);
+
+    //         // setLoaded(false);
+    //     }
+
+
+    // }, [allChampsData, summonerDetail])
 
 
 
@@ -256,14 +243,15 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
     return (
         <>
-            <div className={pageLoading ? 'laoding-page' : 'matchHistory-page'}>
+            <div className={gamesDetailLoading ? 'laoding-page' : 'matchHistory-page'}>
                 {
-                    pageLoading ?
+                    gamesDetailLoading ?
                         <div className="loading" >
                             <Loading />
                         </div>
                         :
                         <div>
+                            {console.log(information)}
                             {
                                 information.map((data, index) => {
                                     return (
@@ -320,7 +308,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                                                         </Accordion.Toggle>
                                                     </div>
                                                     <Accordion.Collapse eventKey={data.gameId.toString()}>
-                                                        <div className="card-body"><MatchedGameDetail clickedData={data} matchesInfo={matchesAllInfo[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
+                                                        <div className="card-body"><MatchedGameDetail clickedData={data} matchesInfo={matchesInfo[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
                                                     </Accordion.Collapse>
                                                 </div>
 

@@ -1,3 +1,4 @@
+import { getGameDetailsInitialState, GetGameDetailsInitialStateType, getGameDetailsReducer } from './reducers/getGamesDetailReducer';
 import { GetGames100InitialStateType, getGames100InitialState, getGames100Reducer } from './reducers/getGames100Reducer';
 import { GetSummonerDetailInitialStateType, getSummonerDetailInitialState, getSummonerDetailReducer } from './reducers/getSummonerDetailReducer';
 import { GetSummonerInitialStateType, getSummonerInitialState, getSummonerReducer } from './reducers/getSummonerReducer';
@@ -18,6 +19,7 @@ export interface initialAppStateType {
     getSummonerStore: GetSummonerInitialStateType,
     getSummonerDetailStore: GetSummonerDetailInitialStateType,
     getGames100Store: GetGames100InitialStateType,
+    getGameDetailStore: GetGameDetailsInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -28,6 +30,7 @@ export const initialAppState: initialAppStateType = {
     getSummonerStore: getSummonerInitialState,
     getSummonerDetailStore: getSummonerDetailInitialState,
     getGames100Store: getGames100InitialState,
+    getGameDetailStore: getGameDetailsInitialState,
 }
 
 const reducer = combineReducers({
@@ -38,6 +41,7 @@ const reducer = combineReducers({
     getSummonerStore: getSummonerReducer,
     getSummonerDetailStore: getSummonerDetailReducer,
     getGames100Store: getGames100Reducer,
+    getGameDetailStore: getGameDetailsReducer,
 })
 
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(promise, thunk)))

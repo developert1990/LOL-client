@@ -33,3 +33,8 @@ export interface getGames100ActionType {
     type: string;
     matchIds: number[];
 }
+
+export interface getGameDetailAction {
+    payload: any;
+    type: string;
+}
