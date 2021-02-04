@@ -43,8 +43,6 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
 
-    // 이거 챔피언 json받는데 사용됨
-    const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
 
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
     const { error, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
@@ -80,20 +78,15 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
     const dispatch = useDispatch();
     useEffect(() => {
-        if (allChampsData.length > 0) {
-            console.log("디스패치 들어옴")
-            console.log('allChampsData', allChampsData);
-            dispatch(getGameDetail(start, gameIdInfo, region, accountId));
-        }
-    }, [start])
+        // if (allChampsData.length > 0) {
+        console.log("디스패치 들어옴")
+        dispatch(getGameDetail(start, gameIdInfo, region, accountId));
+        // }
+        setLoadMore(false);
+    }, [start]);
 
-    // useEffect(() => {
-    //     if (games) {
-    //         games.map((data) => {
-    //             matchesInfo.push(data);
-    //         })
-    //     }
-    // }, [games])
+
+
     // useEffect(() => {
     //     (
     //         async () => {
@@ -247,6 +240,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     const handleStartClicked = () => {
+        console.log("start 클릭")
         setLoadMore(true);
         setStart(start + 3);
     }
@@ -263,9 +257,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                         :
                         <div>
                             {
+                                games &&
                                 detailedImageData.map((data, index) => {
                                     return (
                                         <div className="accordion-page" key={index}>
+                                            {console.log("랜더되는중")}
                                             <Accordion key={index} className="accordion">
                                                 <div className="card">
                                                     <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>
@@ -317,9 +313,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                                                             </div>
                                                         </Accordion.Toggle>
                                                     </div>
-                                                    {/* <Accordion.Collapse eventKey={data.gameId.toString()}>
-                                                        <div className="card-body"><MatchedGameDetail clickedData={data} matchesInfo={matchesInfo[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
-                                                    </Accordion.Collapse> */}
+                                                    <Accordion.Collapse eventKey={data.gameId.toString()}>
+                                                        <div className="card-body"><MatchedGameDetail clickedData={data} games={games[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
+                                                    </Accordion.Collapse>
                                                 </div>
 
                                             </Accordion>

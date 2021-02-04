@@ -10,12 +10,14 @@ export const getGameDetail = (start: number, gameIdInfo: number[], region: strin
     dispatch({ type: THREE_GAMES_DETAIL_REQUEST });
     const matchesData: MatchedGameType[] = [];
     try {
+        console.log('start== > ', start)
         for (let i = start; i < start + 3; i++) {
+            console.log('i 변화 ----------------', i)
             const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
             const data = await response.json();
             matchesData.push(data);
         }
-
+        console.log('matchesData @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', matchesData);
         const summonerMatchDetail = getSummonerMatchDetail(matchesData, accountId); // 검색한 유저가 경기한 디테일을 가져옴
         const detailedImageData = getDetailedImageData(summonerMatchDetail, matchesData);
         console.log('detailedImageData @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', detailedImageData);
