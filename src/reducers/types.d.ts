@@ -1,3 +1,4 @@
+import { GameImageType } from './../types.d';
 export interface regionActionType {
     payload: string;
     type: string;
@@ -32,4 +33,11 @@ export interface getGames100ActionType {
     payload: any;
     type: string;
     matchIds: number[];
+}
+
+export interface getGameDetailAction {
+    payload: any;
+    type: string;
+    summonerMatchDetail: any;
+    detailedImageData: any;
 }

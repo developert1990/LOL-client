@@ -34,7 +34,6 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
                     return a;
                 }, [])
 
-
                 dispatch({ type: GET_SUMMONER_GAMES_100_SUCCESS, payload: matches, matchIds: matchIds });
             } catch (error) {
                 dispatch({ type: GET_SUMMONER_GAMES_100_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message });

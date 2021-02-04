@@ -1,4 +1,4 @@
-import { SpellDetailType } from './../types.d';
+import { SpellDetailType } from '../types';
 import { useEffect, useState } from 'react';
 import { spells } from '../data/index';
 
@@ -23,13 +23,10 @@ interface hardCodingSpellType {
 
 interface SpellsType { [key: string]: SpellDetailType }; // 위에 선언한거랑 같은거임
 
-export const useSpellsData = () => {
-    const [allSpellsData, setAllSpellsData] = useState<SpellDetailType[]>([]);
+export const getSpellsData = () => {
     const spellsData: SpellsType = spells // 이렇게 타입 안줘도 실행 되긴 하더라..
 
-    useEffect(() => {
-        setAllSpellsData(Object.values(spellsData));
-    }, []);
+    const allSpellsData: SpellDetailType[] = Object.values(spellsData);
     return allSpellsData;
 }
 
