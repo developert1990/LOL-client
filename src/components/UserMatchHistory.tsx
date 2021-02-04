@@ -14,7 +14,7 @@ import { initialAppStateType } from '../store';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType, ParticipantsType, RuneBigType, RunesIngameType, SpellDetailType, SpellsIngameType } from '../types';
 import darkgery from '../images/darkgrey.png';
 import { getPlayGameDate, getPlayDuration } from '../libs/index';
-import { useChampsData, useRunesData, useSpellsData, use_3MatchedGames } from '../hooks/index';
+import { useChampsData, useRunesData, useSpellsData } from '../hooks/index';
 import { getGameDetail } from '../actions/getGameDetailAction';
 export interface LocationType {
     gameIdInfo: number[];
@@ -55,8 +55,8 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
     const matchesData: MatchedGameType[] = [];
     const [summonerDetail, setSummonerDetail] = useState<ParticipantsType[]>([]);
-    const [result, setResult] = useState<boolean[]>([]);
-
+    // const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
+    const matchesInfo: MatchedGameType[] = []
 
     // 커스텀 훅 사용해서 chams, spells, runes 정보 받아옴
     const allChampsData = useChampsData();
@@ -72,15 +72,21 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const [start, setStart] = useState(0);
     const [loadMore, setLoadMore] = useState(false);
 
-    let matchesInfo: MatchedGameType[] = []
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         console.log("디스패치 들어옴")
-        dispatch(getGameDetail(start, gameIdInfo, region));
+        dispatch(getGameDetail(start, gameIdInfo, region, accountId));
     }, [start])
 
+    // useEffect(() => {
+    //     if (games) {
+    //         games.map((data) => {
+    //             matchesInfo.push(data);
+    //         })
+    //     }
+    // }, [games])
     // useEffect(() => {
     //     (
     //         async () => {
@@ -106,27 +112,25 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     // useEffect(() => {
     //     // if (loaded) {
     //     console.log('loaded 되서 들어옴  4');
-    //     // console.log(matchesInfo)
-    //     // console.log('accountId==>> ', accountId)
-    //     const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-    //     console.log("participantId ==>> ", participantId);
-    //     const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
-    //     console.log("매치 디테일: ", summonorMatchDetail);
-    //     setSummonerDetail(summonorMatchDetail);
+    //     if (matchesInfo) {
+    //         const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
+    //         console.log("participantId ==>> ", participantId);
+    //         const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
+    //         console.log("매치 디테일: ", summonorMatchDetail);
+    //         setSummonerDetail(summonorMatchDetail);
 
-    //     const playResult = summonorMatchDetail.map((data) => data.stats.win)
-    //     // console.log(playResult);
-    //     setResult(playResult);
-
+    //         const playResult = summonorMatchDetail.map((data) => data.stats.win)
+    //         // console.log(playResult);
+    //     }
     //     // }
     // }, [matchesInfo, accountId])
-    // // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
+    // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
 
 
 
     // useEffect(() => {
 
-    //     if (!isLoading && summonerDetail.length > 0) {
+    //     if (!isLoading && matchesInfo && summonerDetail.length > 0) {
     //         console.log('룬, 스펠, 챔프 뽑음. ')
     //         // console.log('룬, 스펠, 챔프 뽑으러 if 문안에 들어옴')
     //         // console.log(allChampsData);
@@ -207,7 +211,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     //                             deaths: summonerDetail[j].stats.deaths,
     //                             minionKillded: summonerDetail[j].stats.totalMinionsKilled,
     //                             rate: ((summonerDetail[j].stats.kills + summonerDetail[j].stats.assists) / summonerDetail[j].stats.deaths).toFixed(2),
-    //                             gameResult: result[j] ? 'Victory' : 'Defeat',
+    //                             gameResult: summonerDetail[j].stats.win ? 'Victory' : 'Defeat',
     //                             level: summonerDetail[j].stats.champLevel,
     //                             mainRune: usedRunes[j].primaryRune,
     //                             subRune: usedRunes[j].subRune,
@@ -251,7 +255,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                         </div>
                         :
                         <div>
-                            {console.log(information)}
+                            {console.log(matchesInfo)}
                             {
                                 information.map((data, index) => {
                                     return (
@@ -307,9 +311,9 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                                                             </div>
                                                         </Accordion.Toggle>
                                                     </div>
-                                                    <Accordion.Collapse eventKey={data.gameId.toString()}>
+                                                    {/* <Accordion.Collapse eventKey={data.gameId.toString()}>
                                                         <div className="card-body"><MatchedGameDetail clickedData={data} matchesInfo={matchesInfo[index]} allChampsData={allChampsData} allSpellsData={allSpellsData} allRunesData={allRunesData} /></div>
-                                                    </Accordion.Collapse>
+                                                    </Accordion.Collapse> */}
                                                 </div>
 
                                             </Accordion>
