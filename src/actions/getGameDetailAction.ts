@@ -19,8 +19,9 @@ export const getGameDetail = (start: number, gameIdInfo: number[], region: strin
         const summonerMatchDetail = getSummonerMatchDetail(matchesData, accountId); // 검색한 유저가 경기한 디테일을 가져옴
         const detailedImageData = getDetailedImageData(summonerMatchDetail, matchesData);
         console.log('detailedImageData @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', detailedImageData);
+        console.log('matchesData @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', matchesData);
         dispatch({ type: THREE_GAMES_DETAIL_SUCCESS, payload: matchesData, summonerMatchDetail, detailedImageData });
-        console.log('summonerMatchDetail  **************************', summonerMatchDetail);
+        // console.log('summonerMatchDetail  **************************', summonerMatchDetail);
 
     } catch (error) {
         dispatch({ type: THREE_GAMES_DETAIL_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message });

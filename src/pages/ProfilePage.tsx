@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../components/Loading';
-import { UserMatchHistory } from '../components/UserMatchHistory';
+import UserMatchHistory from '../components/UserMatchHistory';
 import { TEST_BASE } from '../config';
 import { initialAppStateType } from '../store';
 import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
