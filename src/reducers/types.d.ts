@@ -22,3 +22,14 @@ export interface getSummonerActionType {
     payload: any;
     type: string;
 }
+
+export interface getSummonerDetailActionType {
+    payload: any;
+    type: string;
+}
+
+export interface getGames100ActionType {
+    payload: any;
+    type: string;
+    matchIds: number[];
+}

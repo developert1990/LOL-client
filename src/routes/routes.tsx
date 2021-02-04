@@ -18,9 +18,9 @@ export default () => {
 
 
     const query = useQuery();
-    useEffect(() => {
-        console.log(query);
-    }, [query])
+    // useEffect(() => {
+    //     console.log(query);
+    // }, [query])
 
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export default () => {
                 </div>
 
                 <div className="searchOuter">
-                    <SearchWrapper profileError={profileError} setProfileError={setProfileError} />
+                    <SearchWrapper />
                     <Route path="/search/userInfo/" component={SideAdvertisement} />
                 </div>
 
@@ -51,12 +51,7 @@ export default () => {
     )
 }
 
-interface SearchWrapperPropsType {
-    profileError: string;
-    setProfileError: Dispatch<SetStateAction<string>>;
-}
-
-const SearchWrapper: React.FC<SearchWrapperPropsType> = ({ profileError, setProfileError }) => {
+const SearchWrapper = () => {
 
 
     return (
@@ -64,7 +59,7 @@ const SearchWrapper: React.FC<SearchWrapperPropsType> = ({ profileError, setProf
             <Route path="/search/userInfo/" component={ProfileMenu} />
             <Route path="/search/userInfo/overview/:region" render={() => {
                 return (
-                    <ProfilePage setProfileError={setProfileError} profileError={profileError} />
+                    <ProfilePage />
                 )
             }} />
             <Route path="/search/userInfo/masteries/:region" component={Masteries} />

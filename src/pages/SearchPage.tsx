@@ -16,22 +16,20 @@ export const SearchPage = () => {
     const { region } = regionStore;
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
-    console.log('summonerInfo ==> ', summonerInfo)
 
-    // console.log('region: ', region)
+    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
+    const { games100 } = getGames100Store;
+
+
     const [summonerID, setSummonerID] = useState('');
     const [errorMsg, setErrorMsg] = useState(false);
 
-    // console.log("1")
-    // console.log("2")
-    // 비동기 - 기다려주지 않는다
-    // 동기 - 기다려준다.
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (!(summonerID.length > 0)) {
             return alert("Should enter summoner's id")
         }
         dispatch(getSummoner(summonerID, region));
-        history.push(`/search/userInfo/overview/${region}?name=${summonerID}`)
+
         setSummonerID("");
     }
 
@@ -42,10 +40,14 @@ export const SearchPage = () => {
         if (focusRef && focusRef.current !== null) {
             focusRef.current.focus();
         }
-        // return () => {
-        //     dispatch({ type: GET_SUMMONER_RESET });
-        // }
-    }, [dispatch])
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        if (summonerInfo && games100?.length !== 0) {
+            history.push(`/search/userInfo/overview/${region}?name=${summonerID}`)
+        }
+    }, [games100])
 
 
 

@@ -13,10 +13,6 @@ export const UserMenuBar = () => {
     const dispatch = useDispatch();
     console.log('summonerInfo 메뉴바 페이지', summonerInfo);
 
-
-    // useEffect(() => {
-    //     dispatch(getSummoner())
-    // },[])
     return (
         <div className="user-nav">
             {/* {console.log(id)} */}

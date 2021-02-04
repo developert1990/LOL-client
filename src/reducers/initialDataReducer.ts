@@ -83,14 +83,14 @@ export const runesReducer = (state = runesInitialState, action: runesActionType)
 
 
 export interface SpellsInitialStateType {
-    spells: [];
+    spells: {};
     isLoading: boolean;
     errorMessage: string;
 }
 
 
 export const spellsInitialState: SpellsInitialStateType = {
-    spells: [],
+    spells: {},
     isLoading: false,
     errorMessage: '',
 }

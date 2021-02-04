@@ -12,7 +12,7 @@ export const regionInitialState: regionInitialStateType = {
 export const regionReducer = (state = regionInitialState, action: regionActionType) => {
     switch (action.type) {
         case CHANGE_REGION:
-            return { region: action.payload };
+            return { ...state, region: action.payload };
         default:
             return state;
     }

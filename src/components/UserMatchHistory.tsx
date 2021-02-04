@@ -14,7 +14,8 @@ import { initialAppStateType } from '../store';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType, ParticipantsType, RuneBigType, RunesIngameType, SpellDetailType, SpellsIngameType } from '../types';
 import darkgery from '../images/darkgrey.png';
 import { getPlayGameDate, getPlayDuration } from '../libs/index';
-
+import { champs, runes, spells } from '../data/index';
+import { useChampsData, useRunesData, useSpellsData } from '../hooks/index';
 export interface LocationType {
     gameIdInfo: number[];
     accountId: string;
@@ -30,19 +31,28 @@ export interface UserMatchHistoryPropsType {
     gameIdInfo: number[];
     accountId: string;
     id: string;
-    loaded: boolean;
-    setLoaded: Dispatch<SetStateAction<boolean>>;
+    // loaded: boolean;
+    // setLoaded: Dispatch<SetStateAction<boolean>>;
 
 }
 
-export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id, loaded, setLoaded }) => {
+// {
+//     [key: string]: DataType
+// } 
+
+
+
+
+export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id }) => {
     console.log("유즈메치히스토리 렌더 하러 들어옴")
-    console.log('loaded ==>>>> ', loaded)
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
-    const { isLoading, champs } = useSelector((state: initialAppStateType) => state.champsStore);
-    const { spells } = useSelector((state: initialAppStateType) => state.spellsStore);
-    const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
+
+    // 이거 챔피언 json받는데 사용됨
+    const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
+    // const { spells: spellsRedux } = useSelector((state: initialAppStateType) => state.spellsStore);
+    // console.log(' 바로 spellsOriginal', spellsRedux)
+    // const { runes } = useSelector((state: initialAppStateType) => state.runesStore);
     // const location = useLocation<LocationType>();
     const [pageLoading, setPageLoading] = useState(true);
     // console.log(location.state)
@@ -57,11 +67,11 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
     const [summonerDetail, setSummonerDetail] = useState<ParticipantsType[]>([]);
     const [result, setResult] = useState<boolean[]>([]);
 
-    const dispatch = useDispatch();
-    const [allChampsData, setAllChampsData] = useState<ChampDetailType[]>([]);
-    const [allSpellsData, setAllSpellsData] = useState<SpellDetailType[]>([]);
-    const [allRunesData, setAllRunesData] = useState<RuneBigType[]>([]);
 
+    // 커스텀 훅 사용해서 chams, spells, runes 정보 받아옴
+    const allChampsData = useChampsData();
+    const allSpellsData = useSpellsData();
+    const allRunesData = useRunesData();
 
 
     const champImages: GameImageType[] = [];
@@ -77,20 +87,10 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     useEffect(() => {
-        // console.log('fetch 한거 set한다. 2')
-        setAllChampsData(Object.values(champs))
-        setAllSpellsData(Object.values(spells));
-        setAllRunesData(runes);
-    }, [champs, spells, runes]);
-
-    useEffect(() => {
         (
             async () => {
-                console.log('data 받음  3');
-                // console.log(start, start + 3)
+                console.log('gameId 쭉 뽑은걸로 matchList 3개 뽑으러 들어옴');
                 for (let i = start; i < start + 3; i++) {
-                    // console.log(start)
-                    console.log('for문들어옴 id ==> ', gameIdInfo)
                     // server 측에 path 가 '/' 이곳으로 들어와서 프록시 서버를 통해서 정보를 호출한다.
                     // const response = await fetch(`${API.GET_MATCH_DETAILS}/${gameIds[i]}?region=${region}`);
                     try {
@@ -102,14 +102,13 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                     }
 
                 }
-                console.log("매치히스토리 다시 뽑음: ", matchesData);
 
                 const newData = matchesAllInfo.concat(matchesData);
 
                 setMatchesAllInfo(newData);
 
                 setMatchesInfo(matchesData);
-                setLoaded(true);
+                // setLoaded(true);
             }
 
         )();
@@ -118,35 +117,30 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
 
 
     useEffect(() => {
+        // if (loaded) {
         console.log('loaded 되서 들어옴  4');
         // console.log(matchesInfo)
-        // console.log(loaded)
-        if (loaded) {
-            // console.log('matchesinfo check')
-            console.log(matchesInfo)
-            console.log('accountId==>> ', accountId)
-            const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
-            // console.log("participantId ==>> ", participantId);
-            const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
-            // console.log("매치 디테일: ", summonorMatchDetail);
-            setSummonerDetail(summonorMatchDetail);
+        // console.log('accountId==>> ', accountId)
+        const participantId = matchesInfo.map((data) => data.participantIdentities.filter((data) => data.player.accountId === accountId)[0].participantId);
+        // console.log("participantId ==>> ", participantId);
+        const summonorMatchDetail = matchesInfo.map((data, index) => data.participants.filter((data) => data.stats.participantId === participantId[index])[0])
+        // console.log("매치 디테일: ", summonorMatchDetail);
+        setSummonerDetail(summonorMatchDetail);
 
-            const playResult = summonorMatchDetail.map((data) => data.stats.win)
-            // console.log(playResult);
-            setResult(playResult);
+        const playResult = summonorMatchDetail.map((data) => data.stats.win)
+        // console.log(playResult);
+        setResult(playResult);
 
-        }
-    }, [matchesInfo, loaded, accountId])
+        // }
+    }, [matchesInfo, accountId])
     // const { gameDuration, gameMode, participantIdentities, participants, teams } = matchesInfo;
 
 
 
     useEffect(() => {
-        // console.log('isLoading', isLoading)
-        // console.log('summonerDetail', summonerDetail)
 
-        console.log('룬, 스펠, 챔프 뽑음. 5')
         if (!isLoading && summonerDetail.length > 0) {
+            console.log('룬, 스펠, 챔프 뽑음. ')
             // console.log('룬, 스펠, 챔프 뽑으러 if 문안에 들어옴')
             // console.log(allChampsData);
             // console.log(allRunesData);
@@ -171,7 +165,7 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
                     subRune,
                 })
             };
-            console.log(runesArr);
+            // console.log(runesArr);
 
             // // 해당하는 룬 뽑는 함수
             const usedRunes: any[] = runesArr.map(rune => {
@@ -244,58 +238,13 @@ export const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountI
             setLoadMore(false) // 로드하는 버튼 누르면 로딩이 시작되기 때문에 데이터를 다 로드하면 false로 해서 로딩 컴포넌트가 종료되고 다시 버튼이 뜬다.
             // console.log(champImages);
 
-            setLoaded(false);
+            // setLoaded(false);
         }
 
 
     }, [allChampsData, summonerDetail])
 
 
-
-
-
-
-    // 게임 언제 했는지 뽑아내는 함수
-    // const getPlayGameDate = (unixTime: number) => {
-    //     const timeGap: number = Number(new Date()) - unixTime;
-    //     let stime = timeGap / 1000;
-    //     const year = 86400 * (365.25);
-    //     const month = 86400 * 30.4375;
-    //     const day = 86400;
-    //     const hour = 3600;
-    //     const min = 60;
-
-    //     if (stime >= year) return (`${stime / year === 1 ? `${(stime / year).toFixed(0)} year ago` : `${(stime / year).toFixed(0)} years ago`}`);
-    //     if (stime >= month) return (`${stime / month === 1 ? `${(stime / month).toFixed(0)} month ago` : `${(stime / month).toFixed(0)} months ago`}`);
-    //     if (stime >= day) return (`${stime / day === 1 ? `${(stime / day).toFixed(0)} day ago` : `${(stime / day).toFixed(0)} days ago`}`);
-    //     if (stime >= hour) return (`${stime / hour === 1 ? `${(stime / hour).toFixed(0)} hour ago` : `${(stime / hour).toFixed(0)} hours ago`}`);
-    //     return (stime / min).toFixed(0) + "minutes ago";
-    // }
-
-
-
-    // 훅
-    //     const usePlayGameDate = (unixTime: number) => {
-    //         const [time, setTime] = useState('');
-    //         useEffect(() => {
-    //             const timeGap: number = Number(new Date()) - unixTime;
-    //             let stime = timeGap / 1000;
-    //             const year = 86400 * (365.25);
-    //             const month = 86400 * 30.4375;
-    //             const day = 86400;
-    //             const hour = 3600;
-    //             const min = 60;
-
-    //             if (stime >= year) return (`${stime / year === 1 ? `${(stime / year).toFixed(0)} year ago` : `${(stime / year).toFixed(0)} years ago`}`);
-    //             if (stime >= month) return (`${stime / month === 1 ? `${(stime / month).toFixed(0)} month ago` : `${(stime / month).toFixed(0)} months ago`}`);
-    //             if (stime >= day) return (`${stime / day === 1 ? `${(stime / day).toFixed(0)} day ago` : `${(stime / day).toFixed(0)} days ago`}`);
-    //             if (stime >= hour) return (`${stime / hour === 1 ? `${(stime / hour).toFixed(0)} hour ago` : `${(stime / hour).toFixed(0)} hours ago`}`);
-    //             const timeStr = (stime / min).toFixed(0) + "minutes ago";
-    //             setTime(timeStr);
-    //         }, []);
-    //         return { time };
-    //     }
-    //    const { time } = usePlayGameDate(500000);
 
 
 

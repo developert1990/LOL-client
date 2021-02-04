@@ -1,135 +1,26 @@
 import axios from 'axios';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { ProfileMenu, SideAdvertisement } from '../components';
 import { Loading } from '../components/Loading';
 import { UserMatchHistory } from '../components/UserMatchHistory';
-import { UserMenuBar } from '../components/UserMenuBar';
-import { API, TEST_BASE } from '../config';
-import { GET_SUMMONER_RESET } from '../constants/getSummonerConstants';
+import { TEST_BASE } from '../config';
 import { initialAppStateType } from '../store';
 import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
 
 
-interface ProfilePagePropsType {
-    profileError: string;
-    setProfileError: Dispatch<SetStateAction<string>>;
-}
 
-export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setProfileError }) => {
+export const ProfilePage = () => {
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
+
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
-    const USER_ID = 'user account id';
 
-    const dispatch = useDispatch();
-    const [errorMsg, setErrorMsg] = useState(false);
+    const getSummonerDetailStore = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
+    const { error: detailError, summonerDetail } = getSummonerDetailStore;
 
-    const [isLoading, setIsLoading] = useState(true);
-
-    const [{ id, name, profileIconId, level, accountId }, setSummonerInfo] = useState<SummonerInfoType>({
-        id: '',
-        name: '',
-        profileIconId: 0,
-        level: 0,
-        accountId: '',
-    });
-    const [{ queueType, tier, rank, leaguePoints, wins, losses }, setSummonerDetail] = useState<SummonerDetailType>({
-        queueType: '',
-        tier: '',
-        rank: '',
-        leaguePoints: 0,
-        wins: 0,
-        losses: 0,
-
-    });
-
-    const gameId: number[] = [];
-    const [gameIdInfo, setGameIdInfo] = useState<number[]>([]);
-    const [gameIdInfoLoaded, setGameIdInfoLoaded] = useState<boolean>(false); // gameInfo가 다 로드 되면 userMatchHistroy 컴포넌트 실행시켜 주기 위해서 생성함.
-
-
-    const [loaded, setLoaded] = useState(false);
-
-
-    useEffect(() => {
-        if (summonerInfo) {
-            console.log("서머너 받아오고 실행됨")
-            localStorage.setItem(USER_ID, summonerInfo.id);
-            // console.log(data.id);
-
-            setErrorMsg(false)
-            setSummonerInfo({
-                id: summonerInfo.id,
-                name: summonerInfo.name,
-                profileIconId: summonerInfo.profileIconId,
-                level: summonerInfo.summonerLevel,
-                accountId: summonerInfo.accountId,
-            });
-        }
-    }, [summonerInfo])
-
-
-    // 두번 setState를 불러 오게 되면 랜더링 때문에 문제가 발생한다. 그래서 의존성배열에 id값을 두고 id값이 변하게 되면 fetch를 통해 setState 를 하게 된다.
-    // 검색한 유저의 세부 정보 가져옴
-    useEffect(() => {
-        console.log('id 확인  ==??? ', id)
-        if (id) {
-            (async () => {
-
-                try {
-                    // const response = await fetch(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-                    const { data } = await axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-                    // const data: SummonerDetailType[] = await response.json();
-                    console.log('data ??????', data)
-                    const [details] = data;
-                    // console.log(details);
-
-                    setSummonerDetail({
-                        queueType: details.queueType,
-                        tier: details.tier,
-                        rank: details.rank,
-                        leaguePoints: details.leaguePoints,
-                        wins: details.wins,
-                        losses: details.losses,
-                    });
-                    setIsLoading(false)
-                    setLoaded(false);
-                    setGameIdInfoLoaded(false);
-                } catch (error) {
-
-                    console.log("405에러 발생해서 들어옴")
-                    setProfileError("No rank information for current filters.");
-                }
-            })();
-        }
-
-    }, [id]);
-
-
-
-    // 해당유저의 게임 했던것들 정보 가져옴 총 100개
-    useEffect(() => {
-        console.log('match', tier)
-        if (tier) {
-            (
-                async () => {
-
-                    const response = await fetch(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
-                    const data: GameMatcheType = await response.json();
-                    // const typedData = data as GameMatcheType;
-                    const { matches } = data;
-
-                    matches.map((match) => gameId.push(match.gameId));
-                    setGameIdInfo([...gameId]);
-                    setGameIdInfoLoaded(true);
-                }
-            )();
-        }
-    }, [accountId, tier]);
-
+    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
+    const { error: games100Error, games100, gameIdInfo } = getGames100Store;
 
 
 
@@ -145,11 +36,12 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
                     </div>
                     :
                     !error ?
-                        profileError == "" ?
+                        detailError == "" && summonerInfo ?
                             <div className="summoner-info">
                                 {
-                                    name.length > 0 && tier.length > 0 &&
+                                    summonerDetail &&
                                     <div>
+                                        {console.log('summonerDetail --------->>>>>>>>>', summonerDetail)}
                                         <div className="summoner_info_bottom">
                                             <div className="summoner_info_bottom_left">
                                                 <div className="detail-info custom_card">
@@ -157,18 +49,18 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
                                                     <div>
                                                         <div className="detail_title">Rank</div>
                                                         <div className="detail-parent">
-                                                            <img className="emblem-img" src={require(`../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" />
+                                                            <img className="emblem-img" src={require(`../images/ranked-emblems/${summonerDetail.tier}.png`).default} alt="tier-emblem" />
 
                                                             <div className="detail">
-                                                                <span className="queue-type">{queueType}</span>
+                                                                <span className="queue-type">{summonerDetail.queueType}</span>
                                                                 <div className="tier-lp">
-                                                                    <span className="tier">{tier} <span className="rank">{rank}</span> </span>
-                                                                    <span className="lp"> / {leaguePoints} LP</span>
+                                                                    <span className="tier">{summonerDetail.tier} <span className="rank">{summonerDetail.rank}</span> </span>
+                                                                    <span className="lp"> / {summonerDetail.leaguePoints} LP</span>
                                                                 </div>
-                                                                <span className="win-lost">{`${wins} W ${losses} L`}</span>
+                                                                <span className="win-lost">{`${summonerDetail.wins} W ${summonerDetail.losses} L`}</span>
                                                                 <div className="winRate-totalGame">
-                                                                    <span className="winRate">{`${Math.round(wins / (wins + losses) * 100)}%`}</span>
-                                                                    <span className="totalGame">{wins + losses} games</span>
+                                                                    <span className="winRate">{`${Math.round(summonerDetail.wins / (summonerDetail.wins + summonerDetail.losses) * 100)}%`}</span>
+                                                                    <span className="totalGame">{summonerDetail.wins + summonerDetail.losses} games</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -187,8 +79,8 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
                                             <div className="summoner_info_bottom_right">
                                                 {
                                                     // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
-                                                    gameIdInfo.length > 0 && accountId && gameIdInfoLoaded && gameIdInfo &&
-                                                    <UserMatchHistory gameIdInfo={gameIdInfo} accountId={accountId} id={id} setLoaded={setLoaded} loaded={loaded} />
+                                                    games100Error === "" && games100 && gameIdInfo.length > 0 &&
+                                                    <UserMatchHistory gameIdInfo={gameIdInfo} accountId={summonerInfo.accountId} id={summonerInfo.id} />
 
                                                 }
                                             </div>
@@ -197,7 +89,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ profileError, setP
                                 }
                             </div>
                             :
-                            <div style={{ color: "red" }}>{profileError}</div>
+                            <div style={{ color: "red" }}>No rank information for current filters.</div>
                         :
                         <>
                             <div style={{ color: "red" }} className="summoner-error">
