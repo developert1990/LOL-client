@@ -16,13 +16,13 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     const allChampsData = getChampsData();
     const allSpellsData = getSpellsData();
     const allRunesData = getRunesData();
-
+    console.log('matchesInfo ==========================', matchesInfo)
     // if (matchesInfo && summonerDetail.length > 0) {
     console.log('룬, 스펠, 챔프 뽑음. ')
     // console.log('룬, 스펠, 챔프 뽑으러 if 문안에 들어옴')
-    console.log(allChampsData);
-    console.log(allRunesData);
-    console.log(allSpellsData)
+    // console.log(allChampsData);
+    // console.log(allRunesData);
+    // console.log(allSpellsData)
 
     for (let i = 0; i < 3; i++) {
         const spell1: any = summonerDetail[i].spell1Id;
@@ -33,8 +33,8 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
         });
     }
 
-    console.log(allSpellsData);
-    console.log(spellsArr);
+    // console.log(allSpellsData);
+    // console.log(spellsArr);
 
     for (let i = 0; i < 3; i++) {
         const primaryRune: any = summonerDetail[i].stats.perkPrimaryStyle;
@@ -44,8 +44,8 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
             subRune,
         })
     };
-    console.log("룬어레이~~~~", runesArr);
-    console.log("allRunesData~~~~", allRunesData);
+    // console.log("룬어레이~~~~", runesArr);
+    // console.log("allRunesData~~~~", allRunesData);
     // // 해당하는 룬 뽑는 함수
     const usedRunes: any[] = runesArr.map(rune => {
         // console.log('Object.entries(rune) ==> ', Object.entries(rune))
@@ -55,7 +55,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
         }
         return obj
     });
-    console.log("뽑은 룬 스트링이라야한다....", usedRunes);
+    // console.log("뽑은 룬 스트링이라야한다....", usedRunes);
 
     // // 해당하는 스펠 뽑는 함수
     // console.log(spellsArr)
@@ -68,14 +68,14 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
         // console.log(obj)
         return obj
     });
-    console.log("뽑은 스펠 스트링이라야한다....", usedSpells);
+    // console.log("뽑은 스펠 스트링이라야한다....", usedSpells);
 
     // console.log(matchesInfo);
 
     for (let j = 0; j < 3; j++) {
         for (let i = 0; i < 150; i++) {
             if (Number(allChampsData[i].key) === summonerDetail[j].championId) {
-                // console.log('같은거 있음')
+                console.log('같은거 있음')
                 champImages.push(
                     {
                         createdGame: matchesInfo[j].gameCreation,
@@ -110,6 +110,6 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
         }
     }
     const newData = information.concat(champImages);
-    console.log('newData: ', newData)
+    console.log('newData================================: ', newData)
     return newData;
 }
