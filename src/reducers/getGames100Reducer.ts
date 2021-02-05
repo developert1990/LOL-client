@@ -1,5 +1,5 @@
 import { MatchType } from './../types.d';
-import { getSummonerActionType, getGames100ActionType } from './types.d';
+import { getGames100ActionType } from './types.d';
 import { GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL } from '../constants/getSummonerConstants';
 
 

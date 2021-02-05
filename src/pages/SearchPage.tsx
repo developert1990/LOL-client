@@ -1,12 +1,9 @@
-import React, { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { initialAppStateType } from '../store';
 import { FaSearch } from "react-icons/fa";
-import { Loading } from '../components/Loading';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { getSummoner } from '../actions/getSummonerAction';
-import { ProfilePage } from './ProfilePage';
-import { GET_SUMMONER_RESET } from '../constants/getSummonerConstants';
 
 
 export const SearchPage = () => {
@@ -22,7 +19,6 @@ export const SearchPage = () => {
 
 
     const [summonerID, setSummonerID] = useState('');
-    const [errorMsg, setErrorMsg] = useState(false);
 
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (!(summonerID.length > 0)) {

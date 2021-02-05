@@ -1,6 +1,6 @@
-import { getChampsData, getRunesData } from '../libs/index';
+
 import { TEST_BASE } from './../config/index';
-import { MatchedGameType, ChampDetailType, SpellDetailType, RuneBigType } from './../types.d';
+import { MatchedGameType } from './../types.d';
 import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_FAIL, THREE_GAMES_DETAIL_SUCCESS } from './../constants/getGamesDetailConstants';
 import { ThunkDispatch } from 'redux-thunk';
 import { getDetailedImageData, getSummonerMatchDetail } from '../libs/index';

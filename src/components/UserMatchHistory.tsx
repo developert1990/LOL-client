@@ -1,17 +1,16 @@
 
 
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { API, TEST_BASE } from '../config';
+import { API } from '../config';
 import { useSelector, useDispatch } from 'react-redux';
-import { Accordion, Card, Button } from 'react-bootstrap';
+import { Accordion, Button } from 'react-bootstrap';
 import { MatchedGameDetail } from './MatchedGameDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Loading } from './Loading';
 import { initialAppStateType } from '../store';
-import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsStatsType, ParticipantsType, RuneBigType, RunesIngameType, SpellDetailType, SpellsIngameType } from '../types';
+import { GameImageType } from '../types';
 import darkgery from '../images/darkgrey.png';
 import { getPlayGameDate, getPlayDuration } from '../libs/index';
 import { getChampsData, getRunesData, getSpellsData } from '../libs/index';
@@ -43,25 +42,11 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
 
-    // 이거 챔피언 json받는데 사용됨
-    const { isLoading } = useSelector((state: initialAppStateType) => state.champsStore);
-
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
     const { error, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
 
-    console.log('games +++++++++++++++++++++++++++++++++ ', games)
-    // console.log('detailedImageData +++++++++++++++++++++++++++++++++ ', detailedImageData)
-    // console.log('summonerMatchDetail +++++++++++++++++++++++++++++++++ ', summonerMatchDetail)
 
 
-    const [pageLoading, setPageLoading] = useState(true);
-
-    // const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
-
-    const matchesData: MatchedGameType[] = [];
-    const [summonerDetail, setSummonerDetail] = useState<ParticipantsType[]>([]);
-    // const [matchesInfo, setMatchesInfo] = useState<MatchedGameType[]>([]);
-    const matchesInfo: MatchedGameType[] = []
 
     // 커스텀훅을 리덕스 내부에서 사용불가능 해서 일반 함수호출로 바꿔줫음
     const allChampsData = getChampsData();
@@ -69,12 +54,10 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     const allRunesData = getRunesData();
 
 
-    const champImages: GameImageType[] = [];
-    const spellsArr: SpellsIngameType[] = [];
-    const runesArr: RunesIngameType[] = [];
     const [information, setInformation] = useState<GameImageType[]>([]);
     // let information: GameImageType[] = [];
 
+    const isInitialLoading = gamesDetailLoading && information.length === 0;
     const [start, setStart] = useState(0);
     const [loadMore, setLoadMore] = useState(false);
 
@@ -82,25 +65,13 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     const dispatch = useDispatch();
     useEffect(() => {
         if (allChampsData.length > 0) {
-            // console.log("디스패치 들어옴")
-            // console.log('allChampsData', allChampsData);
             dispatch(getGameDetail(start, gameIdInfo, region, accountId));
         }
     }, [start])
 
 
     useEffect(() => {
-        if (detailedImageData.length > 0) {
-            const infoForPush: GameImageType[] = [];
-            // console.log("detailedImageData변화생겼음")
-            // console.log('detailedImageData', detailedImageData)
-            detailedImageData.map((data) => {
-                infoForPush.push(data);
-            })
-            // setInformation(information);
-            // console.log('information 푸쉬하고 난다음!!!!!!!!!!!!!!!!!!!!!!!!!!', information)
-            setInformation([...information, ...infoForPush]);
-        }
+        setInformation([...information, ...detailedImageData]);
         setLoadMore(false);
     }, [detailedImageData])
 
@@ -115,7 +86,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
         <>
             <div className={gamesDetailLoading ? 'laoding-page' : 'matchHistory-page'}>
                 {
-                    gamesDetailLoading && information.length === 0 ? // information.lenght 가 0 이라는 조건을 추가해서 맨처음에만 로딩을 띄우게 만들어주었다.
+                    isInitialLoading ? // information.lenght 가 0 이라는 조건을 추가해서 맨처음에만 로딩을 띄우게 만들어주었다.
                         <div className="loading" >
                             <Loading />
                         </div>

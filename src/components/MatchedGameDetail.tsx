@@ -1,5 +1,5 @@
 
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { API } from '../config';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantIdentitiesType, ParticipantsType, RuneBigType, SpellDetailType } from '../types';
 import darkgery from '../images/darkgrey.png';
