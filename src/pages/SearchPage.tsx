@@ -11,11 +11,6 @@ export const SearchPage = () => {
     const dispatch = useDispatch();
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
-    const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
-    const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
-
-    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
-    const { games100 } = getGames100Store;
 
 
     const [summonerID, setSummonerID] = useState('');
@@ -24,9 +19,10 @@ export const SearchPage = () => {
         if (!(summonerID.length > 0)) {
             return alert("Should enter summoner's id")
         }
+        history.push(`/search/userInfo/overview/${region}?name=${summonerID}`);
         dispatch(getSummoner(summonerID, region));
-
         setSummonerID("");
+
     }
 
 
@@ -37,13 +33,6 @@ export const SearchPage = () => {
             focusRef.current.focus();
         }
     }, [dispatch]);
-
-
-    useEffect(() => {
-        if (summonerInfo && games100?.length !== 0) {
-            history.push(`/search/userInfo/overview/${region}?name=${summonerID}`)
-        }
-    }, [games100])
 
 
 
