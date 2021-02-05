@@ -9,13 +9,13 @@ import { UserMenuBar } from './UserMenuBar';
 
 export const ProfileMenu = () => {
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
-    const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
+    const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
 
     return (
         <>
             { getSummonerIsLoading ?
                 <Loading /> :
-                !error ?
+                !summonerInfoError ?
                     <div className="summoner_info_top">
                         <div className="summoner_profile">
                             <div className="logo-name-link link">
@@ -31,7 +31,10 @@ export const ProfileMenu = () => {
                         </div>
                     </div>
                     :
-                    ""
+                    <div style={{ color: "red" }} className="summoner-error">
+                        {summonerInfoError}
+                        <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
+                    </div>
             }
         </>
     )
