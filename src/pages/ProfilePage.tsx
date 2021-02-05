@@ -63,7 +63,6 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
             {
                 !summonerDetail && getSummonerDetailLoading ?
                     <Loading /> : (
-                        // summonerDetail ? (
                         <div className="summoner_info_bottom">
 
                             <div className="summoner_info_bottom_left">
@@ -83,9 +82,6 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
                                 }
                             </div>
                         </div>
-                        // )
-                        //     :
-                        //     <div style={{ color: "red" }}>No rank information for current filters.</div>
                     )
             }
         </div>

@@ -1,26 +1,53 @@
-@import './constants/mixin';
-@import './constants/variables';
+@import "./constants/mixin";
+@import "./constants/variables";
+
+.summoner_info_top {
+    color: $whiteColor;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.summoner_profile {
+    position: relative;
+    display: flex;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    flex: 1;
+}
 
 
-.logo-name-link {
-        position: relative;
-        margin: 20px;
-        background-color: $cardColor_1;
-        width: 350px;
-        padding: 10px;
-        border-radius: 10px;
-        flex: 1;
-    }
 
 @include desktop {
-
     .summoner_info_top {
-        margin-left: 10px;
-        display: flex;
-        flex-direction: column;
-        //    justify-content: flex-start;
+        .summoner_profile {
+            .level_img {
+                position: relative;
+                display: inline-block;
+                .logo-img {
+                    width: 80px;
+                    border-radius: 10px;
+                    border: 4px solid rgb(245, 35, 20);
+                }
 
-        .summoner_profile {}
+                .level {
+                    position: absolute;
+                    right: 24px;
+                    top: -11px;
+                    font-weight: bolder;
+                    background-color: black;
+                    padding: 3px 5px;
+                    border: 2px solid red;
+                    border-radius: 10px;
+                    font-size: 13px;
+                }
+            }
+
+            .name {
+                font-size: $fontSize_lg;
+                margin-left: 20px;
+            }
+        }
 
         .summoner_menu {
             margin-left: 20px;
@@ -45,61 +72,41 @@
                     text-decoration: none;
                 }
             }
-
-        }
-
-
-
-        .level_img {
-            position: relative;
-            display: inline-block;
-
-            .logo-img {
-                width: 80px;
-                border-radius: 10px;
-                border: 4px solid rgb(245, 35, 20);
-            }
-
-            .level {
-                position: absolute;
-                right: 30px;
-                top: -8px;
-                font-weight: bolder;
-                background-color: black;
-                padding: 3px;
-                border-radius: 20px;
-                font-size: 10px;
-                color: white;
-            }
-
-        }
-
-        .name {
-            background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
-            font-weight: bolder;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 30px;
-            margin-left: 20px;
         }
     }
-
-
 }
-
-
-
-
 
 @include tablet {
-
     .summoner_info_top {
-        margin-left: 10px;
-        display: flex;
-        flex-direction: column;
-        //    justify-content: flex-start;
+        .summoner_profile {
+            .level_img {
+                position: relative;
+                display: inline-block;
 
-        .summoner_profile {}
+                .logo-img {
+                    width: 80px;
+                    border-radius: 10px;
+                    border: 4px solid rgb(245, 35, 20);
+                }
+
+                .level {
+                    position: absolute;
+                    right: 24px;
+                    top: -11px;
+                    font-weight: bolder;
+                    background-color: black;
+                    padding: 3px 5px;
+                    border: 2px solid red;
+                    border-radius: 10px;
+                    font-size: 13px;
+                }
+            }
+
+            .name {
+                font-size: $fontSize_md;
+                margin-left: 20px;
+            }
+        }
 
         .summoner_menu {
             margin-left: 20px;
@@ -124,59 +131,41 @@
                     text-decoration: none;
                 }
             }
-
-        }
-
-
-
-        .level_img {
-            position: relative;
-            display: inline-block;
-
-            .logo-img {
-                width: 80px;
-                border-radius: 10px;
-                border: 4px solid rgb(245, 35, 20);
-            }
-
-            .level {
-                position: absolute;
-                right: 30px;
-                top: -8px;
-                font-weight: bolder;
-                background-color: black;
-                padding: 3px;
-                border-radius: 20px;
-                font-size: 10px;
-                color: white;
-            }
-
-        }
-
-        .name {
-            background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
-            font-weight: bolder;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 30px;
-            margin-left: 20px;
         }
     }
-
 }
 
-
-
-
-
 @include mobile {
-        .summoner_info_top {
-        margin-left: 10px;
-        display: flex;
-        flex-direction: column;
-        //    justify-content: flex-start;
+    .summoner_info_top {
+        .summoner_profile {
+            .level_img {
+                position: relative;
+                display: inline-block;
 
-        .summoner_profile {}
+                .logo-img {
+                    width: 60px;
+                    border-radius: 10px;
+                    border: 4px solid rgb(245, 35, 20);
+                }
+
+                .level {
+                    position: absolute;
+                    right: 18px;
+                    top: -9px;
+                    font-weight: bolder;
+                    background-color: black;
+                    padding: 1px 3px;
+                    border: 1px solid red;
+                    border-radius: 10px;
+                    font-size: 10px;
+                }
+            }
+
+            .name {
+                font-size: $fontSize_sm;
+                margin-left: 20px;
+            }
+        }
 
         .summoner_menu {
             margin-left: 20px;
@@ -201,42 +190,6 @@
                     text-decoration: none;
                 }
             }
-
-        }
-
-
-
-        .level_img {
-            position: relative;
-            display: inline-block;
-
-            .logo-img {
-                width: 80px;
-                border-radius: 10px;
-                border: 4px solid rgb(245, 35, 20);
-            }
-
-            .level {
-                position: absolute;
-                right: 30px;
-                top: -8px;
-                font-weight: bolder;
-                background-color: black;
-                padding: 3px;
-                border-radius: 20px;
-                font-size: 10px;
-                color: white;
-            }
-
-        }
-
-        .name {
-            background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(45, 95, 202));
-            font-weight: bolder;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 30px;
-            margin-left: 20px;
         }
     }
 }

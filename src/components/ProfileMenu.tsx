@@ -1,9 +1,9 @@
-import { profile } from 'console';
+
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { API } from '../config';
 import { initialAppStateType } from '../store';
 import { Loading } from './Loading';
+import { SummonerProfileCard } from './small_components';
 import { UserMenuBar } from './UserMenuBar';
 
 
@@ -17,18 +17,8 @@ export const ProfileMenu = () => {
                 <Loading /> :
                 !summonerInfoError ?
                     <div className="summoner_info_top">
-                        <div className="summoner_profile">
-                            <div className="logo-name-link link">
-                                <div className="level_img">
-                                    <span className="level">{summonerInfo?.summonerLevel}</span>
-                                    <img className="logo-img" src={`${API.GET_PROFILEICON}/${summonerInfo?.profileIconId}.png`} alt="profileIcon" />
-                                </div>
-                                <span className="name">{summonerInfo?.name}</span>
-                            </div>
-                        </div>
-                        <div className="summoner_menu">
-                            <UserMenuBar />
-                        </div>
+                        <SummonerProfileCard summonerInfo={summonerInfo} />
+                        <UserMenuBar summonerInfo={summonerInfo} />
                     </div>
                     :
                     <div style={{ color: "red" }} className="summoner-error">

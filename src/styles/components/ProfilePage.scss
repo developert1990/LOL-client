@@ -141,7 +141,6 @@
     }
 
     .custom_card {
-        // border: 3px solid plum;
         margin: 5px;
         background-color: $cardColor_1;
         color: white;
@@ -212,10 +211,6 @@
 
                 }
 
-                .percentage-circle {
-                    width: 60px;
-                    height: 60px;
-                }
             }
         }
 
@@ -238,19 +233,15 @@
 
 
     .summoner-info {
-        display: flex;
-        flex-direction: column;
         margin-bottom: 60px;
         padding: 25px;
-
+        background-color: red;
         .summoer_menu {
             flex: 3;
         }
 
         .summoner_info_bottom {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
+            
         }
 
 
