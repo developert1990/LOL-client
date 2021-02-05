@@ -16,7 +16,7 @@ export const ProfilePage = () => {
     const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
 
     const getSummonerDetailStore = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
-    const { error: detailError, summonerDetail } = getSummonerDetailStore;
+    const { isLoading: getSummonerDetailLoading, error: detailError, summonerDetail } = getSummonerDetailStore;
 
     const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
     const { error: games100Error, games100, matchIds } = getGames100Store;
@@ -58,42 +58,47 @@ export const ProfilePage = () => {
         <div className="summoner-info">
             {
                 getSummonerIsLoading ?
-                    <Loading />
-                    :
-                    (
-                        summonerDetail ?
-                            (
+                    <Loading /> : (
 
-                                !detailError && summonerMatchDetail ?
+                        !summonerDetail && getSummonerDetailLoading ?
+
+                            <Loading /> : (
+
+                                summonerDetail ? (
                                     <div className="summoner_info_bottom">
+
                                         <div className="summoner_info_bottom_left">
                                             <SummonerDetailCard summonerDetail={summonerDetail} />
                                             <HistoryGraphCard />
                                         </div>
 
                                         <div className="summoner_info_bottom_right">
+                                            {console.log('information ====================', information)}
                                             {
-                                                information.length > 0 ?
+                                                information.length === 0 ?
+                                                    <Loading /> :
                                                     <UserMatchHistory
                                                         setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
                                                     />
-                                                    :
-                                                    <Loading />
+
                                             }
                                         </div>
                                     </div>
+                                )
                                     :
                                     <div style={{ color: "red" }}>No rank information for current filters.</div>
                             )
-                            :
-                            <>
-                                <div style={{ color: "red" }} className="summoner-error">
-                                    {summonerInfoError}
-                                    <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
-                                </div>
-                            </>
+
+
+
                     )
             }
         </div>
     )
 }
+
+
+{/* <div style={{ color: "red" }} className="summoner-error">
+    {summonerInfoError}
+    <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
+</div> */}
