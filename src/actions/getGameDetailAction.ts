@@ -7,6 +7,7 @@ import { getDetailedImageData, getSummonerMatchDetail } from '../libs/index';
 
 
 export const getGameDetail = (start: number, gameIdInfo: number[], region: string, accountId: string) => async (dispatch: ThunkDispatch<any, any, any>) => {
+    console.log("게임디테일 뽑으러 들어옴")
     dispatch({ type: THREE_GAMES_DETAIL_REQUEST });
     const matchesData: MatchedGameType[] = [];
     try {

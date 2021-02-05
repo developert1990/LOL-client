@@ -4,6 +4,7 @@ import { initialAppStateType } from '../store';
 import { FaSearch } from "react-icons/fa";
 import { useHistory } from 'react-router-dom';
 import { getSummoner } from '../actions/getSummonerAction';
+import { GET_SUMMONER_GAMES_100_RESET } from '../constants/getSummonerConstants';
 
 
 export const SearchPage = () => {
@@ -12,6 +13,8 @@ export const SearchPage = () => {
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
 
+    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
+    const { error: games100Error, matchIds, games100 } = getGames100Store;
 
     const [summonerID, setSummonerID] = useState('');
 
@@ -19,9 +22,14 @@ export const SearchPage = () => {
         if (!(summonerID.length > 0)) {
             return alert("Should enter summoner's id")
         }
-        history.push(`/search/userInfo/overview/${region}?name=${summonerID}`);
+        // if (matchIds.length > 0) {
+        //     dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
+        //     history.push(`/search/userInfo/overview/${region}?name=${summonerID}`);
+        // }
+        dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
         dispatch(getSummoner(summonerID, region));
         setSummonerID("");
+        history.push(`/search/userInfo/overview/${region}?name=${summonerID}`);
 
     }
 

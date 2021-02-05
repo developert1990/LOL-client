@@ -1,6 +1,7 @@
+import { THREE_GAMES_DETAIL_RESET } from './../constants/getGamesDetailConstants';
 import { MatchType, SummonerDetailType } from './../types.d';
 import { TEST_BASE } from './../config/index';
-import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL, GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL } from './../constants/getSummonerConstants';
+import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL, GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL, GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET } from './../constants/getSummonerConstants';
 import { ThunkDispatch } from 'redux-thunk';
 import Axios from 'axios';
 
@@ -9,6 +10,9 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
     const USER_ID = 'user account id';
     console.log("getSummoner 액션 들어")
     dispatch({ type: GET_SUMMONER_RESET });
+    // dispatch({ type: THREE_GAMES_DETAIL_RESET });
+    // dispatch({ type: GET_SUMMONER_DETAIL_RESET });
+    // dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
     dispatch({ type: GET_SUMMONER_REQUEST });
     try {
         const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${summonerId}/${region}`);
@@ -21,6 +25,8 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
         try {
             const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
             const detail: SummonerDetailType = data[0];
+            console.log('data', data)
+            console.log('detail', detail)
             dispatch({ type: GET_SUMMONER_DETAIL_SUCCESS, payload: detail });
 
             // 해당유저의 게임 했던것들 정보 가져옴 총 100개

@@ -42,8 +42,14 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
 
+    const getSummonerInfoStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
+    const { error, isLoading, summonerInfo } = getSummonerInfoStore;
+
+    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
+    const { error: games100Error, matchIds, games100 } = getGames100Store;
+
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
-    const { error, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
+    const { error: gamesDetailError, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
 
 
     // 커스텀훅을 리덕스 내부에서 사용불가능 해서 일반 함수호출로 바꿔줫음
@@ -62,10 +68,12 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
 
     const dispatch = useDispatch();
     useEffect(() => {
-        if (allChampsData.length > 0) {
+        console.log('matchIds===>>>> ', matchIds.length)
+        if (allChampsData.length > 0 && matchIds.length > 0) {
+            console.log("디테일 뽑으러 들어오모")
             dispatch(getGameDetail(start, gameIdInfo, region, accountId));
         }
-    }, [start])
+    }, [start, summonerInfo])
 
 
     useEffect(() => {

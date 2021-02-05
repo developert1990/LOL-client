@@ -1,4 +1,4 @@
-import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_SUCCESS, THREE_GAMES_DETAIL_FAIL } from './../constants/getGamesDetailConstants';
+import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_SUCCESS, THREE_GAMES_DETAIL_FAIL, THREE_GAMES_DETAIL_RESET } from './../constants/getGamesDetailConstants';
 import { MatchedGameType, ParticipantsType, GameImageType } from './../types.d';
 import { getGameDetailAction } from './types';
 
@@ -27,6 +27,8 @@ export const getGameDetailsReducer = (state = getGameDetailsInitialState, action
             return { ...state, isLoading: false, games: state.games.length === 0 ? action.payload : [...state.games, ...action.payload], summonerMatchDetail: action.summonerMatchDetail, detailedImageData: action.detailedImageData };
         case THREE_GAMES_DETAIL_FAIL:
             return { ...state, isLoading: false, error: action.payload };
+        case THREE_GAMES_DETAIL_RESET:
+            return {};
         default:
             return state;
     }

@@ -16,7 +16,7 @@ export const ProfilePage = () => {
     const { error: detailError, summonerDetail } = getSummonerDetailStore;
 
     const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
-    const { error: games100Error, games100, gameIdInfo } = getGames100Store;
+    const { error: games100Error, games100, matchIds } = getGames100Store;
 
 
 
@@ -37,7 +37,6 @@ export const ProfilePage = () => {
                                 {
                                     summonerDetail &&
                                     <div>
-                                        {console.log('summonerDetail --------->>>>>>>>>', summonerDetail)}
                                         <div className="summoner_info_bottom">
                                             <div className="summoner_info_bottom_left">
                                                 <div className="detail-info custom_card">
@@ -73,10 +72,11 @@ export const ProfilePage = () => {
 
 
                                             <div className="summoner_info_bottom_right">
+                                                {console.log('games100Error', games100Error)}
                                                 {
                                                     // gameIdInfo 를 다 받으면 길이가 0 이상이겠지 그러면 랜더 되도록
-                                                    games100Error === "" && games100 && gameIdInfo.length > 0 &&
-                                                    <UserMatchHistory gameIdInfo={gameIdInfo} accountId={summonerInfo.accountId} id={summonerInfo.id} />
+                                                    !games100Error && games100 && games100.length > 0 &&
+                                                    <UserMatchHistory gameIdInfo={matchIds} accountId={summonerInfo.accountId} id={summonerInfo.id} />
 
                                                 }
                                             </div>
