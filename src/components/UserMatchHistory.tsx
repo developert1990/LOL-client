@@ -46,8 +46,6 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     const { error, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
 
 
-
-
     // 커스텀훅을 리덕스 내부에서 사용불가능 해서 일반 함수호출로 바꿔줫음
     const allChampsData = getChampsData();
     const allSpellsData = getSpellsData();
@@ -64,11 +62,10 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
 
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("디스패치 들어옴")
-        dispatch(getGameDetail(start, gameIdInfo, region, accountId));
-        setLoadMore(false);
-    }, [start]);
-
+        if (allChampsData.length > 0) {
+            dispatch(getGameDetail(start, gameIdInfo, region, accountId));
+        }
+    }, [start])
 
 
     useEffect(() => {
@@ -78,7 +75,6 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
 
 
     const handleStartClicked = () => {
-        console.log("start 클릭")
         setLoadMore(true);
         setStart(start + 3);
     }
@@ -95,13 +91,10 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
                         :
                         <div>
                             {
-
-                                games &&
-                                detailedImageData.map((data, index) => {
+                                information.map((data, index) => {
                                     return (
                                         <div className="accordion-page" key={index}>
-                                            {console.log("랜더되는중")}
-
+                                            {/* {console.log('information 추가하고 난다음~~~~~~~~~~~~~~~~~~~~~~', information)} */}
                                             <Accordion key={index} className="accordion">
                                                 <div className="card">
                                                     <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>
