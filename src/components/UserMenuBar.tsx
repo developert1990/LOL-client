@@ -17,19 +17,11 @@ export const UserMenuBar = () => {
             {/* {console.log(id)} */}
             <Link className="link" to={
                 {
-                    pathname: `/search/userInfo/overview/${region}?name=${summonerInfo?.name}/`,
-                    // state: {
-                    //     gameIdInfo: gameIds,
-                    //     accountId: accountId,
-                    // }
+                    pathname: `/search/userInfo/overview/${region}?name=${summonerInfo?.name}/`
                 }}><span className='span'>Overview</span></Link>
             <Link className="link" to={
                 {
-                    pathname: `/search/userInfo/masteries/${region}?name=${summonerInfo?.name}`,
-                    // state: {
-                    //     gameIdInfo: gameIds,
-                    //     accountId: accountId,
-                    // }
+                    pathname: `/search/userInfo/masteries/${region}?name=${summonerInfo?.name}`
                 }}><span className='span'>Masteries</span></Link>
             <Link className="link" to={
                 {
