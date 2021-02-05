@@ -1,7 +1,7 @@
 
 
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useEffect } from 'react';
 import { API } from '../config';
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,14 +30,17 @@ export interface UserMatchHistoryPropsType {
     gameIdInfo: number[];
     accountId: string;
     id: string;
-
-
+    setStart: Dispatch<SetStateAction<number>>;
+    start: number;
+    information: GameImageType[];
+    loadMore: boolean;
+    setLoadMore: Dispatch<SetStateAction<boolean>>;
 }
 
 
 
 
-const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id }) => {
+const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, gameIdInfo, id, setStart, start, information, loadMore, setLoadMore }) => {
     console.log("유즈메치히스토리 렌더 하러 들어옴")
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
@@ -58,29 +61,28 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     const allRunesData = getRunesData();
 
 
-    const [information, setInformation] = useState<GameImageType[]>([]);
-    // let information: GameImageType[] = [];
+    // const [information, setInformation] = useState<GameImageType[]>([]);
 
     const isInitialLoading = gamesDetailLoading && information.length === 0;
 
-    const [start, setStart] = useState(0);
-    const [loadMore, setLoadMore] = useState(false);
+    // const [start, setStart] = useState(0);
+    // const [loadMore, setLoadMore] = useState(false);
 
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        console.log('matchIds===>>>> ', matchIds.length)
-        if (allChampsData.length > 0 && matchIds.length > 0) {
-            console.log("디테일 뽑으러 들어오모")
-            dispatch(getGameDetail(start, gameIdInfo, region, accountId));
-        }
-    }, [start, summonerInfo])
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     console.log('matchIds===>>>> ', matchIds.length)
+    //     if (allChampsData.length > 0 && matchIds.length > 0) {
+    //         console.log("디테일 뽑으러 들어오모")
+    //         dispatch(getGameDetail(start, gameIdInfo, region, accountId));
+    //     }
+    // }, [start, summonerInfo])
 
 
-    useEffect(() => {
-        setInformation([...information, ...detailedImageData]);
-        setLoadMore(false);
-    }, [detailedImageData])
+    // useEffect(() => {
+    //     setInformation([...information, ...detailedImageData]);
+    //     setLoadMore(false);
+    // }, [detailedImageData])
 
 
     const handleStartClicked = () => {
@@ -103,7 +105,8 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
                                 information.map((data, index) => {
                                     return (
                                         <div className="accordion-page" key={index}>
-                                            {/* {console.log('information 추가하고 난다음~~~~~~~~~~~~~~~~~~~~~~', information)} */}
+                                            {/* {console.log('information 추가하고 난다음~~~~~~~~~~~~~~~~~~~~~~', information)}
+                                            {console.log('games 추가하고 난다음~~~~~~~~~~~~~~~~~~~~~~', games)} */}
                                             <Accordion key={index} className="accordion">
                                                 <div className="card">
                                                     <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>

@@ -14,21 +14,16 @@ export const SearchPage = () => {
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
 
-    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
-    const { error: games100Error, matchIds, games100 } = getGames100Store;
-
     const [summonerID, setSummonerID] = useState('');
+
+
 
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (!(summonerID.length > 0)) {
             return alert("Should enter summoner's id")
         }
-        // if (matchIds.length > 0) {
-        //     dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
-        //     history.push(`/search/userInfo/overview/${region}?name=${summonerID}`);
-        // }
-        // dispatch({ type: THREE_GAMES_DETAIL_RESET });
-        // dispatch({ type: GET_SUMMONER_DETAIL_RESET });
+        dispatch({ type: THREE_GAMES_DETAIL_RESET });
+        dispatch({ type: GET_SUMMONER_DETAIL_RESET });
         dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
         dispatch(getSummoner(summonerID, region));
         setSummonerID("");

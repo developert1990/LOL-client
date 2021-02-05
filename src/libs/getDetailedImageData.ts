@@ -5,7 +5,7 @@ import { getChampsData } from './getChampsData';
 
 import { SpellsIngameType, RunesIngameType, ParticipantsType, GameImageType, MatchedGameType, ChampDetailType, SpellDetailType, RuneBigType } from './../types.d';
 
-
+// 성공
 export const getDetailedImageData = (summonerDetail: ParticipantsType[], matchesInfo: MatchedGameType[]) => {
     const spellsArr: SpellsIngameType[] = [];
     const runesArr: RunesIngameType[] = [];

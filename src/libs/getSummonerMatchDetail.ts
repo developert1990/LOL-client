@@ -3,7 +3,7 @@ import { ParticipantsType } from '../types';
 
 
 
-
+//성공한다.
 export const getSummonerMatchDetail = (games: MatchedGameType[], accountId: string) => {
 
     let summonorMatchDetail: ParticipantsType[] = [];

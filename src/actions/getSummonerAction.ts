@@ -24,9 +24,14 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
         // summoner 기본 정보 받았으니 => summoner 디테일 뽑기
         try {
             const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-            const detail: SummonerDetailType = data[0];
-            console.log('data', data)
-            console.log('detail', detail)
+            const summonerDetailForGameType: SummonerDetailType[] = data;
+            const detail = summonerDetailForGameType.reduce((a, c) => {
+                let soloType = {};
+                if (c.queueType === "RANKED_SOLO_5x5") {
+                    soloType = c;
+                }
+                return soloType
+            }, {})
             dispatch({ type: GET_SUMMONER_DETAIL_SUCCESS, payload: detail });
 
             // 해당유저의 게임 했던것들 정보 가져옴 총 100개
