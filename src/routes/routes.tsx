@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Footer, NavbarComp, SearchResultWrapper, SideAdvertisement } from '../components/index';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { MainPage } from '../pages/index'
@@ -12,23 +12,11 @@ export default () => {
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
 
-
-
-    const [profileError, setProfileError] = useState<string>("");
-
-
     const query = useQuery();
     // useEffect(() => {
     //     console.log(query);
     // }, [query])
 
-
-    useEffect(() => {
-        console.log("라우터 유즈이펙트 *********************", profileError)
-        if (profileError !== "") {
-            setProfileError("");
-        }
-    }, [summonerInfo])
 
     // drill down
     return (
