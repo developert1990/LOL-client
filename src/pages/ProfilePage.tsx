@@ -6,6 +6,7 @@ import { Loading } from '../components/Loading';
 import UserMatchHistory from '../components/UserMatchHistory';
 import { initialAppStateType } from '../store';
 import { GameImageType } from '../types';
+import { HistoryGraphCard, SummonerDetailCard } from '../components/small_components/index';
 
 
 
@@ -56,48 +57,19 @@ export const ProfilePage = () => {
     return (
         <div className="summoner-info">
             {
-                getSummonerIsLoading && !summonerDetail ?
-                    <div className="loading" >
-                        <Loading />
-                    </div>
+                getSummonerIsLoading ?
+                    <Loading />
                     :
-                    !summonerInfoError ?
-                        !detailError && summonerInfo && summonerDetail && summonerMatchDetail ?
-                            <div >
-                                <div>
+                    (
+                        summonerDetail ?
+                            (
+
+                                !detailError && summonerMatchDetail ?
                                     <div className="summoner_info_bottom">
                                         <div className="summoner_info_bottom_left">
-                                            <div className="detail-info custom_card">
-
-                                                <div>
-                                                    <div className="detail_title">Rank</div>
-                                                    <div className="detail-parent">
-                                                        <img className="emblem-img" src={require(`../images/ranked-emblems/${summonerDetail.tier}.png`).default} alt="tier-emblem" />
-
-                                                        <div className="detail">
-                                                            <span className="queue-type">{summonerDetail.queueType}</span>
-                                                            <div className="tier-lp">
-                                                                <span className="tier">{summonerDetail.tier} <span className="rank">{summonerDetail.rank}</span> </span>
-                                                                <span className="lp"> / {summonerDetail.leaguePoints} LP</span>
-                                                            </div>
-                                                            <span className="win-lost">{`${summonerDetail.wins} W ${summonerDetail.losses} L`}</span>
-                                                            <div className="winRate-totalGame">
-                                                                <span className="winRate">{`${Math.round(summonerDetail.wins / (summonerDetail.wins + summonerDetail.losses) * 100)}%`}</span>
-                                                                <span className="totalGame">{summonerDetail.wins + summonerDetail.losses} games</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div className="custom_card detail_graph">
-                                                역대 기록 그래프
-                                                </div>
+                                            <SummonerDetailCard summonerDetail={summonerDetail} />
+                                            <HistoryGraphCard />
                                         </div>
-
-
 
                                         <div className="summoner_info_bottom_right">
                                             {
@@ -106,24 +78,21 @@ export const ProfilePage = () => {
                                                         setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
                                                     />
                                                     :
-                                                    <div className="loading" >
-                                                        <Loading />
-                                                    </div>
-
+                                                    <Loading />
                                             }
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                    :
+                                    <div style={{ color: "red" }}>No rank information for current filters.</div>
+                            )
                             :
-                            <div style={{ color: "red" }}>No rank information for current filters.</div>
-                        :
-                        <>
-                            <div style={{ color: "red" }} className="summoner-error">
-                                {summonerInfoError}
-                                <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
-                            </div>
-                        </>
+                            <>
+                                <div style={{ color: "red" }} className="summoner-error">
+                                    {summonerInfoError}
+                                    <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
+                                </div>
+                            </>
+                    )
             }
         </div>
     )
