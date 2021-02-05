@@ -56,8 +56,6 @@ export const ProfilePage = () => {
     return (
         <div className="summoner-info">
             {
-
-                // 이렇게 하면 반드시 id가 존재하고 isLoading 이 true 인 경우에 아래 식을 실행 시키도록 한다 즉, 검색어에 유저의 이름을 입력하고 검색을 해야 loading이나 결과가 나타난다.
                 getSummonerIsLoading && !summonerDetail ?
                     <div className="loading" >
                         <Loading />
@@ -105,8 +103,7 @@ export const ProfilePage = () => {
                                             {
                                                 information.length > 0 ?
                                                     <UserMatchHistory
-                                                        gameIdInfo={matchIds} accountId={summonerInfo.accountId} id={summonerInfo.id} setStart={setStart} start={start}
-                                                        information={information} loadMore={loadMore} setLoadMore={setLoadMore}
+                                                        setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
                                                     />
                                                     :
                                                     <div className="loading" >
