@@ -5,18 +5,22 @@ import { getGameDetail } from '../actions/getGameDetailAction';
 import { Loading } from '../components/Loading';
 import UserMatchHistory from '../components/UserMatchHistory';
 import { initialAppStateType } from '../store';
-import { GameImageType } from '../types';
+import { GameImageType, SummonerDetailType } from '../types';
 import { HistoryGraphCard, SummonerDetailCard } from '../components/small_components/index';
 
 
+interface ProfilePagePropsType {
+    summonerDetail: SummonerDetailType;
+    getSummonerDetailLoading: boolean;
+}
 
-export const ProfilePage = () => {
+export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, getSummonerDetailLoading }) => {
 
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
 
-    const getSummonerDetailStore = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
-    const { isLoading: getSummonerDetailLoading, error: detailError, summonerDetail } = getSummonerDetailStore;
+    // const getSummonerDetailStore = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
+    // const { isLoading: getSummonerDetailLoading, error: detailError, summonerDetail } = getSummonerDetailStore;
 
     const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
     const { error: games100Error, games100, matchIds } = getGames100Store;
@@ -57,48 +61,33 @@ export const ProfilePage = () => {
     return (
         <div className="summoner-info">
             {
-                getSummonerIsLoading ?
+                !summonerDetail && getSummonerDetailLoading ?
                     <Loading /> : (
+                        // summonerDetail ? (
+                        <div className="summoner_info_bottom">
 
-                        !summonerDetail && getSummonerDetailLoading ?
+                            <div className="summoner_info_bottom_left">
+                                <SummonerDetailCard summonerDetail={summonerDetail} />
+                                <HistoryGraphCard />
+                            </div>
 
-                            <Loading /> : (
+                            <div className="summoner_info_bottom_right">
+                                {console.log('information ====================', information)}
+                                {
+                                    information.length === 0 ?
+                                        <Loading /> :
+                                        <UserMatchHistory
+                                            setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
+                                        />
 
-                                summonerDetail ? (
-                                    <div className="summoner_info_bottom">
-
-                                        <div className="summoner_info_bottom_left">
-                                            <SummonerDetailCard summonerDetail={summonerDetail} />
-                                            <HistoryGraphCard />
-                                        </div>
-
-                                        <div className="summoner_info_bottom_right">
-                                            {console.log('information ====================', information)}
-                                            {
-                                                information.length === 0 ?
-                                                    <Loading /> :
-                                                    <UserMatchHistory
-                                                        setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
-                                                    />
-
-                                            }
-                                        </div>
-                                    </div>
-                                )
-                                    :
-                                    <div style={{ color: "red" }}>No rank information for current filters.</div>
-                            )
-
-
-
+                                }
+                            </div>
+                        </div>
+                        // )
+                        //     :
+                        //     <div style={{ color: "red" }}>No rank information for current filters.</div>
                     )
             }
         </div>
     )
 }
-
-
-{/* <div style={{ color: "red" }} className="summoner-error">
-    {summonerInfoError}
-    <div> This summoner is not registered at H.GG.<br /> Please check spelling and region</div>
-</div> */}
