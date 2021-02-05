@@ -7,11 +7,9 @@ import { getDetailedImageData, getSummonerMatchDetail } from '../libs/index';
 
 
 export const getGameDetail = (start: number, gameIdInfo: number[], region: string, accountId: string) => async (dispatch: ThunkDispatch<any, any, any>) => {
-    console.log("게임디테일 뽑으러 들어옴")
     dispatch({ type: THREE_GAMES_DETAIL_REQUEST });
     const matchesData: MatchedGameType[] = [];
     try {
-        console.log('start== > ', start)
         for (let i = start; i < start + 3; i++) {
             const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
             const data = await response.json();

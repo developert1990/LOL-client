@@ -9,8 +9,6 @@ export const UserMenuBar = () => {
     const { region } = regionStore;
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
-    const dispatch = useDispatch();
-    console.log('summonerInfo 메뉴바 페이지', summonerInfo);
 
     return (
         <div className="user-nav">

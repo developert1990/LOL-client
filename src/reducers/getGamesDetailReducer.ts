@@ -28,7 +28,11 @@ export const getGameDetailsReducer = (state = getGameDetailsInitialState, action
         case THREE_GAMES_DETAIL_FAIL:
             return { ...state, isLoading: false, error: action.payload };
         case THREE_GAMES_DETAIL_RESET:
-            return {};
+            return {
+                games: [],
+                summonerMatchDetail: [],
+                detailedImageData: [],
+            };
         default:
             return state;
     }
