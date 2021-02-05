@@ -62,6 +62,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ accountId, game
     // let information: GameImageType[] = [];
 
     const isInitialLoading = gamesDetailLoading && information.length === 0;
+
     const [start, setStart] = useState(0);
     const [loadMore, setLoadMore] = useState(false);
 

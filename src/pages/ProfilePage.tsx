@@ -18,8 +18,11 @@ export const ProfilePage = () => {
     const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
     const { error: games100Error, games100, matchIds } = getGames100Store;
 
-
-
+    console.log("프로필 페이지")
+    console.log('summonerDetail', summonerDetail)
+    console.log('matchIds', matchIds)
+    console.log('detailError', detailError)
+    console.log('summonerInfo', summonerInfo)
     return (
         <div className="summoner-info">
             {

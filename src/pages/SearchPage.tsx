@@ -4,7 +4,8 @@ import { initialAppStateType } from '../store';
 import { FaSearch } from "react-icons/fa";
 import { useHistory } from 'react-router-dom';
 import { getSummoner } from '../actions/getSummonerAction';
-import { GET_SUMMONER_GAMES_100_RESET } from '../constants/getSummonerConstants';
+import { GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET } from '../constants/getSummonerConstants';
+import { THREE_GAMES_DETAIL_RESET } from '../constants/getGamesDetailConstants';
 
 
 export const SearchPage = () => {
@@ -26,6 +27,8 @@ export const SearchPage = () => {
         //     dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
         //     history.push(`/search/userInfo/overview/${region}?name=${summonerID}`);
         // }
+        // dispatch({ type: THREE_GAMES_DETAIL_RESET });
+        // dispatch({ type: GET_SUMMONER_DETAIL_RESET });
         dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
         dispatch(getSummoner(summonerID, region));
         setSummonerID("");
