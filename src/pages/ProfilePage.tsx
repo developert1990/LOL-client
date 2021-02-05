@@ -1,17 +1,13 @@
-import axios from 'axios';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+
+import React from 'react'
+import { useSelector } from 'react-redux';
 import { Loading } from '../components/Loading';
-import { UserMatchHistory } from '../components/UserMatchHistory';
-import { TEST_BASE } from '../config';
+import UserMatchHistory from '../components/UserMatchHistory';
 import { initialAppStateType } from '../store';
-import { GameMatcheType, SummonerDetailType, SummonerInfoType } from '../types';
 
 
 
 export const ProfilePage = () => {
-    const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
-    const { region } = regionStore;
 
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error, summonerInfo } = getSummonerStore;
@@ -25,7 +21,7 @@ export const ProfilePage = () => {
 
 
     return (
-        <div>
+        <div className="summoner-info">
             {
 
                 // 이렇게 하면 반드시 id가 존재하고 isLoading 이 true 인 경우에 아래 식을 실행 시키도록 한다 즉, 검색어에 유저의 이름을 입력하고 검색을 해야 loading이나 결과가 나타난다.
@@ -37,7 +33,7 @@ export const ProfilePage = () => {
                     :
                     !error ?
                         detailError == "" && summonerInfo ?
-                            <div className="summoner-info">
+                            <div >
                                 {
                                     summonerDetail &&
                                     <div>
@@ -71,7 +67,7 @@ export const ProfilePage = () => {
 
                                                 <div className="custom_card detail_graph">
                                                     역대 기록 그래프
-                                            </div>
+                                                </div>
                                             </div>
 
 

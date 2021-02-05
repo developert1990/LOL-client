@@ -5,7 +5,7 @@ import { getGameDetailAction } from './types';
 export interface GetGameDetailsInitialStateType {
     isLoading: boolean;
     error: string;
-    games: MatchedGameType[] | undefined;
+    games: MatchedGameType[];
     summonerMatchDetail: ParticipantsType[];
     detailedImageData: GameImageType[];
 }
@@ -13,7 +13,7 @@ export interface GetGameDetailsInitialStateType {
 export const getGameDetailsInitialState: GetGameDetailsInitialStateType = {
     isLoading: false,
     error: "",
-    games: undefined,
+    games: [],
     summonerMatchDetail: [],
     detailedImageData: [],
 }
@@ -23,7 +23,8 @@ export const getGameDetailsReducer = (state = getGameDetailsInitialState, action
         case THREE_GAMES_DETAIL_REQUEST:
             return { ...state, isLoading: true };
         case THREE_GAMES_DETAIL_SUCCESS:
-            return { ...state, isLoading: false, games: action.payload, summonerMatchDetail: action.summonerMatchDetail, detailedImageData: action.detailedImageData };
+            // 여기서 games 의 값을 처음에는 action.payload만 추가하고 두번째부터는 값을 차곡차곡 저장한다.
+            return { ...state, isLoading: false, games: state.games.length === 0 ? action.payload : [...state.games, ...action.payload], summonerMatchDetail: action.summonerMatchDetail, detailedImageData: action.detailedImageData };
         case THREE_GAMES_DETAIL_FAIL:
             return { ...state, isLoading: false, error: action.payload };
         default:

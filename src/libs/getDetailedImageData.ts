@@ -112,11 +112,4 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     const newData = information.concat(champImages);
     console.log('newData================================: ', newData)
     return newData;
-    // setInformation(newData);
-    // setPageLoading(false);
-    // setLoadMore(false) // 로드하는 버튼 누르면 로딩이 시작되기 때문에 데이터를 다 로드하면 false로 해서 로딩 컴포넌트가 종료되고 다시 버튼이 뜬다.
-    // console.log(champImages);
-
-    // setLoaded(false);
-    // }
 }

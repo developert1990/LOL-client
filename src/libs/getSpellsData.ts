@@ -1,5 +1,4 @@
 import { SpellDetailType } from '../types';
-import { useEffect, useState } from 'react';
 import { spells } from '../data/index';
 
 

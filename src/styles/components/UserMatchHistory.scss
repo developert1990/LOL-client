@@ -1,213 +1,657 @@
 @import './constants/variables';
 
-.matchHistory-page {
-    background-color: $cardColor_1;
-    margin: 5px auto;
-    border-radius: 20px;
-    padding: 20px;
+@include desktop{
 
-    .load-data-button {
-        display: flex;
-        justify-content: center;
-
-        .load-button {
-            width: 780px;
-            background-color: rgb(56, 40, 143);
-            color: white;
-            border-radius: 10px;
-            padding: 5px;
-        }
-
-        .load-button:hover {
-            background-color: rgb(60, 37, 102);
-        }
-
-    }
-}
-
-.accordion-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // width: 1000px;
-    margin: 0 auto;
-    // background-color: rgb(28, 28, 56);
-    border-radius: 10px;
-
-    .accordion {
-        text-align: center;
-        width: 700px;
-        padding: 5px 10px 5px 10px;
-
-        .card-header {
-            position: relative;
-            z-index: 1;
-
-        }
-
-        .win {
-            background-color: rgb(13, 40, 128);
-        }
-
-        .lose {
-            background-color: rgb(179, 4, 48);
-        }
-
-        .win_text {
-            font-size: 15px;
-            color: rgb(2, 32, 122);
-            font-weight: bolder;
-        }
-
-        .lose_text {
-            font-size: 20px;
-            color: rgb(255, 17, 0);
-            font-weight: bolder;
-        }
-
-        .card-header::after {
-            background-image: url(../../images/newChamp_bg.webp);
-            top: 0;
-            left: 0;
-            position: absolute;
-            background-size: 100%;
-            opacity: 0.4 !important;
-            // filter: alpha(opacity=50);
-            z-index: -1;
-            content: "";
-            width: 100%;
-            height: 100%;
-
-
-        }
-
-        .accordion-toggle {
+    
+    .matchHistory-page {
+        background-color: $cardColor_1;
+        margin: 5px auto;
+        border-radius: 20px;
+        padding: 20px;
+    
+        .load-data-button {
             display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: center;
-            width: 700px;
-            font-size: 0.7rem;
-            font-weight: bolder;
-            cursor: url('../../images/mouse-cursor-click.png'), auto;
-
-            .first-info {
-                display: flex;
-                flex-direction: column;
+            justify-content: center;
+    
+            .load-button {
+                width: 98%;
+                background-color: rgb(56, 40, 143);
                 color: white;
-                width: 150px;
+                border-radius: 10px;
+                padding: 5px;
             }
-
-            .second-info {
+    
+            .load-button:hover {
+                background-color: rgb(60, 37, 102);
+            }
+    
+        }
+    }
+    
+    .accordion-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // width: 1000px;
+        margin: 0 auto;
+        // background-color: rgb(28, 28, 56);
+        border-radius: 10px;
+    
+        .accordion {
+            text-align: center;
+            width: 700px;
+            padding: 5px 10px 5px 10px;
+    
+            .card-header {
+                position: relative;
+                z-index: 1;
+    
+            }
+    
+            .win {
+                background-color: rgb(13, 40, 128);
+            }
+    
+            .lose {
+                background-color: rgb(179, 4, 48);
+            }
+    
+            .win_text {
+                font-size: 15px;
+                color: rgb(2, 32, 122);
+                font-weight: bolder;
+            }
+    
+            .lose_text {
+                font-size: 20px;
+                color: rgb(255, 17, 0);
+                font-weight: bolder;
+            }
+    
+            .card-header::after {
+                background-image: url(../../images/newChamp_bg.webp);
+                top: 0;
+                left: 0;
+                position: absolute;
+                background-size: 100%;
+                opacity: 0.4 !important;
+                // filter: alpha(opacity=50);
+                z-index: -1;
+                content: "";
+                width: 100%;
+                height: 100%;
+    
+    
+            }
+    
+            .accordion-toggle {
                 display: flex;
                 flex-direction: row;
-                color: white;
-
-                .level-champ {
+                justify-content: space-evenly;
+                align-items: center;
+                width: 700px;
+                font-size: 0.7rem;
+                font-weight: bolder;
+                cursor: url('../../images/mouse-cursor-click.png'), auto;
+    
+                .first-info {
                     display: flex;
                     flex-direction: column;
-                    position: relative;
-
-                    .level {
-                        position: absolute;
-                        top: 40px;
-                        left: 22px;
-                        background-color: black;
-                        font-size: 10px;
-                        width: 17px;
-                        padding: 1px;
-                    }
-
-                    .champ-image {
-                        width: 55px;
-                    }
-                }
-            }
-
-            .spells-runes {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                .spell,
-                .rune {
-                    width: 20px;
-                    margin: 2px;
-                }
-
-                .rune {
-                    background-color: black;
-                    border-radius: 10px;
-                }
-            }
-
-            .third-info {
-                display: flex;
-                flex-direction: column;
-                color: black;
-
-                .gold {
-                    color: gold;
-                }
-
-                .kills {
-                    color: rgb(133, 245, 122);
-                }
-
-                .assists {
-                    color: yellow;
-                }
-
-                .deaths {
-                    color: red;
-                }
-
-                .rate,
-                .cs {
                     color: white;
+                    width: 150px;
                 }
-
-            }
-
-            .forth-info {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-
-                .item {
-                    width: 20px;
-                    height: 20px;
-                    margin: 1px 0 0 2px;
-                    border-radius: 5px;
-
+    
+                .second-info {
+                    display: flex;
+                    flex-direction: row;
+                    color: white;
+    
+                    .level-champ {
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+    
+                        .level {
+                            position: absolute;
+                            top: 40px;
+                            left: 22px;
+                            background-color: black;
+                            font-size: 10px;
+                            width: 17px;
+                            padding: 1px;
+                        }
+    
+                        .champ-image {
+                            width: 55px;
+                        }
+                    }
+                }
+    
+                .spells-runes {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+    
+                    .spell,
+                    .rune {
+                        width: 20px;
+                        margin: 2px;
+                    }
+    
+                    .rune {
+                        background-color: black;
+                        border-radius: 10px;
+                    }
+                }
+    
+                .third-info {
+                    display: flex;
+                    flex-direction: column;
+                    color: black;
+    
+                    .gold {
+                        color: gold;
+                    }
+    
+                    .kills {
+                        color: rgb(133, 245, 122);
+                    }
+    
+                    .assists {
+                        color: yellow;
+                    }
+    
+                    .deaths {
+                        color: red;
+                    }
+    
+                    .rate,
+                    .cs {
+                        color: white;
+                    }
+    
+                }
+    
+                .forth-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+    
+                    .item {
+                        width: 20px;
+                        height: 20px;
+                        margin: 1px 0 0 2px;
+                        border-radius: 5px;
+    
+                    }
                 }
             }
         }
+    
     }
-
+    
+    
+    .card-body {
+        position: relative;
+        z-index: 1;
+    
+    
+    }
+    
+    .card-body::after {
+        background-image: url('../../images/newChamp_bg.webp');
+        // background-color: $mainBackgroundColor;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    
+    
+    }
 }
 
 
-.card-body {
-    position: relative;
-    z-index: 1;
 
 
+
+
+
+
+
+
+
+
+@include tablet{
+        .matchHistory-page {
+        background-color: $cardColor_1;
+        margin: 5px auto;
+        border-radius: 20px;
+        padding: 20px;
+    
+        .load-data-button {
+            display: flex;
+            justify-content: center;
+    
+            .load-button {
+                width: 678px;
+                background-color: rgb(56, 40, 143);
+                color: white;
+                border-radius: 10px;
+                padding: 5px;
+            }
+    
+            .load-button:hover {
+                background-color: rgb(60, 37, 102);
+            }
+    
+        }
+    }
+    
+    .accordion-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // width: 1000px;
+        margin: 0 auto;
+        // background-color: rgb(28, 28, 56);
+        border-radius: 10px;
+    
+        .accordion {
+            text-align: center;
+            width: 700px;
+            padding: 5px 10px 5px 10px;
+    
+            .card-header {
+                position: relative;
+                z-index: 1;
+    
+            }
+    
+            .win {
+                background-color: rgb(13, 40, 128);
+            }
+    
+            .lose {
+                background-color: rgb(179, 4, 48);
+            }
+    
+            .win_text {
+                font-size: 15px;
+                color: rgb(2, 32, 122);
+                font-weight: bolder;
+            }
+    
+            .lose_text {
+                font-size: 20px;
+                color: rgb(255, 17, 0);
+                font-weight: bolder;
+            }
+    
+            .card-header::after {
+                background-image: url(../../images/newChamp_bg.webp);
+                top: 0;
+                left: 0;
+                position: absolute;
+                background-size: 100%;
+                opacity: 0.4 !important;
+                // filter: alpha(opacity=50);
+                z-index: -1;
+                content: "";
+                width: 100%;
+                height: 100%;
+    
+    
+            }
+    
+            .accordion-toggle {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 700px;
+                font-size: 0.7rem;
+                font-weight: bolder;
+                cursor: url('../../images/mouse-cursor-click.png'), auto;
+    
+                .first-info {
+                    display: flex;
+                    flex-direction: column;
+                    color: white;
+                    width: 150px;
+                }
+    
+                .second-info {
+                    display: flex;
+                    flex-direction: row;
+                    color: white;
+    
+                    .level-champ {
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+    
+                        .level {
+                            position: absolute;
+                            top: 40px;
+                            left: 22px;
+                            background-color: black;
+                            font-size: 10px;
+                            width: 17px;
+                            padding: 1px;
+                        }
+    
+                        .champ-image {
+                            width: 55px;
+                        }
+                    }
+                }
+    
+                .spells-runes {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+    
+                    .spell,
+                    .rune {
+                        width: 20px;
+                        margin: 2px;
+                    }
+    
+                    .rune {
+                        background-color: black;
+                        border-radius: 10px;
+                    }
+                }
+    
+                .third-info {
+                    display: flex;
+                    flex-direction: column;
+                    color: black;
+    
+                    .gold {
+                        color: gold;
+                    }
+    
+                    .kills {
+                        color: rgb(133, 245, 122);
+                    }
+    
+                    .assists {
+                        color: yellow;
+                    }
+    
+                    .deaths {
+                        color: red;
+                    }
+    
+                    .rate,
+                    .cs {
+                        color: white;
+                    }
+    
+                }
+    
+                .forth-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+    
+                    .item {
+                        width: 20px;
+                        height: 20px;
+                        margin: 1px 0 0 2px;
+                        border-radius: 5px;
+    
+                    }
+                }
+            }
+        }
+    
+    }
+    
+    
+    .card-body {
+        position: relative;
+        z-index: 1;
+    
+    
+    }
+    
+    .card-body::after {
+        background-image: url('../../images/newChamp_bg.webp');
+        // background-color: $mainBackgroundColor;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    
+    
+    }
 }
 
-.card-body::after {
-    background-image: url('../../images/newChamp_bg.webp');
-    // background-color: $mainBackgroundColor;
-    top: 0;
-    left: 0;
-    position: absolute;
-    background-size: 100%;
-    opacity: 0.9 !important;
-    filter: alpha(opacity=50);
-    z-index: -1;
-    content: "";
-    width: 100%;
-    height: 100%;
 
-
+@include mobile{
+      .matchHistory-page {
+        background-color: $cardColor_1;
+        margin: 5px auto;
+        border-radius: 20px;
+        padding: 20px;
+    
+        .load-data-button {
+            display: flex;
+            justify-content: center;
+    
+            .load-button {
+                width: 678px;
+                background-color: rgb(56, 40, 143);
+                color: white;
+                border-radius: 10px;
+                padding: 5px;
+            }
+    
+            .load-button:hover {
+                background-color: rgb(60, 37, 102);
+            }
+    
+        }
+    }
+    
+    .accordion-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // width: 1000px;
+        margin: 0 auto;
+        // background-color: rgb(28, 28, 56);
+        border-radius: 10px;
+    
+        .accordion {
+            text-align: center;
+            width: 700px;
+            padding: 5px 10px 5px 10px;
+    
+            .card-header {
+                position: relative;
+                z-index: 1;
+    
+            }
+    
+            .win {
+                background-color: rgb(13, 40, 128);
+            }
+    
+            .lose {
+                background-color: rgb(179, 4, 48);
+            }
+    
+            .win_text {
+                font-size: 15px;
+                color: rgb(2, 32, 122);
+                font-weight: bolder;
+            }
+    
+            .lose_text {
+                font-size: 20px;
+                color: rgb(255, 17, 0);
+                font-weight: bolder;
+            }
+    
+            .card-header::after {
+                background-image: url(../../images/newChamp_bg.webp);
+                top: 0;
+                left: 0;
+                position: absolute;
+                background-size: 100%;
+                opacity: 0.4 !important;
+                // filter: alpha(opacity=50);
+                z-index: -1;
+                content: "";
+                width: 100%;
+                height: 100%;
+    
+    
+            }
+    
+            .accordion-toggle {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 700px;
+                font-size: 0.7rem;
+                font-weight: bolder;
+                cursor: url('../../images/mouse-cursor-click.png'), auto;
+    
+                .first-info {
+                    display: flex;
+                    flex-direction: column;
+                    color: white;
+                    width: 150px;
+                }
+    
+                .second-info {
+                    display: flex;
+                    flex-direction: row;
+                    color: white;
+    
+                    .level-champ {
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+    
+                        .level {
+                            position: absolute;
+                            top: 40px;
+                            left: 22px;
+                            background-color: black;
+                            font-size: 10px;
+                            width: 17px;
+                            padding: 1px;
+                        }
+    
+                        .champ-image {
+                            width: 55px;
+                        }
+                    }
+                }
+    
+                .spells-runes {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+    
+                    .spell,
+                    .rune {
+                        width: 20px;
+                        margin: 2px;
+                    }
+    
+                    .rune {
+                        background-color: black;
+                        border-radius: 10px;
+                    }
+                }
+    
+                .third-info {
+                    display: flex;
+                    flex-direction: column;
+                    color: black;
+    
+                    .gold {
+                        color: gold;
+                    }
+    
+                    .kills {
+                        color: rgb(133, 245, 122);
+                    }
+    
+                    .assists {
+                        color: yellow;
+                    }
+    
+                    .deaths {
+                        color: red;
+                    }
+    
+                    .rate,
+                    .cs {
+                        color: white;
+                    }
+    
+                }
+    
+                .forth-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+    
+                    .item {
+                        width: 20px;
+                        height: 20px;
+                        margin: 1px 0 0 2px;
+                        border-radius: 5px;
+    
+                    }
+                }
+            }
+        }
+    
+    }
+    
+    
+    .card-body {
+        position: relative;
+        z-index: 1;
+    
+    
+    }
+    
+    .card-body::after {
+        background-image: url('../../images/newChamp_bg.webp');
+        // background-color: $mainBackgroundColor;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    
+    
+    }
 }
