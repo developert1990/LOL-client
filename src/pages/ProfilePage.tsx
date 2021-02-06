@@ -19,8 +19,6 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
 
-    // const getSummonerDetailStore = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
-    // const { isLoading: getSummonerDetailLoading, error: detailError, summonerDetail } = getSummonerDetailStore;
 
     const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
     const { error: games100Error, games100, matchIds } = getGames100Store;
@@ -56,6 +54,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
             setInformation([]);
         }
     }, [summonerInfo])
+
 
 
     return (
