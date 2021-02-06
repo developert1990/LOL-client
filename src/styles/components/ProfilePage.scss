@@ -7,8 +7,6 @@
 
 
     .summoner-info {
-        display: flex;
-        flex-direction: column;
         margin-bottom: 60px;
         padding: 25px;
 
@@ -21,7 +19,7 @@
         .summoner_info_bottom {
             // border: 2px solid white;
             display: grid;
-            grid-template-columns: 2fr 4fr 2fr;
+            grid-template-columns: 2fr 4fr;
             column-gap: 4rem;
         }
 
@@ -233,16 +231,14 @@
 
 
     .summoner-info {
+        display: flex;
+        flex-direction: column;
         margin-bottom: 60px;
-        padding: 25px;
-        background-color: red;
+        padding: 5px;
         .summoer_menu {
             flex: 3;
         }
 
-        .summoner_info_bottom {
-            
-        }
 
 
     }

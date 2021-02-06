@@ -3,6 +3,7 @@ import React from 'react';
 import { API } from '../config';
 import { ChampDetailType, GameImageType, MatchedGameType, ParticipantIdentitiesType, ParticipantsType, RuneBigType, SpellDetailType } from '../types';
 import darkgery from '../images/darkgrey.png';
+import { ChampImgCard, GoldEarnedCard, ItemsCard, KDA_Card, MinionKillsCard, RunesCard, SpellsCard } from './small_components/index';
 export interface MatchedGameDetailPropsType {
     games: MatchedGameType;
     clickedData: GameImageType;
@@ -25,7 +26,6 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ games,
 
         // 챔피언 이름 뽑는 것
         allChampsData.map((champInfo: ChampDetailType) => {
-
             if (champInfo.key === data.championId.toString()) {
                 data.championId = champInfo.id;
             }
@@ -68,46 +68,32 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ games,
                 <div key={index} className={data.stats.win ? 'win' : 'lost'}>
                     {index === 0 && <div className="win-defeat1">{data.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">BLUE</span></div>}
                     {index === 5 && <div className="win-defeat2">{data.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">RED</span></div>}
-                    {/* <span>Champ ID: {data.championId}</span> */}
-                    <div className="users-info">
-                        <div className="first-part">
-                            <div className="img-level">
-                                <img src={`${API.GET_CHAMPION_SQUARE_IMG}/${data.championId}.png`} alt="images" />
-                                <span className="level">{champLevel}</span>
-                            </div>
-                            <div className="spells-runes">
-                                <div className="spells">
-                                    <img src={`${API.GET_SPELLS_IMG}/${data.spell1Id}`} alt="images" />
-                                    <img src={`${API.GET_SPELLS_IMG}/${data.spell2Id}`} alt="images" />
-                                </div>
-                                <div className="runes">
-                                    <img src={`${API.GET_RUNES_IMG}/${perkPrimaryStyle}`} alt="images" />
-                                    <img src={`${API.GET_RUNES_IMG}/${perkSubStyle}`} alt="images" />
-                                </div>
-                            </div>
-                            <span className="id">{data.participantId}</span>
-                        </div>
 
-                        {/* <span> 승패: {data.stats.win ? 'WIN' : 'DEFEAT'}</span> */}
-                        <div className="second-part">
-                            {/* <div>{data.stats}</div> */}
-                            <span>{`${((kills + assists) / deaths).toFixed(2)}` === 'Infinity' ? 'Perfect' : `${((kills + assists) / deaths).toFixed(2)}`}</span>
-                            <div className="kda">
-                                <span className="kills">{kills}</span> / <span className="deaths">{deaths}</span> / <span className="assists">{assists}</span>
+                    {console.log('data ===============', data)}
+                    <div className="users-info">
+                        <div className="img-level_spells_runes">
+                            <ChampImgCard data={data} />
+                            <span className="level">{champLevel}</span>
+                            <span className="chammpionId">{data.championId}</span>
+                            <div className="spells_runes">
+                                <SpellsCard data={data} />
+                                <RunesCard data={data} perkPrimaryStyle={perkPrimaryStyle} perkSubStyle={perkSubStyle} />
                             </div>
                         </div>
-                        <div className="third-part">
-                            <span className="cs">{totalMinionsKilled} ({(totalMinionsKilled / 60).toFixed(1)}) CS</span>
-                            <span className="gold">{goldEarned.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} G</span> {/* 숫자에 콤마(,) 찍는 함수 */}
+                        <div className="participantRank_id">
+                            <div className="participantRank">티어,랭크</div>
+                            <div className="id">{data.participantId}</div>
                         </div>
-                        <div className="forth-part">
-                            {item0 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item0}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
-                            {item1 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item1}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
-                            {item2 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item2}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
-                            {item3 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item3}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
-                            {item4 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item4}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
-                            {item5 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item5}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
-                            {item6 === 0 ? <img src={darkgery} alt="emptyImage"></img> : <img src={`${API.GET_ITEMS_IMG}/${item6}.png`} onError={(e: any) => e.target.style.display = 'none'} alt="images" />}
+                        <div className="kda_kdaAv">
+                            <span>{`${((kills + assists) / deaths).toFixed(2)}` === 'Infinity' ? 'Perfect' : `${((kills + assists) / deaths).toFixed(2)}`}</span>
+                            <KDA_Card data={data} />
+                        </div>
+                        <div className="minion_gold">
+                            <MinionKillsCard data={data} totalMinionsKilled={totalMinionsKilled} />
+                            <GoldEarnedCard data={data} />
+                        </div>
+                        <div className="items">
+                            <ItemsCard data={data} />
                         </div>
                         {/* http://ddragon.leagueoflegends.com/cdn/10.18.1/img/item/3065.png */}
                     </div>

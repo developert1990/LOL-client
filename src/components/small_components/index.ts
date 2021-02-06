@@ -8,3 +8,6 @@ export * from './SpellsCard';
 export * from './ChampImgCard';
 export * from './BasicGameInfoCard';
 export * from './OneGameHistoryBar';
+export * from './KDA_Card';
+export * from './GoldEarnedCard';
+export * from './MinionKillsCard';

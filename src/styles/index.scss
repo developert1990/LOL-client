@@ -7,6 +7,8 @@
 @import './components/ProfileMenu.scss';
 @import './components/ProfilePage.scss';
 @import './components/SideAdvertisement.scss';
+@import './components/OneGameHistoryBar.scss';
+@import './components/itemsCard.scss';
 
 
 
@@ -72,13 +74,9 @@ body {
         font-size: 1.3rem;
     }
 
-    .searchWrapper {
-        width: 1308.72px;
-    }
-
     .searchOuter {
         display: grid;
-        grid-template-columns: 6fr 2fr;
+        grid-template-columns: 4fr 1fr;
     }
 
 }
@@ -103,7 +101,7 @@ body {
     
 
     .searchOuter {
-        display: grid;
-        grid-template-columns: 6fr 2fr;
+        display: flex;
+        flex-direction: column;
     }
 }

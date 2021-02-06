@@ -37,6 +37,9 @@ export const OneGameHistoryBar: React.FC<OneGameHistoryBarPropsType> = ({ data }
                 <div className="forth-info">
                     <ItemsCard data={data} />
                 </div>
+                <div className="fifth-info">
+                    경기했던 유저들..
+                </div>
             </Accordion.Toggle>
         </div>
     )

@@ -1,174 +1,470 @@
-.matched-details{
-    border-radius: 10px;
-}
+@import "./constants/mixin";
+@import "./constants/variables";
 
-
-.win-defeat1{
-    color: blue;
-}
-
-.win-defeat2{
-color: red;
-}
-
-.team{
-    color: white;
-}
-// 배경화면 투명도 조절
-.win {
-    position: relative;
-    z-index: 1;
-
-
-}
-
-.win::after {
-    background-color: rgb(30, 55, 124);
-    top: 0;
-    left: 0;
-    position: absolute;
-    background-size: 100%;
-    opacity: 0.9 !important;
-    filter: alpha(opacity=50);
-    z-index: -1;
-    content: "";
-    width: 100%;
-    height: 100%;
-
-
-}
-
-// 배경화면 투명도 조절
-.lost {
-    position: relative;
-    z-index: 1;
-
-
-}
-
-.lost::after {
-    background-color: rgb(160, 20, 20);
-    top: 0;
-    left: 0;
-    position: absolute;
-    background-size: 100%;
-    opacity: 0.8 !important;
-    filter: alpha(opacity=50);
-    z-index: -1;
-    content: "";
-    width: 100%;
-    height: 100%;
-
-}
-
-
-.users-info {
-    display: flex;
-    flex-direction: row;
-    font-size: 10px;
-    font-weight: bolder;
-
-    .first-part {
-        display: flex;
-        flex-direction: row;
-        width: 250px;
-
-        .img-level{
-            position: relative;
-        }
-        .level{
-            position: relative;
-            top: 20px;
-            left: -15px;
-        }
+@include desktop {
+    .matched-details {
+        border-radius: 10px;
     }
 
-    .first-part img {
-        width: 50px;
-        margin: 1px;
-
+    .win-defeat1 {
+        color: blue;
     }
 
-    .spells img {
-        width: 20px;
+    .win-defeat2 {
+        color: red;
     }
 
-    .runes img {
-        width: 20px;
-        background-color: black;
-        border-radius: 5px;
-    }
-
-    .id {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 30px;
+    .team {
         color: white;
+    }
+    // 배경화면 투명도 조절
+    .win {
+        position: relative;
+        z-index: 1;
+    }
+
+    .win::after {
+        background-color: rgb(30, 55, 124);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    // 배경화면 투명도 조절
+    .lost {
+        position: relative;
+        z-index: 1;
+    }
+
+    .lost::after {
+        background-color: rgb(160, 20, 20);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.8 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    .users-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         font-size: 10px;
+        font-weight: bolder;
+        color: white;
+        margin-left: $margin_padding15;
+        margin-right: $margin_padding15;
 
- 
-    }
+        .img-level_spells_runes {
+            display: flex;
+            flex-direction: row;
+            position: relative;
 
-    .second-part {
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-
-        .kda {
-            .kills {
-                color: blue;
+            .level {
+                position: absolute;
+                bottom: 0;
+                left: 30px;
+            }
+            .chammpionId {
+                display: none;
             }
 
-            .deaths {
-                color: red;
+            .spells img {
+                width: 20px;
+                height: 20px;
             }
 
-            .assists {
-                color: yellow;
+            .runes img {
+                width: 20px;
+                height: 20px;
+                background-color: black;
+                border-radius: 5px;
+            }
+        }
+        .participantRank_id {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            .id {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 10px;
+            }
+        }
+        .img-level_spells_runes img {
+            width: 40px;
+            height: 40px;
+            margin: 1px;
+        }
+
+        .kda_kdaAv {
+            display: flex;
+            flex-direction: column;
+
+            .kda {
+                .kills {
+                    color: $winColor;
+                }
+
+                .deaths {
+                    color: red;
+                }
+
+                .assists {
+                    color: yellow;
+                }
+            }
+        }
+
+        .kda > span {
+            color: darkgray;
+        }
+
+        .minion_gold {
+            display: flex;
+            flex-direction: column;
+
+            .cs {
+                color: white;
             }
 
+            .gold {
+                color: gold;
+            }
         }
 
-
-    }
-
-    .second-part>span {
-        color: darkgray;
-    }
-
-
-
-
-    .third-part {
-        display: flex;
-        flex-direction: column;
-        width: 200px;
-
-        .cs {
-            color: white;
+        .items{
+            display: flex;
+            .items__card{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                }
         }
 
-        .gold {
-            color: gold;
+        .items img {
+            width: 20px;
+            height: 20px;
+            margin-left: 1px;
+            border-radius: 5px;
         }
     }
+}
 
-
-
-    .forth-part {
-        width: 200px;
-        // display: flex;
-        // flex-wrap: wrap;
-
+@include tablet {
+    .matched-details {
+        border-radius: 10px;
     }
 
-    .forth-part img {
-        width: 20px;
-        height: 20px;
-        margin-left: 1px;
-        border-radius: 5px;
+    .win-defeat1 {
+        color: blue;
     }
 
+    .win-defeat2 {
+        color: red;
+    }
 
+    .team {
+        color: white;
+    }
+    // 배경화면 투명도 조절
+    .win {
+        position: relative;
+        z-index: 1;
+    }
+
+    .win::after {
+        background-color: rgb(30, 55, 124);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    // 배경화면 투명도 조절
+    .lost {
+        position: relative;
+        z-index: 1;
+    }
+
+    .lost::after {
+        background-color: rgb(160, 20, 20);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.8 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    .users-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        font-size: 10px;
+        font-weight: bolder;
+        color: white;
+        margin-left: $margin_padding15;
+        margin-right: $margin_padding15;
+
+        .img-level_spells_runes {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            .level {
+                position: absolute;
+                bottom: 0;
+                left: 30px;
+            }
+            .chammpionId {
+                display: none;
+            }
+
+            .spells img {
+                width: 20px;
+                height: 20px;
+            }
+
+            .runes img {
+                width: 20px;
+                height: 20px;
+                background-color: black;
+                border-radius: 5px;
+            }
+        }
+        .participantRank_id {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            .id {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 10px;
+            }
+        }
+        .img-level_spells_runes img {
+            width: 40px;
+            height: 40px;
+            margin: 1px;
+        }
+
+        .kda_kdaAv {
+            display: flex;
+            flex-direction: column;
+
+            .kda {
+                .kills {
+                    color: $winColor;
+                }
+
+                .deaths {
+                    color: red;
+                }
+
+                .assists {
+                    color: yellow;
+                }
+            }
+        }
+
+        .kda > span {
+            color: darkgray;
+        }
+
+        .minion_gold {
+            display: flex;
+            flex-direction: column;
+
+            .cs {
+                color: white;
+            }
+
+            .gold {
+                color: gold;
+            }
+        }
+
+        // 고쳐야함
+        .items__card{
+            display: flex;
+        }
+        .items img {
+            width: 20px;
+            height: 20px;
+            margin-left: 1px;
+            border-radius: 5px;
+        }
+    }
+}
+
+@include mobile {
+    .matched-details {
+        border-radius: 10px;
+    }
+
+    .win-defeat1 {
+        color: blue;
+    }
+
+    .win-defeat2 {
+        color: red;
+    }
+
+    .team {
+        color: white;
+    }
+    // 배경화면 투명도 조절
+    .win {
+        position: relative;
+        z-index: 1;
+    }
+
+    .win::after {
+        background-color: rgb(30, 55, 124);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    // 배경화면 투명도 조절
+    .lost {
+        position: relative;
+        z-index: 1;
+    }
+
+    .lost::after {
+        background-color: rgb(160, 20, 20);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.8 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    .users-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        font-size: 10px;
+        font-weight: bolder;
+        color: white;
+        margin-left: $margin_padding15;
+        margin-right: $margin_padding15;
+
+        .img-level_spells_runes {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            .level {
+                position: absolute;
+                bottom: 0;
+                left: 25px;
+            }
+            .chammpionId {
+                display: none;
+            }
+
+            .spells img {
+                width: 15px;
+                height: 15px;
+            }
+
+            .runes img {
+                width: 15px;
+                height: 15px;
+                background-color: black;
+                border-radius: 5px;
+            }
+        }
+        .img-level_spells_runes img {
+            width: 35px;
+            height: 35px;
+            margin: 1px;
+        }
+
+        .participantRank_id {
+            .id {
+                font-size: 10px;
+                font-weight: bolder;
+            }
+        }
+
+        .kda_kdaAv {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            .kda {
+                .kills {
+                    color: $winColor;
+                }
+
+                .deaths {
+                    color: red;
+                }
+
+                .assists {
+                    color: yellow;
+                }
+            }
+        }
+
+        .kda > span {
+            color: darkgray;
+        }
+
+        .minion_gold {
+            display: none;
+
+            .cs {
+                color: white;
+            }
+
+            .gold {
+                color: gold;
+            }
+        }
+        .items__card {
+            display: flex;
+        }
+        .items img {
+            width: 20px;
+            height: 20px;
+            margin-left: 1px;
+            border-radius: 5px;
+        }
+    }
 }

@@ -375,6 +375,7 @@ export interface GameImageType {
     teams: TeamsType[];
     gameId: number;
     champImage: string;
+    championId?: string;
     item0: number;
     item1: number;
     item2: number;
@@ -383,9 +384,12 @@ export interface GameImageType {
     item5: number;
     item6: number;
     spell1: any;
+    spell1Id?: string;
+    spell2Id?: string;
     spell2: any;
     gold: number;
     ward: number;
+    stats?: ParticipantsStatsType;
     kills: number;
     assists: number;
     deaths: number;
@@ -394,5 +398,7 @@ export interface GameImageType {
     gameResult: string;
     level: number;
     mainRune: any;
+    perkPrimaryStyle?: string;
+    perkSubStyle?: string;
     subRune: any;
 }
