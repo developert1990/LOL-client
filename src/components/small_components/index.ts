@@ -11,3 +11,4 @@ export * from './OneGameHistoryBar';
 export * from './KDA_Card';
 export * from './GoldEarnedCard';
 export * from './MinionKillsCard';
+export * from './OtherParticipantsCard';

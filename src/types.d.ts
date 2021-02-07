@@ -1,3 +1,4 @@
+import { mixedArrType } from './libs/getParticipantsData';
 export interface SummonerInfoType {
     id: string;
     name: string;
@@ -238,6 +239,7 @@ export interface ParticipantsType {
     stats: ParticipantsStatsType;
     teamId: number;
     timeline: ParticipantsTimelineType;
+    otherParticipants: mixedArrType[];
 }
 
 export interface ParticipantsStatsType {
@@ -401,4 +403,5 @@ export interface GameImageType {
     perkPrimaryStyle?: string;
     perkSubStyle?: string;
     subRune: any;
+    otherParticipants: mixedArrType[];
 }

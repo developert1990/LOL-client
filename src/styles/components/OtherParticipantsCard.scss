@@ -1,0 +1,23 @@
+@import "./constants/mixin";
+@import "./constants/variables";
+
+@include desktop {
+    .OtherParticipants_Container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        color: $lightBlueFontColor;
+
+        .OtherParticipantsCard {
+            display: flex;
+            .champ-image {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                margin-right: 2px;
+            }
+
+            .participantName {
+            }
+        }
+    }
+}

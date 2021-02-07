@@ -12,7 +12,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     const champImages: GameImageType[] = [];
     const information: GameImageType[] = [];
 
-
+    console.log('summonerDetail', summonerDetail)
     const allChampsData = getChampsData();
     const allSpellsData = getSpellsData();
     const allRunesData = getRunesData();
@@ -35,6 +35,8 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
             subRune,
         })
     };
+
+
     // // 해당하는 룬 뽑는 함수
     const usedRunes: any[] = runesArr.map(rune => {
         // console.log('Object.entries(rune) ==> ', Object.entries(rune))
@@ -44,6 +46,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
         }
         return obj
     });
+
 
     // // 해당하는 스펠 뽑는 함수
     const usedSpells: any[] = spellsArr.map(spell => {
@@ -85,12 +88,13 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
                         level: summonerDetail[j].stats.champLevel,
                         mainRune: usedRunes[j].primaryRune,
                         subRune: usedRunes[j].subRune,
-
+                        otherParticipants: summonerDetail[j].otherParticipants,
                     }
                 )
             }
         }
     }
     const newData = information.concat(champImages);
+    console.log('newData', newData)
     return newData;
 }

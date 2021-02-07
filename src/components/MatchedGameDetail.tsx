@@ -68,8 +68,6 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ games,
                 <div key={index} className={data.stats.win ? 'win' : 'lost'}>
                     {index === 0 && <div className="win-defeat1">{data.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">BLUE</span></div>}
                     {index === 5 && <div className="win-defeat2">{data.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">RED</span></div>}
-
-                    {console.log('data ===============', data)}
                     <div className="users-info">
                         <div className="img-level_spells_runes">
                             <ChampImgCard data={data} />

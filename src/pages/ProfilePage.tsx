@@ -59,6 +59,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
 
     return (
         <div className="summoner-info">
+            {console.log('summonerMatchDetail', summonerMatchDetail)}
             {
                 !summonerDetail && getSummonerDetailLoading ?
                     <Loading /> : (
@@ -70,7 +71,6 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
                             </div>
 
                             <div className="summoner_info_bottom_right">
-                                {console.log('information ====================', information)}
                                 {
                                     information.length === 0 ?
                                         <Loading /> :

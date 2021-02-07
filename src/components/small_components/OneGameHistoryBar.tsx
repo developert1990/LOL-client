@@ -7,12 +7,14 @@ import { SpellsCard } from './SpellsCard';
 import { RunesCard } from './RunesCard';
 import { GameRecordsCard } from './GameRecordsCard';
 import { ItemsCard } from './ItemsCard';
+import { OtherParticipantsCard } from './OtherParticipantsCard';
 
 
 interface OneGameHistoryBarPropsType {
     data: GameImageType;
 }
 export const OneGameHistoryBar: React.FC<OneGameHistoryBarPropsType> = ({ data }) => {
+    console.log('data ==>>>>>>>>>>>>>>', data)
     return (
         <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>
             <Accordion.Toggle as={Button} variant="link" eventKey={data.gameId.toString()} className="accordion-toggle link">
@@ -38,7 +40,7 @@ export const OneGameHistoryBar: React.FC<OneGameHistoryBarPropsType> = ({ data }
                     <ItemsCard data={data} />
                 </div>
                 <div className="fifth-info">
-                    경기했던 유저들..
+                    <OtherParticipantsCard otherParticipants={data.otherParticipants} />
                 </div>
             </Accordion.Toggle>
         </div>
