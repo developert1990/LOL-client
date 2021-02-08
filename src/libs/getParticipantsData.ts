@@ -1,8 +1,9 @@
 
-import { champs } from '../data';
 import { MatchedGameType } from './../types.d';
 import { getChampsData } from './getChampsData';
 import { getSummonerDetailData } from './index';
+
+import { getParticipantTiers } from './getParticipantTiers';
 
 interface playerNameInGameType {
     [playerName: string]: string
@@ -20,6 +21,7 @@ export interface mixedArrType {
     playerName: string;
     championId: number | string;
     encryptedSummonerId?: string;
+    tier: string;
 }
 
 
@@ -31,13 +33,6 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
     const champsId = games.map((data) => data.participants.map((innerData) => innerData.championId));                  // players champ id Array
     const encrypedId = games.map((data) => data.participantIdentities.map((innerData) => innerData.player.summonerId));     // encryptedSummonerId in Array
 
-
-
-
-
-    console.log('games', games)
-    console.log('players', players)
-    console.log('champsId', champsId)
     // 플레이어들 객체로
     const playerNameInThreeGamesArr: playerNameInGameType[][] = []; // players name object in Array
 
@@ -65,7 +60,6 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
         encryptedIdInThreeGamesArr.push(inner);
     });
 
-    console.log('encryptedIdInThreeGamesArr', encryptedIdInThreeGamesArr)
 
 
     // 플레이한 챔피언 객체로
@@ -86,44 +80,28 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
     });
 
     const deepCopyEncryped: string[][] = JSON.parse(JSON.stringify(encrypedId));
-    console.log('deepCopyEncryped', deepCopyEncryped)
-
-    const arr: string[][] = [];
-
-
-    console.log('deepCopyEncryped', deepCopyEncryped)
-
-    // deepCopyEncryped.map((data, outerIndex) => data.map(async (innerData: string, innerIndex) => {
-    //     const summonerDetail = await getSummonerDetailData(innerData, region);
-    //     // console.log('summonerDetail ===========================', summonerDetail)
-    //     summonerDetail.map((detailData) => {
-    //         // const obj: any = {};
-    //         if (detailData.queueType === "RANKED_SOLO_5x5") {
-    //             // obj["tier"] = detailData.tier
-    //             deepCopyEncryped[outerIndex][innerIndex] = detailData.tier;
-    //         }
-    //     })
-    // }))
 
 
 
-    console.log('encrypedId', encrypedId)
+
+
+    const participantTierArr = await getParticipantTiers(deepCopyEncryped, region);
+
+
     let resultArr: any[][] = [];
     resultArr = playerNameInThreeGamesArr.map((eachGame: playerNameInGameType[], outerIndex: number) => {
-        console.log('리절트 내부에서 encrypedId', encrypedId)
         const resultInnerArr: any[] = [];
         eachGame.map((players, innerIndex: number) => {
             resultInnerArr.push({
                 playerName: players.playerName,
                 championId: playChampsIdInTreeGamesArr[outerIndex][innerIndex].championId,
                 encryptedSummonerId: encryptedIdInThreeGamesArr[outerIndex][innerIndex].encryptedSummonerId,
-                tier: deepCopyEncryped[outerIndex][innerIndex],
+                tier: participantTierArr[outerIndex][innerIndex],
             });
         })
         return resultInnerArr;
     });
 
-    console.log('playerNameInThreeGamesArr', playerNameInThreeGamesArr)
 
 
     resultArr.map((data, index) => {

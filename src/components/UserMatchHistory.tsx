@@ -62,6 +62,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
                             return (
                                 <div className="accordion-page" key={index}>
                                     {console.log('information ==>>>>>', information)}
+                                    {console.log('games=== >>> ', games)}
                                     <Accordion key={index} className="accordion">
                                         <div className="card">
                                             <OneGameHistoryBar data={data} />

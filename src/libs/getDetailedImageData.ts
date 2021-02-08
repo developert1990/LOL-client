@@ -12,7 +12,6 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     const champImages: GameImageType[] = [];
     const information: GameImageType[] = [];
 
-    console.log('summonerDetail', summonerDetail)
     const allChampsData = getChampsData();
     const allSpellsData = getSpellsData();
     const allRunesData = getRunesData();

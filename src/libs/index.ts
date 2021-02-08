@@ -9,3 +9,4 @@ export * from './getParticipantsData';
 export * from './getSummonerDetailData';
 export * from './getSummonerBasicInfo';
 export * from './get100Games';
+export * from './getParticipantTiers';
