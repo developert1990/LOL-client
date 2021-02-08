@@ -12,3 +12,5 @@ export * from './KDA_Card';
 export * from './GoldEarnedCard';
 export * from './MinionKillsCard';
 export * from './OtherParticipantsCard';
+export * from './ParticipantsTierCard';
+export * from './MatchedDetailedCard';
