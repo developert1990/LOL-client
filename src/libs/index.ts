@@ -6,3 +6,6 @@ export * from './getChampsData';
 export * from './getRunesData';
 export * from './getSpellsData';
 export * from './getParticipantsData';
+export * from './getSummonerDetailData';
+export * from './getSummonerBasicInfo';
+export * from './get100Games';

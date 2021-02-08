@@ -5,11 +5,10 @@ import { getParticipantsData } from './index';
 
 
 //성공한다.
-export const getSummonerMatchDetail = (games: MatchedGameType[], accountId: string) => {
+export const getSummonerMatchDetail = async (games: MatchedGameType[], accountId: string, region: string) => {
     // console.log('games????????', games)
 
-    const participantsData = getParticipantsData(games);
-
+    const participantsData = await getParticipantsData(games, region);
 
     let summonorMatchDetail: ParticipantsType[] = [];
     if (games) {

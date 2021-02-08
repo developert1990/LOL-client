@@ -23,7 +23,7 @@ export const ProfileMenu = () => {
     } = useQuery();
 
 
-    console.log('query', query)
+    // console.log('query', query)
 
     // useEffect(() => {
     //     console.log("프로필메뉴 유즈이펙")

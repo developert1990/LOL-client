@@ -4,6 +4,7 @@ import { TEST_BASE } from './../config/index';
 import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL, GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL, GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET, GET_SUMMONER_DETAIL_REQUEST } from './../constants/getSummonerConstants';
 import { ThunkDispatch } from 'redux-thunk';
 import Axios from 'axios';
+import { get100Games, getSummonerBasicInfo, getSummonerDetailData } from '../libs';
 
 
 export const getSummoner = (summonerId: string, region: string) => async (dispatch: ThunkDispatch<any, any, any>) => {
@@ -15,16 +16,15 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
     // dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
     dispatch({ type: GET_SUMMONER_REQUEST });
     try {
-        const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${summonerId}/${region}`);
+        const data = await getSummonerBasicInfo(summonerId, region);
         dispatch({ type: GET_SUMMONER_SUCCESS, payload: data });
         localStorage.setItem(USER_ID, data.id);
         const id: string = data.id;
         const accountId: string = data.accountId;
-
         // summoner 기본 정보 받았으니 => summoner 디테일 뽑기
         dispatch({ type: GET_SUMMONER_DETAIL_REQUEST });
         try {
-            const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
+            const data = await getSummonerDetailData(id, region);
             const summonerDetailForGameType: SummonerDetailType[] = data;
             const detail = summonerDetailForGameType.reduce((a, c) => {
                 let soloType = {};
@@ -37,7 +37,8 @@ export const getSummoner = (summonerId: string, region: string) => async (dispat
 
             // 해당유저의 게임 했던것들 정보 가져옴 총 100개
             try {
-                const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${accountId}/${region}/matchId`);
+
+                const data = await get100Games(accountId, region);
                 const matches: MatchType[] = data.matches;
 
                 // 게임 id(number)만 뽑아서 길이가 100인 배열을 만든다. 

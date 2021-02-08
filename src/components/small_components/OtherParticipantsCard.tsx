@@ -1,8 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { API } from '../../config';
 import { mixedArrType } from '../../libs';
-import { initialAppStateType } from '../../store';
 
 interface OtherParticipantsCardPropsType {
     otherParticipants: mixedArrType[];
