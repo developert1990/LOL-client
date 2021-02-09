@@ -20,3 +20,53 @@
         @content;
     }
 }
+
+
+
+@mixin baseTierColor {
+    .C {
+        color: yellow;
+    }
+    .GM {
+        color: red;
+    }
+    .M {
+        color: purple;
+    }
+    .D {
+        color: blue;
+    }
+    .P {
+        color: green;
+    }
+    .G {
+        color: gold;
+    }
+    .S {
+        color: silver;
+    }
+    .B {
+        color: #c49c48;
+    }
+    .IR {
+        color: rgb(129, 128, 128);
+    }
+}
+
+
+@mixin matchedGameDetailBGColor {
+        .won {
+      background:linear-gradient(135deg,rgba(50,115,250,.2),rgba(50,115,250,0)),#191937;
+        margin-bottom: 3px;
+}
+
+    .lost {
+        background: linear-gradient(135deg,rgba(255,78,80,.16),rgba(255,78,80,0)),#191937;
+        margin-bottom: 3px;
+    }
+    .sameUser {
+        border: 1px solid #ff9b00;
+        background: linear-gradient(90deg, #ad6d0a 0, rgba(255, 155, 0, 0) 42%), #473518 !important;
+    }
+    
+}

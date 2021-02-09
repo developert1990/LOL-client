@@ -17,49 +17,11 @@
     .team {
         color: white;
     }
-    // 배경화면 투명도 조절
-    .win {
-        position: relative;
-        z-index: 1;
-    }
 
-    .win::after {
-        background-color: rgb(30, 55, 124);
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-size: 100%;
-        opacity: 0.9 !important;
-        filter: alpha(opacity=50);
-        z-index: -1;
-        content: "";
-        width: 100%;
-        height: 100%;
-    }
-
-    // 배경화면 투명도 조절
-    .lost {
-        position: relative;
-        z-index: 1;
-    }
-
-    .lost::after {
-        background-color: rgb(160, 20, 20);
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-size: 100%;
-        opacity: 0.8 !important;
-        filter: alpha(opacity=50);
-        z-index: -1;
-        content: "";
-        width: 100%;
-        height: 100%;
-    }
 
     .users-info {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 2fr 0.7fr 0.7fr 1fr;
         font-size: 10px;
         font-weight: bolder;
         color: white;
@@ -113,6 +75,7 @@
             display: flex;
             flex-direction: column;
 
+            font-size: $fontSize_xxsm;
             .kda {
                 .kills {
                     color: $winColor;
@@ -135,7 +98,7 @@
         .minion_gold {
             display: flex;
             flex-direction: column;
-
+            font-size: $fontSize_xxxsm;
             .cs {
                 color: white;
             }
@@ -145,12 +108,12 @@
             }
         }
 
-        .items{
+        .items {
             display: flex;
-            .items__card{
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
-                }
+            .items__card {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
         }
 
         .items img {
@@ -160,6 +123,9 @@
             border-radius: 5px;
         }
     }
+
+    @include matchedGameDetailBGColor;
+    
 }
 
 @include tablet {
@@ -178,49 +144,10 @@
     .team {
         color: white;
     }
-    // 배경화면 투명도 조절
-    .win {
-        position: relative;
-        z-index: 1;
-    }
-
-    .win::after {
-        background-color: rgb(30, 55, 124);
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-size: 100%;
-        opacity: 0.9 !important;
-        filter: alpha(opacity=50);
-        z-index: -1;
-        content: "";
-        width: 100%;
-        height: 100%;
-    }
-
-    // 배경화면 투명도 조절
-    .lost {
-        position: relative;
-        z-index: 1;
-    }
-
-    .lost::after {
-        background-color: rgb(160, 20, 20);
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-size: 100%;
-        opacity: 0.8 !important;
-        filter: alpha(opacity=50);
-        z-index: -1;
-        content: "";
-        width: 100%;
-        height: 100%;
-    }
-
+   
     .users-info {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 2fr 0.7fr 0.7fr 1fr;
         font-size: 10px;
         font-weight: bolder;
         color: white;
@@ -273,6 +200,7 @@
         .kda_kdaAv {
             display: flex;
             flex-direction: column;
+            font-size: $fontSize_xxxsm;
 
             .kda {
                 .kills {
@@ -296,7 +224,7 @@
         .minion_gold {
             display: flex;
             flex-direction: column;
-
+            font-size: $fontSize_xxxsm;
             .cs {
                 color: white;
             }
@@ -307,7 +235,7 @@
         }
 
         // 고쳐야함
-        .items__card{
+        .items__card {
             display: flex;
         }
         .items img {
@@ -317,6 +245,9 @@
             border-radius: 5px;
         }
     }
+
+   @include matchedGameDetailBGColor;
+    
 }
 
 @include mobile {
@@ -334,45 +265,6 @@
 
     .team {
         color: white;
-    }
-    // 배경화면 투명도 조절
-    .win {
-        position: relative;
-        z-index: 1;
-    }
-
-    .win::after {
-        background-color: rgb(30, 55, 124);
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-size: 100%;
-        opacity: 0.9 !important;
-        filter: alpha(opacity=50);
-        z-index: -1;
-        content: "";
-        width: 100%;
-        height: 100%;
-    }
-
-    // 배경화면 투명도 조절
-    .lost {
-        position: relative;
-        z-index: 1;
-    }
-
-    .lost::after {
-        background-color: rgb(160, 20, 20);
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-size: 100%;
-        opacity: 0.8 !important;
-        filter: alpha(opacity=50);
-        z-index: -1;
-        content: "";
-        width: 100%;
-        height: 100%;
     }
 
     .users-info {
@@ -461,10 +353,13 @@
             display: flex;
         }
         .items img {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             margin-left: 1px;
             border-radius: 5px;
         }
     }
+
+    @include matchedGameDetailBGColor;
+
 }

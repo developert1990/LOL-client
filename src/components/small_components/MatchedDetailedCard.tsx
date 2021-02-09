@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { initialAppStateType } from '../../store';
 import { ChampDetailType, GameImageType, ParticipantIdentitiesType, RuneBigType, SpellDetailType } from '../../types';
 import { ChampImgCard, GoldEarnedCard, ItemsCard, KDA_Card, MinionKillsCard, ParticipantsTierCard, RunesCard, SpellsCard } from './index';
 
@@ -16,6 +18,10 @@ export const MatchedDetailedCard: React.FC<MatchedDetailedCardPropsType> = ({ pa
     const { assists, champLevel, deaths, doubleKills, goldEarned, item0, item1, item2, item3, item4, item5, item6, kills, totalMinionsKilled, tripleKills, wardsPlaced } = participantsInfo.stats;
     let { perkPrimaryStyle, perkSubStyle } = participantsInfo.stats;
 
+    const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
+    const { summonerInfo } = getSummonerStore;
+    console.log('summonerInfo 변화 보자ㅏㅏㅏㅏㅏㅏㅏ', summonerInfo)
+    const isSearchedUser = participantsInfo.participantId === summonerInfo && summonerInfo?.name ? "sameUser" : "notSame";
 
     const { otherParticipants } = clickedData;
 
@@ -59,10 +65,11 @@ export const MatchedDetailedCard: React.FC<MatchedDetailedCardPropsType> = ({ pa
 
 
     return (
-        <div className="matched-details" key={index}>
-            <div key={index} className={participantsInfo.stats.win ? 'win' : 'lost'}>
-                {index === 0 && <div className="win-defeat1">{participantsInfo.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">BLUE</span></div>}
-                {index === 5 && <div className="win-defeat2">{participantsInfo.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">RED</span></div>}
+        <div className={`matched-details`} key={index}>
+
+            {index === 0 && <div className="win-defeat1">{participantsInfo.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">BLUE</span></div>}
+            {index === 5 && <div className="win-defeat2">{participantsInfo.stats.win ? 'WIN' : 'DEFEAT'}<span className="team">RED</span></div>}
+            <div key={index} className={`${participantsInfo.stats.win ? 'won' : 'lost'} ${participantsInfo.participantId === summonerInfo?.name ? "sameUser" : "notSame"}`}>
                 <div className="users-info">
                     <div className="img-level_spells_runes">
                         <ChampImgCard data={participantsInfo} />
@@ -94,3 +101,5 @@ export const MatchedDetailedCard: React.FC<MatchedDetailedCardPropsType> = ({ pa
         </div>
     )
 }
+
+

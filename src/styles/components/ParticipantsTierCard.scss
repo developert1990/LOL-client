@@ -1,0 +1,43 @@
+@import './constants/mixin';
+@import './constants/variables';
+
+@include desktop{
+.participantRank {
+    display: flex;
+    align-items: center;
+    .emblem-img{
+        margin-right: $margin_padding10;
+    }
+    @include baseTierColor;
+    font-size: $fontSize_xxsm;
+}
+
+}
+
+@include tablet {
+.participantRank {
+    display: flex;
+    align-items: center;
+    .emblem-img{
+        margin-right: $margin_padding10;
+    }
+
+    @include baseTierColor;
+    font-size: $fontSize_xxsm;
+}
+}
+
+@include mobile{
+.participantRank {
+    // display: flex;
+    // align-items: center;
+    .emblem-img{
+        display: none;
+    }
+    .initialTier{
+        width: 100%;
+    }
+    @include baseTierColor;
+    font-size: $fontSize_xxsm;
+}
+}

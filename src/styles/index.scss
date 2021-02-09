@@ -10,6 +10,7 @@
 @import './components/OneGameHistoryBar.scss';
 @import './components/itemsCard.scss';
 @import './components/OtherParticipantsCard.scss';
+@import './components/ParticipantsTierCard.scss';
 
 
 
@@ -104,4 +105,9 @@ body {
         display: flex;
         flex-direction: column;
     }
+
+    .logo-img img {
+    display: none;
+}
+
 }

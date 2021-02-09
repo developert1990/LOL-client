@@ -17,7 +17,6 @@
         position: absolute;
         background-size: 100%;
         opacity: 0.4 !important;
-        // filter: alpha(opacity=50);
         z-index: -1;
         content: "";
         width: 100%;
@@ -172,7 +171,6 @@
             display: grid;
             grid-template-columns:1.5fr 2fr 2fr 2fr 3fr;
             align-items: center;
-            // width: 700px;
             font-size: 0.7rem;
             font-weight: bolder;
             cursor: url("../../images/mouse-cursor-click.png"), auto;
