@@ -9,7 +9,7 @@
         margin-right: $margin_padding10;
     }
     @include baseTierColor;
-    font-size: $fontSize_xxsm;
+    font-size: $fontSize_xxsm_rem;
 }
 
 }
@@ -23,7 +23,7 @@
     }
 
     @include baseTierColor;
-    font-size: $fontSize_xxsm;
+    font-size: $fontSize_xxsm_rem;
 }
 }
 
@@ -38,6 +38,6 @@
         width: 100%;
     }
     @include baseTierColor;
-    font-size: $fontSize_xxsm;
+    font-size: $fontSize_xxsm_rem;
 }
 }

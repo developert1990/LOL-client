@@ -17,7 +17,6 @@ export const UserMenuBar: React.FC<UserMenuBarPropsType> = ({ summonerInfo }) =>
     return (
         <div className="summoner_menu">
             <div className="user-nav">
-                {/* {console.log(id)} */}
                 <Link className="link" to={`/search/userInfo/overview/${region}?name=${summonerInfo?.name}/`}>
                     <span className='span'>Overview</span>
                 </Link>

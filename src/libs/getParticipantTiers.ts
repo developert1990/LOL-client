@@ -26,7 +26,6 @@ export const getParticipantTiers = async (deepCopyEncryped: string[][], region: 
     })
     const promiseResult = await Promise.all(promiseCall)
     while (promiseResult.length) newArr2.push(promiseResult.splice(0, 10));
-    console.log('promiseResult ??? ', promiseResult)
     return newArr2;
 }
 
@@ -34,25 +33,3 @@ export const getParticipantTiers = async (deepCopyEncryped: string[][], region: 
 
 
 
-
-
-
-// export const testinparticipant = (deepCopyEncryped: string[][], region: string) => {
-//     const result = "a";
-//     // let newArr: string[][] =[];
-
-//     const newArr = Promise.all(
-//         deepCopyEncryped.map((data, outIndex) => {
-//             data.map(
-//                 async (id: string, inIndex) => {
-//                     const { data } = await Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`);
-//                     console.log('data', data)
-//                     deepCopyEncryped[outIndex][inIndex] = data[0].tier;
-//                 })
-//         }));
-
-//     console.log("하하")
-//     console.log('newArr', newArr)
-
-//     return result;
-// }

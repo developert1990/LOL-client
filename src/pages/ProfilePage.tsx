@@ -15,7 +15,6 @@ interface ProfilePagePropsType {
 }
 
 export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, getSummonerDetailLoading }) => {
-
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
 

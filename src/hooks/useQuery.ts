@@ -4,8 +4,12 @@ interface QueryStringObj {
     [key: string]: string;
 }
 
+interface queryType {
+    name: string;
+}
+
 export const useQuery = () => {
-    const [query, setQuery] = useState({});
+    const [query, setQuery] = useState<QueryStringObj>({});
 
     useEffect(() => {
         const queryString = window.location.search.slice(1).split('&').reduce((acc: QueryStringObj, cur: string) => {
@@ -16,5 +20,6 @@ export const useQuery = () => {
         setQuery(queryString);
     }, []);
 
+    console.log('query', query)
     return query;
 }

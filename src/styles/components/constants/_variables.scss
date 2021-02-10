@@ -3,20 +3,33 @@ $borderColor: #606170;
 $whiteColor: #fff;
 $borderRadius: 10px;
 $cardColor_1: #191937;
-$margin_padding15: 15px;
-$margin_padding10: 10px;
 $lightBlueFontColor: #cddcfe;
-$winColor: rgb(45, 241, 71);
+$killsColor: #3273fa;
+$deathsColor:#ff4e50;
+$assistColor:#ffdf4e;
 
 // responsible
 $breakpoint-mobile: 335px;
 $breakpoint-tablet: 758px;
 $breakpoint-desktop: 1024px;
 
-$fontSize_lg: 2.5rem;
-$fontSize_md: 2rem;
-$fontSize_sm: 1.8rem;
-$fontSize_xsm: 1.5rem;
-$fontSize_xxsm: 0.8rem;
-$fontSize_xxxsm: 0.7rem;
+// font
+$fontSize_lg_rem: 2.5rem;
+$fontSize_md_rem: 2rem;
+$fontSize_sm_rem: 1.8rem;
+$fontSize_xsm_rem: 1.5rem;
+$fontSize_xxsm_rem: 0.8rem;
+$fontSize_xxxsm_rem: 0.7rem;
+
+$fontSize_20px:20px;
+$fontSize_15px:15px;
+
+// margin
+$margin_padding20: 20px;
+$margin_padding15: 15px;
+$margin_padding10: 10px;
+
+// with, height
+$with_height20: 20px;
+$with_height40: 40px;
 

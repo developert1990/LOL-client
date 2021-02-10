@@ -61,8 +61,6 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
                         information.map((data, index) => {
                             return (
                                 <div className="accordion-page" key={index}>
-                                    {console.log('information ==>>>>>', information)}
-                                    {console.log('games=== >>> ', games)}
                                     <Accordion key={index} className="accordion">
                                         <div className="card">
                                             <OneGameHistoryBar data={data} />
@@ -82,7 +80,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
                     }
 
                     <div className="load-data-button">
-                        {loadMore ? <Loading /> : <Button style={{
+                        {loadMore ? <Loading /> : <Button variant="dark" style={{
                             width: "98%",
                             color: "white",
                             borderRadius: "10px",

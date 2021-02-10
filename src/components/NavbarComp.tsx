@@ -13,18 +13,16 @@ export const NavbarComp = () => {
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const selectedRegion = e.target.value;
-        console.log('selectedRegion ==> ', selectedRegion);
         dispatch(changeRegion(selectedRegion))
     }
 
     const toggleHandle = () => {
-        console.log("토글클릭")
         setActive(!active);
     }
 
     return (
         <div className="navbarComp">
-            <Link className="link" to="/"><img src={logo} style={{ width: "30px", height: "40px", marginRight: "20px" }} alt="cat" />H.gg</Link>
+            <Link className="link" to="/"><img src={logo} style={{ width: "30px", height: "$with_height40", marginRight: "$margin_padding20" }} alt="cat" />H.gg</Link>
 
             <nav className={`menus  ${active ? "active" : "inActive"}`}>
                 <Link className="link" to="/search">

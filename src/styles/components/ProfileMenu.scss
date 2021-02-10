@@ -10,7 +10,7 @@
 .summoner_profile {
     position: relative;
     display: flex;
-    margin: 20px;
+    margin: $margin_padding20;
     padding: 10px;
     border-radius: 10px;
     flex: 1;
@@ -44,13 +44,13 @@
             }
 
             .name {
-                font-size: $fontSize_lg;
-                margin-left: 20px;
+                font-size: $fontSize_lg_rem;
+                margin-left: $margin_padding20;
             }
         }
 
         .summoner_menu {
-            margin-left: 20px;
+            margin-left: $margin_padding20;
             display: flex;
             flex-direction: row;
             justify-content: center;
@@ -64,7 +64,7 @@
 
                 a {
                     margin-right: 25px;
-                    height: 40px;
+                    height: $with_height40;
                 }
 
                 a:hover {
@@ -103,13 +103,13 @@
             }
 
             .name {
-                font-size: $fontSize_md;
-                margin-left: 20px;
+                font-size: $fontSize_md_rem;
+                margin-left: $margin_padding20;
             }
         }
 
         .summoner_menu {
-            margin-left: 20px;
+            margin-left: $margin_padding20;
             display: flex;
             flex-direction: row;
             justify-content: center;
@@ -123,7 +123,7 @@
 
                 a {
                     margin-right: 25px;
-                    height: 40px;
+                    height: $with_height40;
                 }
 
                 a:hover {
@@ -162,19 +162,19 @@
             }
 
             .name {
-                font-size: $fontSize_sm;
-                margin-left: 20px;
+                font-size: $fontSize_sm_rem;
+                margin-left: $margin_padding20;
             }
         }
 
         .summoner_menu {
-            margin-left: 20px;
+            margin-left: $margin_padding20;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: flex-end;
             margin-bottom: 15px;
-            font-size: $fontSize_xsm;
+            font-size: $fontSize_xsm_rem;
             .user-nav {
                 display: flex;
                 flex-direction: row;
@@ -182,7 +182,7 @@
 
                 a {
                     margin-right: 25px;
-                    height: 40px;
+                    height: $with_height40;
                 }
 
                 a:hover {

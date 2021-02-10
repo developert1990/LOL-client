@@ -114,7 +114,6 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
         })
     });
 
-    console.log('resultArr======>  ', resultArr)
 
 
 

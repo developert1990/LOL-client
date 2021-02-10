@@ -14,7 +14,6 @@ interface OneGameHistoryBarPropsType {
     data: GameImageType;
 }
 export const OneGameHistoryBar: React.FC<OneGameHistoryBarPropsType> = ({ data }) => {
-    console.log('data ==>>>>>>>>>>>>>>', data)
     return (
         <div className={`card-header ${data.gameResult === 'Victory' ? 'win' : 'lose'} `}>
             <Accordion.Toggle as={Button} variant="link" eventKey={data.gameId.toString()} className="accordion-toggle link">

@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { getSummoner } from '../actions/getSummonerAction';
 import { GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET } from '../constants/getSummonerConstants';
 import { THREE_GAMES_DETAIL_RESET } from '../constants/getGamesDetailConstants';
+import { useQuery } from '../hooks';
 
 
 export const SearchPage = () => {
@@ -17,6 +18,20 @@ export const SearchPage = () => {
     const [summonerID, setSummonerID] = useState('');
 
 
+    console.log("SearchPage")
+    console.log('summonerID', summonerID.length)
+
+    const query = useQuery();
+
+
+    useEffect(() => {
+        if (summonerID.length === 0) {
+            dispatch({ type: THREE_GAMES_DETAIL_RESET });
+            dispatch({ type: GET_SUMMONER_DETAIL_RESET });
+            dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
+            dispatch(getSummoner(query.name, region));
+        }
+    }, [])
 
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (!(summonerID.length > 0)) {

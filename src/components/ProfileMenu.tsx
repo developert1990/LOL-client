@@ -23,19 +23,6 @@ export const ProfileMenu = () => {
     } = useQuery();
 
 
-    // console.log('query', query)
-
-    // useEffect(() => {
-    //     console.log("프로필메뉴 유즈이펙")
-    //     if (query && query.name) {
-    //         console.log("쿼리 안에 들어옴", query.name)
-    //         dispatch({ type: THREE_GAMES_DETAIL_RESET });
-    //         dispatch({ type: GET_SUMMONER_DETAIL_RESET });
-    //         dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
-    //         dispatch(getSummoner(query.name, region));
-    //     }
-    // }, [])
-
     return (
         <>
             { getSummonerIsLoading ?

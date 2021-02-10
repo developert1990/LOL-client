@@ -52,7 +52,7 @@ body {
 }
 
 .logo-img img {
-    margin-top: 20px;
+    margin-top: $margin_padding20;
     width: 300px;
 }
 
@@ -62,7 +62,7 @@ body {
     bottom: 0;
     width: 100%;
     height: 0.1rem;
-    color: $whiteColor;
+    color: $killsColor;
 
     .jumbotron {
         background-color: $mainBackgroundColor;

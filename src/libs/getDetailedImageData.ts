@@ -38,7 +38,6 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
 
     // // 해당하는 룬 뽑는 함수
     const usedRunes: any[] = runesArr.map(rune => {
-        // console.log('Object.entries(rune) ==> ', Object.entries(rune))
         const obj: any = {};
         for (const [key, value] of Object.entries(rune)) {
             obj[key] = allRunesData.find(data => data.id === value)?.icon
@@ -94,6 +93,5 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
         }
     }
     const newData = information.concat(champImages);
-    console.log('newData', newData)
     return newData;
 }

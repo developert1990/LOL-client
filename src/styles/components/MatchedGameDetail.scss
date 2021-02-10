@@ -1,24 +1,23 @@
 @import "./constants/mixin";
 @import "./constants/variables";
 
+.matched-details {
+    border-radius: 10px;
+}
+
+.win-defeat1 {
+    color: $killsColor;
+}
+
+.win-defeat2 {
+    color:$deathsColor;
+}
+
+.team {
+    color: white;
+}
+
 @include desktop {
-    .matched-details {
-        border-radius: 10px;
-    }
-
-    .win-defeat1 {
-        color: blue;
-    }
-
-    .win-defeat2 {
-        color: red;
-    }
-
-    .team {
-        color: white;
-    }
-
-
     .users-info {
         display: grid;
         grid-template-columns: 1fr 2fr 0.7fr 0.7fr 1fr;
@@ -43,13 +42,13 @@
             }
 
             .spells img {
-                width: 20px;
-                height: 20px;
+                width: $with_height20;
+                height: $with_height20;
             }
 
             .runes img {
-                width: 20px;
-                height: 20px;
+                width: $with_height20;
+                height: $with_height20;
                 background-color: black;
                 border-radius: 5px;
             }
@@ -66,8 +65,8 @@
             }
         }
         .img-level_spells_runes img {
-            width: 40px;
-            height: 40px;
+            width: $with_height40;
+            height: $with_height40;
             margin: 1px;
         }
 
@@ -75,18 +74,18 @@
             display: flex;
             flex-direction: column;
 
-            font-size: $fontSize_xxsm;
+            font-size: $fontSize_xxsm_rem;
             .kda {
                 .kills {
-                    color: $winColor;
+                    color: $killsColor;
                 }
 
                 .deaths {
-                    color: red;
+                    color: $deathsColor;
                 }
 
                 .assists {
-                    color: yellow;
+                    color: $assistColor;
                 }
             }
         }
@@ -98,7 +97,7 @@
         .minion_gold {
             display: flex;
             flex-direction: column;
-            font-size: $fontSize_xxxsm;
+            font-size: $fontSize_xxxsm_rem;
             .cs {
                 color: white;
             }
@@ -117,34 +116,17 @@
         }
 
         .items img {
-            width: 20px;
-            height: 20px;
+            width: $with_height20;
+            height: $with_height20;
             margin-left: 1px;
             border-radius: 5px;
         }
     }
 
     @include matchedGameDetailBGColor;
-    
 }
 
 @include tablet {
-    .matched-details {
-        border-radius: 10px;
-    }
-
-    .win-defeat1 {
-        color: blue;
-    }
-
-    .win-defeat2 {
-        color: red;
-    }
-
-    .team {
-        color: white;
-    }
-   
     .users-info {
         display: grid;
         grid-template-columns: 1fr 2fr 0.7fr 0.7fr 1fr;
@@ -169,13 +151,13 @@
             }
 
             .spells img {
-                width: 20px;
-                height: 20px;
+                width: $with_height20;
+                height: $with_height20;
             }
 
             .runes img {
-                width: 20px;
-                height: 20px;
+                width: $with_height20;
+                height: $with_height20;
                 background-color: black;
                 border-radius: 5px;
             }
@@ -192,27 +174,27 @@
             }
         }
         .img-level_spells_runes img {
-            width: 40px;
-            height: 40px;
+            width: $with_height40;
+            height: $with_height40;
             margin: 1px;
         }
 
         .kda_kdaAv {
             display: flex;
             flex-direction: column;
-            font-size: $fontSize_xxxsm;
+            font-size: $fontSize_xxxsm_rem;
 
             .kda {
                 .kills {
-                    color: $winColor;
+                    color: $killsColor;
                 }
 
                 .deaths {
-                    color: red;
+                    color: $deathsColor;
                 }
 
                 .assists {
-                    color: yellow;
+                    color: $assistColor;
                 }
             }
         }
@@ -224,7 +206,7 @@
         .minion_gold {
             display: flex;
             flex-direction: column;
-            font-size: $fontSize_xxxsm;
+            font-size: $fontSize_xxxsm_rem;
             .cs {
                 color: white;
             }
@@ -234,39 +216,21 @@
             }
         }
 
-        // 고쳐야함
         .items__card {
             display: flex;
         }
         .items img {
-            width: 20px;
-            height: 20px;
+            width: $with_height20;
+            height: $with_height20;
             margin-left: 1px;
             border-radius: 5px;
         }
     }
 
-   @include matchedGameDetailBGColor;
-    
+    @include matchedGameDetailBGColor;
 }
 
 @include mobile {
-    .matched-details {
-        border-radius: 10px;
-    }
-
-    .win-defeat1 {
-        color: blue;
-    }
-
-    .win-defeat2 {
-        color: red;
-    }
-
-    .team {
-        color: white;
-    }
-
     .users-info {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -321,15 +285,15 @@
             justify-content: space-around;
             .kda {
                 .kills {
-                    color: $winColor;
+                    color: $killsColor;
                 }
 
                 .deaths {
-                    color: red;
+                    color: $deathsColor;
                 }
 
                 .assists {
-                    color: yellow;
+                    color: $assistColor;
                 }
             }
         }
@@ -361,5 +325,4 @@
     }
 
     @include matchedGameDetailBGColor;
-
 }

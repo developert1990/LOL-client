@@ -10,7 +10,6 @@ export const use_3MatchedGames = (start: number, gameIdInfo: number[], region: s
 
         (
             async () => {
-                console.log('gameId 쭉 뽑은걸로 matchList 3개 뽑으러 들어옴');
                 for (let i = start; i < start + 3; i++) {
                     try {
                         const response = await fetch(`${TEST_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
@@ -21,7 +20,6 @@ export const use_3MatchedGames = (start: number, gameIdInfo: number[], region: s
                     }
 
                 }
-                console.log('matchesData===================', matchesData)
                 setMatchesInfo(matchesData);
             }
         )();
