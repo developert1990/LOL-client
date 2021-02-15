@@ -1,5 +1,5 @@
 
-import { API_BASE_LOCAL } from './../config/index';
+import { API_BASE } from './../config/index';
 import { MatchedGameType } from './../types.d';
 import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_FAIL, THREE_GAMES_DETAIL_SUCCESS } from './../constants/getGamesDetailConstants';
 import { ThunkDispatch } from 'redux-thunk';
@@ -11,7 +11,7 @@ export const getGameDetail = (start: number, gameIdInfo: number[], region: strin
     const matchesData: MatchedGameType[] = [];
     try {
         for (let i = start; i < start + 3; i++) {
-            const response = await fetch(`${API_BASE_LOCAL}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
+            const response = await fetch(`${API_BASE}/summonorById/proxy/${gameIdInfo[i]}/${region}/matchList`);
             const data = await response.json();
             matchesData.push(data);
         }
