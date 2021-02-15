@@ -1,16 +1,16 @@
 import { GET_SUMMONER_REQUEST, GET_SUMMONER_SUCCESS, GET_SUMMONER_FAIL, GET_SUMMONER_RESET } from './../constants/getSummonerConstants';
 import { SummonerReduxtype } from './../types.d';
-import { getSummonerActionType } from './types';
+import { ErrorType, getSummonerActionType } from './types';
 
 export interface GetSummonerInitialStateType {
     isLoading: boolean;
-    error: string;
+    error: ErrorType | null;
     summonerInfo: SummonerReduxtype | undefined;
 }
 
 export const getSummonerInitialState: GetSummonerInitialStateType = {
     isLoading: false,
-    error: '',
+    error: null,
     summonerInfo: undefined,
 }
 
@@ -23,7 +23,11 @@ export const getSummonerReducer = (state = getSummonerInitialState, action: getS
         case GET_SUMMONER_FAIL:
             return { ...state, isLoading: false, error: action.payload };
         case GET_SUMMONER_RESET:
-            return {};
+            return {
+                isLoading: false,
+                error: null,
+                summonerInfo: undefined,
+            };
         default:
             return state;
     }

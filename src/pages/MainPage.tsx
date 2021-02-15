@@ -1,7 +1,9 @@
 import React from 'react'
+import { API_BASE } from '../config'
 
 export const MainPage = () => {
-
+    console.log('서버 연결', process.env.NODE_ENV)
+    console.log('API_BASE: ????', API_BASE)
 
     return (
         <div className="main-page">

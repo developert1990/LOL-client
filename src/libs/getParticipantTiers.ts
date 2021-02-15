@@ -1,5 +1,5 @@
 import { SummonerDetailType } from '../types';
-import { TEST_BASE } from '../config/index';
+import { API_BASE_LOCAL } from '../config/index';
 import Axios from 'axios';
 
 
@@ -18,7 +18,7 @@ export const getParticipantTiers = async (deepCopyEncryped: string[][], region: 
     deepCopyEncryped.forEach((data, outerIndex) => {
         data.forEach((id, innerIndex) => {
 
-            promiseCall.push(Axios.get(`${TEST_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`)
+            promiseCall.push(Axios.get(`${API_BASE_LOCAL}/summonorById/proxy/${id}/${region}/summonerDetail`)
                 // .then((res) => testArr.push(res.data[0].tier))
                 .then((res) => res.data[0].tier)
             )

@@ -19,7 +19,5 @@ export const useQuery = () => {
         }, {});
         setQuery(queryString);
     }, []);
-
-    console.log('query', query)
     return query;
 }

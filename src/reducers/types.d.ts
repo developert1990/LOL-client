@@ -41,3 +41,7 @@ export interface getGameDetailAction {
     summonerMatchDetail: any;
     detailedImageData: any;
 }
+
+export interface ErrorType {
+    message: string;
+}
