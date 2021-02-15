@@ -11,6 +11,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 
+
 export interface initialAppStateType {
     regionStore: regionInitialStateType,
     champsStore: ChampsInitialStateType,
@@ -42,8 +43,10 @@ const reducer = combineReducers({
     getSummonerDetailStore: getSummonerDetailReducer,
     getGames100Store: getGames100Reducer,
     getGameDetailStore: getGameDetailsReducer,
-})
+});
+
 
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(promise, thunk)))
+
 
 export default store;

@@ -14,18 +14,13 @@ export const SearchPage = () => {
     const dispatch = useDispatch();
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
-
-    const [summonerID, setSummonerID] = useState('');
-
-
-    console.log("SearchPage")
-    console.log('summonerID', summonerID.length)
-
+    const userFromLS = localStorage.getItem("userAccId");
+    const [summonerID, setSummonerID] = useState<string>('');
     const query = useQuery();
 
-
     useEffect(() => {
-        if (summonerID.length === 0) {
+        if (summonerID.length === 0 && userFromLS) {
+            console.log("여긴 새로고침 랜더부분.")
             dispatch({ type: THREE_GAMES_DETAIL_RESET });
             dispatch({ type: GET_SUMMONER_DETAIL_RESET });
             dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
@@ -58,24 +53,20 @@ export const SearchPage = () => {
 
 
     return (
-        <div className="wrap">
+        <div className="wrap" data-testid="searchPage">
 
             <div className="search">
                 {/* <input type="text" className="summoner-id" placeholder="Enter the Summoner's ID" onChange={e => setSummonerID(e.target.value)} value={summonerID} /> */}
-                <input type="text" className="searchTerm" placeholder="Enter the Summoner's ID" onChange={(e: ChangeEvent<HTMLInputElement>) => setSummonerID(e.target.value)} onKeyPress={
+                <input data-testid="userNameChange" type="text" className="searchTerm" placeholder="Enter the Summoner's ID" onChange={(e: ChangeEvent<HTMLInputElement>) => setSummonerID(e.target.value)} onKeyPress={
                     (e) => {
                         if (e.key === 'Enter')
                             handleClick(e);
                     }
                 } value={summonerID} ref={focusRef} />
-                <button type="submit" className="searchButton" onClick={(e: any) => handleClick(e)}>
+                <button data-testid="searchBtn" type="submit" className="searchButton" onClick={(e: any) => handleClick(e)}>
                     <FaSearch />
                 </button>
             </div>
-
-            {/* 아래에 꺼 붙여 넣으면 됨 */}
-
-
         </div>
 
     )

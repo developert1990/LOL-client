@@ -1,9 +1,11 @@
-export const API_BASE = 'https://react-lol-app.herokuapp.com';
+
 export const USER_BASE = 'https://react-lol-app.herokuapp.com/user';
-export const TEST_BASE = 'http://localhost:7080';
+export const API_AWS_BASE = "http://ec2-3-80-79-7.compute-1.amazonaws.com:7080";
+export const API_BASE_LOCAL = 'http://localhost:7080';
+export const API_BASE = process.env.NODE_ENV === "production" ? "http://ec2-3-80-79-7.compute-1.amazonaws.com:7080" : API_BASE_LOCAL;
 export const GAME_VERSION = "11.2.1";
 export const API = {
-    GET_SUMMONER_BY_NAME: `${TEST_BASE}/lol/summoner/v4/summoners/by-name`,
+    GET_SUMMONER_BY_NAME: `${API_BASE}/lol/summoner/v4/summoners/by-name`,
     GET_SUMMONER_DETAIL_BY_ID: `${API_BASE}/lol/league/v4/entries/by-summoner`,
     GET_CHAMPION_SQUARE_IMG: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/champion`,
     GET_ITEMS_IMG: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/item`,

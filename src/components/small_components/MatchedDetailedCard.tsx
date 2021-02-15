@@ -64,10 +64,10 @@ export const MatchedDetailedCard: React.FC<MatchedDetailedCardPropsType> = ({ pa
 
 
     return (
-        <div className={`matched-details`} key={index}>
+        <div className={`matched-details`} key={participantIdentities[index].participantId + new Date().getMilliseconds()}>
 
 
-            <div key={index} className={`${participantsInfo.stats.win ? 'won' : 'lost'} ${participantsInfo.participantId === summonerInfo?.name ? "sameUser" : "notSame"}`}>
+            <div key={participantIdentities[index].participantId + new Date().getMilliseconds()} className={`${participantsInfo.stats.win ? 'won' : 'lost'} ${participantsInfo.participantId === summonerInfo?.name ? "sameUser" : "notSame"}`}>
                 {index === 0 && <div className="win-defeat1">{participantsInfo.stats.win ? 'WIN' : 'DEFEAT'}<span className="team"> (Blue Team)</span></div>}
                 {index === 5 && <div className="win-defeat2">{participantsInfo.stats.win ? 'WIN' : 'DEFEAT'}<span className="team"> (Red Team)</span></div>}
                 <div className="users-info">

@@ -20,7 +20,7 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ games,
     const matchedInformation: MatchedGameType = JSON.parse(JSON.stringify(games)); // Object deep copy
     const { participants, participantIdentities } = matchedInformation;
 
-
+    console.log('new Date()', new Date().getMilliseconds())
     return (
         <div>
             {participants.map((participantsInfo: ParticipantsType, index: number) => {
@@ -30,13 +30,13 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ games,
 
                         return (
                             <>
-                                <MatchedDetailedCard clickedData={clickedData} participantsInfo={participantsInfo} participantIdentities={participantIdentities} index={index} allChampsData={allChampsData} allRunesData={allRunesData} allSpellsData={allSpellsData} />
+                                <MatchedDetailedCard key={participantIdentities[index].participantId + new Date().getMilliseconds()} clickedData={clickedData} participantsInfo={participantsInfo} participantIdentities={participantIdentities} index={index} allChampsData={allChampsData} allRunesData={allRunesData} allSpellsData={allSpellsData} />
                             </>
                         );
                     case 200:
                         return (
                             <>
-                                <MatchedDetailedCard clickedData={clickedData} participantsInfo={participantsInfo} participantIdentities={participantIdentities} index={index} allChampsData={allChampsData} allRunesData={allRunesData} allSpellsData={allSpellsData} />
+                                <MatchedDetailedCard key={participantIdentities[index].participantId + new Date().getMilliseconds()} clickedData={clickedData} participantsInfo={participantsInfo} participantIdentities={participantIdentities} index={index} allChampsData={allChampsData} allRunesData={allRunesData} allSpellsData={allSpellsData} />
                             </>
                         );
                     default:

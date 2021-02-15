@@ -1,8 +1,8 @@
 
 
-test('This is a sample', () => {
-    expect(true).toBe(true);
-});
+// test('This is a sample', () => {
+//     expect(true).toBe(true);
+// });
 
 
  // test('get region', () => {

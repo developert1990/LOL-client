@@ -67,6 +67,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
                                             <Accordion.Collapse eventKey={data.gameId.toString()}>
                                                 <div className="card-body">
                                                     <MatchedGameDetail
+                                                        key={index + new Date().getMilliseconds()}
                                                         clickedData={data} games={games[index]} allChampsData={allChampsData}
                                                         allSpellsData={allSpellsData} allRunesData={allRunesData}
                                                     />
@@ -80,12 +81,14 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
                     }
 
                     <div className="load-data-button">
-                        {loadMore ? <Loading /> : <Button variant="dark" style={{
-                            width: "98%",
-                            color: "white",
-                            borderRadius: "10px",
-                            padding: "5px",
-                        }} className="load-button" onClick={() => handleStartClicked()}>button</Button>}
+                        {loadMore ?
+                            <Loading /> :
+                            <Button variant="dark" style={{
+                                width: "98%",
+                                color: "white",
+                                borderRadius: "10px",
+                                padding: "5px",
+                            }} className="load-button" onClick={() => handleStartClicked()}>button</Button>}
 
                     </div>
 
