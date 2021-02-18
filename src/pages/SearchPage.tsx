@@ -32,6 +32,7 @@ export const SearchPage = () => {
         if (!(summonerID.length > 0)) {
             return alert("Should enter summoner's id")
         }
+        console.log("클릭된쪽 으로 들어옴")
         dispatch({ type: THREE_GAMES_DETAIL_RESET });
         dispatch({ type: GET_SUMMONER_DETAIL_RESET });
         dispatch({ type: GET_SUMMONER_GAMES_100_RESET });

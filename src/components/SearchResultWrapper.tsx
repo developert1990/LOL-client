@@ -1,36 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProfileMenu } from '../components/index';
 import { Route } from 'react-router-dom';
-import { ProfilePage } from '../pages/ProfilePage';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { initialAppStateType } from '../store';
 import { Masteries } from '../components/Masteries';
-import { SummonerDetailType } from '../types';
-import { ErrorType } from '../reducers/types';
+import { GameImageType } from '../types';
+import { getGameDetail } from '../actions/getGameDetailAction';
+import { SummonerProfile } from './SummonerProfile';
 
-interface SummonerProfileProps {
-    summonerDetail?: SummonerDetailType;
-    isLoading: boolean;
-    hasError: ErrorType | null;
-}
-
-const SummonerProfile: React.FC<SummonerProfileProps> = ({ summonerDetail, isLoading, hasError }) => {
-    return (
-        summonerDetail ?
-            <ProfilePage summonerDetail={summonerDetail} getSummonerDetailLoading={isLoading} /> : <NoRankInformation hasError={hasError} />
-    )
-}
-
-const NoRankInformation = ({ hasError }: { hasError: ErrorType | null }) => {
-    return hasError ? <div style={{ color: "red" }}>{hasError.message}</div> : null;
-}
 
 export const SearchResultWrapper = () => {
     const { isLoading, error, summonerDetail } = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
+
+    const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
+    const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
+
+
+    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
+    const { error: games100Error, games100, matchIds } = getGames100Store;
+
+    const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
+    const { detailedImageData, error: gameDetailError, games, isLoading: summoerMatchDetailLoading, summonerMatchDetail } = getGamesDetailStore;
+
+
+    const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
+    const { region } = regionStore;
+
+    const [information, setInformation] = useState<GameImageType[]>([]);
+
+    const [start, setStart] = useState(0);
+
+    const [loadMore, setLoadMore] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (matchIds && summonerInfo) {
+            dispatch(getGameDetail(start, matchIds, region, summonerInfo.accountId));
+        }
+    }, [start, summonerInfo, matchIds])
+
+    useEffect(() => {
+        setInformation([...information, ...detailedImageData]);
+        setLoadMore(false);
+    }, [detailedImageData])
+
+    useEffect(() => {
+        if (!games100) {
+            setInformation([]);
+        }
+    }, [summonerInfo])
+
+
+
     return (
         <div className="searchWrapper">
             <Route path="/search/userInfo/" component={ProfileMenu} />
-            <Route path="/search/userInfo/overview/:region" render={() => <SummonerProfile summonerDetail={summonerDetail} isLoading={isLoading} hasError={error} />} />
+            <Route path="/search/userInfo/overview/:region" render={
+                () =>
+                    <SummonerProfile summonerDetail={summonerDetail} isLoading={isLoading} hasError={error}
+                        information={information} start={start} setStart={setStart} loadMore={loadMore} setLoadMore={setLoadMore}
+                    />} />
             <Route path="/search/userInfo/masteries/:region" component={Masteries} />
         </div>
     )

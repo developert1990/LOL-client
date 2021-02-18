@@ -1,10 +1,7 @@
 
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { getGameDetail } from '../actions/getGameDetailAction';
+import React, { Dispatch, SetStateAction } from 'react'
 import { Loading } from '../components/Loading';
 import UserMatchHistory from '../components/UserMatchHistory';
-import { initialAppStateType } from '../store';
 import { GameImageType, SummonerDetailType } from '../types';
 import { HistoryGraphCard, SummonerDetailCard } from '../components/small_components/index';
 
@@ -12,48 +9,32 @@ import { HistoryGraphCard, SummonerDetailCard } from '../components/small_compon
 interface ProfilePagePropsType {
     summonerDetail: SummonerDetailType;
     getSummonerDetailLoading: boolean;
+    information: GameImageType[];
+    start: number;
+    setStart: Dispatch<SetStateAction<number>>;
+    setLoadMore: Dispatch<SetStateAction<boolean>>;
+    loadMore: boolean;
 }
 
-export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, getSummonerDetailLoading }) => {
-    const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
-    const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
+interface CheckHistoryPropsType {
+    information: GameImageType[];
+    start: number;
+    setStart: Dispatch<SetStateAction<number>>;
+    setLoadMore: Dispatch<SetStateAction<boolean>>;
+    loadMore: boolean;
+}
 
+const CheckHistory: React.FC<CheckHistoryPropsType> = ({ information, loadMore, setLoadMore, setStart, start }) => {
+    return (
+        information.length === 0 ?
+            <Loading /> :
+            <UserMatchHistory
+                setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
+            />
+    )
+}
 
-    const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
-    const { error: games100Error, games100, matchIds } = getGames100Store;
-
-    const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
-    const { detailedImageData, error: gameDetailError, games, isLoading: summoerMatchDetailLoading, summonerMatchDetail } = getGamesDetailStore;
-
-
-    const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
-    const { region } = regionStore;
-
-    const [information, setInformation] = useState<GameImageType[]>([]);
-
-    const [start, setStart] = useState(0);
-
-    const [loadMore, setLoadMore] = useState(false);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (matchIds && summonerInfo) {
-            dispatch(getGameDetail(start, matchIds, region, summonerInfo.accountId));
-        }
-    }, [start, summonerInfo, matchIds])
-
-    useEffect(() => {
-        setInformation([...information, ...detailedImageData]);
-        setLoadMore(false);
-    }, [detailedImageData])
-
-    useEffect(() => {
-        if (!games100) {
-            setInformation([]);
-        }
-    }, [summonerInfo])
-
+export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, getSummonerDetailLoading, loadMore, information, setStart, setLoadMore, start }) => {
 
 
     return (
@@ -70,11 +51,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
 
                             <div className="summoner_info_bottom_right">
                                 {
-                                    information.length === 0 ?
-                                        <Loading /> :
-                                        <UserMatchHistory
-                                            setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore}
-                                        />
+                                    <CheckHistory setStart={setStart} start={start} information={information} loadMore={loadMore} setLoadMore={setLoadMore} />
 
                                 }
                             </div>
