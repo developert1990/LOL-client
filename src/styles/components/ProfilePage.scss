@@ -51,7 +51,7 @@
     }
 
     .custom_card {
-        margin: 5px;
+        margin: $margin_padding5;
         background-color: $cardColor_1;
         color: white;
         border-radius: $borderRadius;
@@ -107,7 +107,7 @@
     }
 
     .custom_card {
-        margin: 5px;
+        margin: $margin_padding5;
         background-color: $cardColor_1;
         color: white;
         border-radius: $borderRadius;
@@ -155,11 +155,11 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 60px;
-        padding: 5px;
+        padding: $margin_padding5;
     }
 
     .custom_card {
-        margin: 5px;
+        margin: $margin_padding5;
         background-color: $cardColor_1;
         color: white;
         border-radius: $borderRadius;

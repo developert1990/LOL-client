@@ -14,7 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Loading } from './Loading';
-import { ChampImgCard } from './small_components';
+import { ChampImgCard, SummonerDetailCard } from './small_components';
 
 
 
@@ -23,6 +23,7 @@ import { ChampImgCard } from './small_components';
 export const Masteries = () => {
     const { summonerInfo } = useSelector((state: initialAppStateType) => state.getSummonerStore);
     const { region } = useSelector((state: initialAppStateType) => state.regionStore);
+    const { summonerDetail } = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
     const [summonermastery, setSummonermastery] = useState<MasteriesType[] | undefined>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     useEffect(() => {
@@ -47,12 +48,17 @@ export const Masteries = () => {
 
 
     return (
-        <div className="masteryPage">
+        <div className="masteryPage summoner-info">
+            { summonerDetail &&
+                <div className="summoner_info_bottom_left">
+                    <SummonerDetailCard summonerDetail={summonerDetail} />
+                </div>
+            }
             {
                 isLoading ?
                     <Loading /> :
                     summonermastery && summonermastery.length > 0 &&
-                    <div className="masteries_table_container">
+                    <div className="masteries_table_container ">
                         <table>
                             <thead className="mastery_th">
                                 <tr className="th_tr">

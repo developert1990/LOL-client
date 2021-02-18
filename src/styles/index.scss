@@ -58,7 +58,7 @@ body {
 }
 
 .footer {
-    border-top: 5px solid $borderColor;
+    border-top: $margin_padding5 solid $borderColor;
     position: absolute;
     bottom: 0;
     width: 100%;

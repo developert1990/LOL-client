@@ -4,7 +4,7 @@
 @include desktop {
     .matchHistory-page {
         // background-color: $cardColor_1;
-        margin: 5px auto;
+        margin: $margin_padding5 auto;
         border-radius: $margin_padding20;
         padding: $margin_padding20;
 
@@ -16,7 +16,7 @@
                 width: 98%;
                 color: white;
                 border-radius: 10px;
-                padding: 5px;
+                padding: $margin_padding5;
             }
         }
     }
@@ -46,7 +46,7 @@
 @include tablet {
     .matchHistory-page {
         // background-color: $cardColor_1;
-        margin: 5px auto;
+        margin: $margin_padding5 auto;
         border-radius: $margin_padding20;
         padding: $margin_padding20;
 
@@ -58,7 +58,7 @@
                 width: 98%;
                 color: white;
                 border-radius: 10px;
-                padding: 5px;
+                padding: $margin_padding5;
             }
         }
     }
@@ -86,9 +86,9 @@
 @include mobile {
     .matchHistory-page {
         
-        margin: 5px auto;
+        margin:$margin_padding5 auto;
         border-radius: $margin_padding20;
-        padding: 5px;
+        padding: $margin_padding5;
 
         .load-data-button {
             display: flex;
@@ -98,7 +98,7 @@
                 width: 98%;
                 color: white;
                 border-radius: 10px;
-                padding: 5px;
+                padding: $margin_padding5;
             }
         }
     }
