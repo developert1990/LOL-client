@@ -43,5 +43,10 @@ export interface getGameDetailAction {
 }
 
 export interface ErrorType {
-    message: string;
+    "status": {
+        "message": string;
+        "status_code": number;
+    }
+    "Error": string;
+    "message": string;
 }

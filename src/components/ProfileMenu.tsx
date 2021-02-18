@@ -21,9 +21,10 @@ interface SummonerInfoProps {
 }
 
 const SummonerError: React.FC<SummonerErrorProps> = ({ error }) => {
+    const checkError = error?.status ? error?.status.message : error?.message;
     return (
         <div style={{ color: "red" }} className="summoner-error">
-            <div>{error?.message}<br /> Please check spelling and region</div>
+            <div>{checkError}</div>
         </div>
     )
 }

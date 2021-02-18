@@ -73,8 +73,8 @@
         .kda_kdaAv {
             display: flex;
             flex-direction: column;
-
             font-size: $fontSize_xxsm_rem;
+
             .kda {
                 .kills {
                     color: $killsColor;
@@ -283,6 +283,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+            align-items: center;
             .kda {
                 .kills {
                     color: $killsColor;
@@ -313,9 +314,16 @@
                 color: gold;
             }
         }
+        
+        .items{
+            display: flex;
+            align-items: center;
+        }
+
         .items__card {
             display: flex;
         }
+
         .items img {
             width: 16px;
             height: 16px;

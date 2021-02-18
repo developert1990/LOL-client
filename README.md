@@ -7,7 +7,7 @@ Set up web browser security setting
     So Mixed content error will be occurred. I will fix this issue to deploy this client app on the AWS soon.
 # Using this application
     - Search korean summoner
-        1. default region is 'kr' (korea)
+        1. Default region is 'kr' (korea)
         2. Enter summoner's id. (ex hide on bush, haha, Gen G Clid and so on )
     - Search North America summoner
         1. Change region to 'north america'

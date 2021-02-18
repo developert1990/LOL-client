@@ -27,7 +27,6 @@ const NoRankInformation = ({ hasError }: { hasError: ErrorType | null }) => {
 
 export const SearchResultWrapper = () => {
     const { isLoading, error, summonerDetail } = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
-
     return (
         <div className="searchWrapper">
             <Route path="/search/userInfo/" component={ProfileMenu} />

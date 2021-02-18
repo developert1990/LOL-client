@@ -11,6 +11,7 @@ import { initialAppStateType } from '../store';
 import { GameImageType } from '../types';
 import { getChampsData, getRunesData, getSpellsData } from '../libs/index';
 import { OneGameHistoryBar } from './small_components/index';
+import { getMatchHistory } from '../constants/constants';
 export interface LocationType {
     gameIdInfo: number[];
     accountId: string;
@@ -34,7 +35,6 @@ export interface UserMatchHistoryPropsType {
 
 
 const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start, information, loadMore, setLoadMore }) => {
-    console.log("유즈메치히스토리 렌더 하러 들어옴")
 
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
     const { error: gamesDetailError, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
@@ -48,7 +48,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
 
     const handleStartClicked = () => {
         setLoadMore(true);
-        setStart(start + 3);
+        setStart(start + getMatchHistory);
     }
 
 

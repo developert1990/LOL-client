@@ -405,3 +405,18 @@ export interface GameImageType {
     subRune: any;
     otherParticipants: mixedArrType[];
 }
+
+
+
+// masteries
+export interface MasteriesType {
+    championId: number | string;
+    championLevel: number;
+    championPoints: number;
+    lastPlayTime: number;
+    championPointsSinceLastLevel: number;
+    championPointsUntilNextLevel: number;
+    chestGranted: boolean;
+    tokensEarned: number;
+    summonerId: string;
+}

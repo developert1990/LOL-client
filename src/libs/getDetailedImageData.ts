@@ -2,8 +2,8 @@ import { getRunesData } from './getRunesData';
 import { getSpellsData } from './getSpellsData';
 import { getChampsData } from './getChampsData';
 
-
 import { SpellsIngameType, RunesIngameType, ParticipantsType, GameImageType, MatchedGameType, ChampDetailType, SpellDetailType, RuneBigType } from './../types.d';
+import { getMatchHistory } from '../constants/constants';
 
 // 성공
 export const getDetailedImageData = (summonerDetail: ParticipantsType[], matchesInfo: MatchedGameType[]) => {
@@ -15,8 +15,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     const allChampsData = getChampsData();
     const allSpellsData = getSpellsData();
     const allRunesData = getRunesData();
-
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < getMatchHistory; i++) {
         const spell1: any = summonerDetail[i].spell1Id;
         const spell2: any = summonerDetail[i].spell2Id;
         spellsArr.push({
@@ -26,7 +25,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     }
 
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < getMatchHistory; i++) {
         const primaryRune: any = summonerDetail[i].stats.perkPrimaryStyle;
         const subRune: any = summonerDetail[i].stats.perkSubStyle;
         runesArr.push({
@@ -56,7 +55,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
     });
 
 
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < getMatchHistory; j++) {
         for (let i = 0; i < 150; i++) {
             if (Number(allChampsData[i].key) === summonerDetail[j].championId) {
                 champImages.push(
@@ -92,6 +91,7 @@ export const getDetailedImageData = (summonerDetail: ParticipantsType[], matches
             }
         }
     }
+
     const newData = information.concat(champImages);
     return newData;
 }

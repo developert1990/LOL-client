@@ -1,0 +1,1 @@
+export const getMatchHistory: number = 3;

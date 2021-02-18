@@ -18,15 +18,15 @@ export const SearchPage = () => {
     const [summonerID, setSummonerID] = useState<string>('');
     const query = useQuery();
 
-    useEffect(() => {
-        if (summonerID.length === 0 && userFromLS) {
-            console.log("여긴 새로고침 랜더부분.")
-            dispatch({ type: THREE_GAMES_DETAIL_RESET });
-            dispatch({ type: GET_SUMMONER_DETAIL_RESET });
-            dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
-            dispatch(getSummoner(query.name, region));
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (summonerID.length === 0 && userFromLS) {
+    //         console.log("여긴 새로고침 랜더부분.")
+    //         dispatch({ type: THREE_GAMES_DETAIL_RESET });
+    //         dispatch({ type: GET_SUMMONER_DETAIL_RESET });
+    //         dispatch({ type: GET_SUMMONER_GAMES_100_RESET });
+    //         dispatch(getSummoner(query.name, region));
+    //     }
+    // }, [])
 
     const handleClick = async (e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>) => {
         if (!(summonerID.length > 0)) {

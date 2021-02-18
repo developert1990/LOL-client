@@ -19,8 +19,6 @@ export const MatchedGameDetail: React.FC<MatchedGameDetailPropsType> = ({ games,
 
     const matchedInformation: MatchedGameType = JSON.parse(JSON.stringify(games)); // Object deep copy
     const { participants, participantIdentities } = matchedInformation;
-
-    console.log('new Date()', new Date().getMilliseconds())
     return (
         <div>
             {participants.map((participantsInfo: ParticipantsType, index: number) => {

@@ -1,9 +1,9 @@
 import React from 'react'
 import { API } from '../../config';
-import { GameImageType } from '../../types';
+import { GameImageType, MasteriesType } from '../../types';
 
 interface RunesCardCardPropsType {
-    data: GameImageType;
+    data: any;
 }
 export const ChampImgCard: React.FC<RunesCardCardPropsType> = ({ data }) => {
 

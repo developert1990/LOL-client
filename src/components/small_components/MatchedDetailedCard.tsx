@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { initialAppStateType } from '../../store';
 import { ChampDetailType, GameImageType, ParticipantIdentitiesType, RuneBigType, SpellDetailType } from '../../types';
-import { ChampImgCard, GoldEarnedCard, ItemsCard, KDA_Card, MinionKillsCard, ParticipantsTierCard, RunesCard, SpellsCard } from './index';
+import { ChampImgCard, GoldEarnedCard, ItemsCard, KDA_Card, MinionKillsCard, ParticipantsTierCard, Rate_Card, RunesCard, SpellsCard } from './index';
 
 interface MatchedDetailedCardPropsType {
     participantsInfo: any;
@@ -85,7 +85,7 @@ export const MatchedDetailedCard: React.FC<MatchedDetailedCardPropsType> = ({ pa
                         <div className="id">{participantsInfo.participantId}</div>
                     </div>
                     <div className="kda_kdaAv">
-                        <span>{`${((kills + assists) / deaths).toFixed(2)}` === 'Infinity' ? 'Perfect' : `${((kills + assists) / deaths).toFixed(2)}`}</span>
+                        <Rate_Card kills={kills} assists={assists} deaths={deaths} />
                         <KDA_Card data={participantsInfo} />
                     </div>
                     <div className="minion_gold">

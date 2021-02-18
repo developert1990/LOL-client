@@ -1,0 +1,45 @@
+@import "./constants/mixin";
+@import "./constants/variables";
+
+.masteryPage {
+    color: $lightBlueFontColor;
+    display: flex;
+    justify-content: center;
+    font-size: $fontSize_xxsm_rem;
+    .masteries_table_container {
+        border-radius: 15px;
+        background-color: $cardColor_1;
+        padding: $margin_padding15;
+        display: grid;
+        width: 70%;
+
+        .th_tr {
+            height: 80px;
+        }
+
+        .tb_tr {
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .mastery_Champion {
+            display: flex;
+            height: 80px;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .mastery_champImgAndID {
+            display: grid;
+            grid-template-columns: 0.2fr 0.4fr;
+            align-items: center;
+            .champ-image {
+                width: 30px;
+                height: 30px;
+            }
+            .mastery_championId {
+                display: flex;
+            }
+        }
+    }
+}

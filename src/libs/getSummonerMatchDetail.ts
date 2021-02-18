@@ -6,7 +6,6 @@ import { getParticipantsData } from './index';
 
 //성공한다.
 export const getSummonerMatchDetail = async (games: MatchedGameType[], accountId: string, region: string) => {
-
     const participantsData = await getParticipantsData(games, region);
 
     let summonorMatchDetail: ParticipantsType[] = [];

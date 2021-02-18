@@ -31,6 +31,8 @@ export const ParticipantsTierCard: React.FC<ParticipantsTierCardPropsType> = ({ 
                 return "B";
             case "IRON":
                 return "IR";
+            case "UNRANK":
+                return "UR";
             default:
                 return "N/A";
         }

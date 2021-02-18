@@ -1,8 +1,6 @@
 
 import { MatchedGameType } from './../types.d';
 import { getChampsData } from './getChampsData';
-import { getSummonerDetailData } from './index';
-
 import { getParticipantTiers } from './getParticipantTiers';
 
 interface playerNameInGameType {
@@ -27,7 +25,6 @@ export interface mixedArrType {
 
 
 export const getParticipantsData = async (games: MatchedGameType[], region: string) => {
-
     const champsData = getChampsData();
     const players = games.map((data) => data.participantIdentities.map((innerdata) => innerdata.player.summonerName)); //players name Array
     const champsId = games.map((data) => data.participants.map((innerData) => innerData.championId));                  // players champ id Array
@@ -87,7 +84,6 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
 
     const participantTierArr = await getParticipantTiers(deepCopyEncryped, region);
 
-
     let resultArr: any[][] = [];
     resultArr = playerNameInThreeGamesArr.map((eachGame: playerNameInGameType[], outerIndex: number) => {
         const resultInnerArr: any[] = [];
@@ -101,7 +97,6 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
         })
         return resultInnerArr;
     });
-
 
 
     resultArr.map((data, index) => {

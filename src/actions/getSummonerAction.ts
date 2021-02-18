@@ -9,7 +9,6 @@ import { get100Games, getSummonerBasicInfo, getSummonerDetailData } from '../lib
 
 export const getSummoner = (summonerId: string, region: string) => async (dispatch: ThunkDispatch<any, any, any>) => {
     const USER_ID = 'userAccId';
-    console.log("getSummoner 액션 들어")
     dispatch({ type: GET_SUMMONER_RESET });
     dispatch({ type: GET_SUMMONER_REQUEST });
     try {

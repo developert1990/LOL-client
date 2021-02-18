@@ -5,22 +5,21 @@ import Axios from 'axios';
 
 
 
-
-
-
-// arr[outerIndex][innerIndex] = res.data
-
 export const getParticipantTiers = async (deepCopyEncryped: string[][], region: string) => {
-
     const newArr2: any[] = [];
     const promiseCall: any[] = [];
 
     deepCopyEncryped.forEach((data, outerIndex) => {
         data.forEach((id, innerIndex) => {
 
-            promiseCall.push(Axios.get(`${API_BASE}/summonorById/proxy/${id}/${region}/summonerDetail`)
-                // .then((res) => testArr.push(res.data[0].tier))
-                .then((res) => res.data[0].tier)
+            promiseCall.push(Axios.get(`${API_BASE}/lol/league/v4/entries/by-summoner/${id}?region=${region}`)
+                .then((res) => {
+                    if (res.data[0]) {
+                        return res.data[0].tier;
+                    } else {
+                        return "UNRANK"
+                    }
+                })
             )
         })
     })
