@@ -1,5 +1,4 @@
-import React from 'react'
-import { GameImageType } from '../../types'
+import React from 'react';
 
 interface Rate_CardPropsType {
     kills?: number;

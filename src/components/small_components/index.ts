@@ -15,3 +15,4 @@ export * from './MinionKillsCard';
 export * from './OtherParticipantsCard';
 export * from './ParticipantsTierCard';
 export * from './MatchedDetailedCard';
+export * from './EmblemCard';

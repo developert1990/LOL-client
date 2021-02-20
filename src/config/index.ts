@@ -20,16 +20,16 @@ export const API = {
     GET_MASTERY: `${API_BASE}/lol/champion-mastery/v4/champion-masteries/by-summoner`
 }
 
-export const TIER = {
-    CHALLENGER: 'CHALLENGER',
-    GRANDMASTER: 'GRANDMASTER',
-    MASTER: 'MASTER',
-    DIAMOND: 'DIAMOND',
-    PLATINUM: 'PLATINUM',
-    GOLD: 'GOLD',
-    SILVER: 'SILVER',
-    BRONZE: 'BRONZE',
-    IRON: 'IRON',
+export enum TIER {
+    CHALLENGER = 'CHALLENGER',
+    GRANDMASTER = 'GRANDMASTER',
+    MASTER = 'MASTER',
+    DIAMOND = 'DIAMOND',
+    PLATINUM = 'PLATINUM',
+    GOLD = 'GOLD',
+    SILVER = 'SILVER',
+    BRONZE = 'BRONZE',
+    IRON = 'IRON',
 }
 
 export const DIVISIONS = [
@@ -38,5 +38,7 @@ export const DIVISIONS = [
     'III',
     'IV'
 ]
+
+export const MATCHHISTORY_LENGTH: number = 3
 
 export const EMAIL_REG_EXP = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i

@@ -5,3 +5,4 @@ export * from './SideAdvertisement';
 export * from './SearchResultWrapper';
 export * from './NoRankInformation';
 export * from './SummonerProfile';
+export * from './RankTable';

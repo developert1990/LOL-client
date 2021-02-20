@@ -5,14 +5,7 @@ import { initialAppStateType } from '../store'
 import { MasteriesType } from '../types';
 
 
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+
 import { Loading } from './Loading';
 import { ChampImgCard, SummonerDetailCard } from './small_components';
 
@@ -48,48 +41,52 @@ export const Masteries = () => {
 
 
     return (
-        <div className="masteryPage summoner-info">
-            { summonerDetail &&
-                <div className="summoner_info_bottom_left">
-                    <SummonerDetailCard summonerDetail={summonerDetail} />
-                </div>
-            }
-            {
-                isLoading ?
-                    <Loading /> :
-                    summonermastery && summonermastery.length > 0 &&
-                    <div className="masteries_table_container ">
-                        <table>
-                            <thead className="mastery_th">
-                                <tr className="th_tr">
-                                    <td className="th_td mastery_Rank">Rank</td>
-                                    <td className="th_td mastery_Champion">Champion</td>
-                                    <td className="th_td mastery_Level">Level</td>
-                                    <td className="th_td mastery_Points">Points</td>
-                                    <td className="th_td mastery_Token">Token</td>
-                                </tr>
-                            </thead>
-                            <tbody className="mastery_tb">
-                                {
-                                    summonermastery?.map((data: MasteriesType, index: number) => {
-                                        return (
-                                            <tr className="tb_tr" key={index} style={{ backgroundColor: `${index % 2 === 0 ? "#11112A" : null}` }}>
-                                                <td className="tb_td mastery_index">{index}</td>
-                                                <td className="tb_td mastery_champImgAndID">
-                                                    <ChampImgCard data={data} />
-                                                    <span className="mastery_championId">{data.championId}</span>
-                                                </td>
-                                                <td className="tb_td mastery_championLevel" style={{ color: `${setLevelColor(data.championLevel)}` }}>{data.championLevel}</td>
-                                                <td className="tb_td mastery_championPoints">{data.championPoints.toLocaleString()}</td>
-                                                <td className="tb_td mastery_tokensEarned">{data.tokensEarned}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
+        <div className="masteryPage mainInfoWrapper">
+            <div className="summoner_info_bottom">
+                {summonerDetail &&
+                    <div className="summoner_info_bottom_left">
+                        <SummonerDetailCard summonerDetail={summonerDetail} />
                     </div>
-            }
+                }
+                {
+                    isLoading ?
+                        <Loading /> :
+                        summonermastery && summonermastery.length > 0 &&
+                        <div className="masteries_table_container ">
+                            <table>
+                                <thead className="mastery_th">
+                                    <tr className="th_tr">
+                                        <td className="th_td mastery_Rank">Rank</td>
+                                        <td className="th_td mastery_Champion">Champion</td>
+                                        <td className="th_td mastery_Level">Level</td>
+                                        <td className="th_td mastery_Level">PointsSinceLastLevel</td>
+                                        <td className="th_td mastery_Points">Points</td>
+                                        <td className="th_td mastery_Token">Token</td>
+                                    </tr>
+                                </thead>
+                                <tbody className="mastery_tb">
+                                    {
+                                        summonermastery?.map((data: MasteriesType, index: number) => {
+                                            return (
+                                                <tr className="tb_tr" key={index} style={{ backgroundColor: `${index % 2 === 0 ? "#11112A" : null}` }}>
+                                                    <td className="tb_td mastery_index">{index + 1}</td>
+                                                    <td className="tb_td mastery_champImgAndID">
+                                                        <ChampImgCard data={data} />
+                                                        <span className="mastery_championId">{data.championId}</span>
+                                                    </td>
+                                                    <td className="tb_td mastery_championLevel" style={{ color: `${setLevelColor(data.championLevel)}` }}>{data.championLevel}</td>
+                                                    <td className="tb_td mastery_championPoints">{data.championPointsSinceLastLevel.toLocaleString()}</td>
+                                                    <td className="tb_td mastery_championPoints">{data.championPoints.toLocaleString()}</td>
+                                                    <td className="tb_td mastery_tokensEarned">{data.tokensEarned}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                }
+            </div>
         </div>
     )
 }

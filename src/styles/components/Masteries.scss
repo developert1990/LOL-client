@@ -9,7 +9,10 @@
 }
 
 @include desktop {
-    .masteryPage {
+    .masteryPage.mainInfoWrapper {
+        @include mainInfoWrapper_Desktop;
+        @include summoner_info_bottom_Desktop;
+
         .masteries_table_container {
             border-radius: 15px;
             background-color: $cardColor_1;
@@ -24,7 +27,9 @@
 }
 
 @include tablet {
-    .masteryPage {
+    .masteryPage.mainInfoWrapper {
+        @include mainInfoWrapper_Desktop;
+        @include summoner_info_bottom_Tablet;
         .masteries_table_container {
             border-radius: 15px;
             background-color: $cardColor_1;
@@ -39,7 +44,8 @@
 }
 
 @include mobile {
-    .masteryPage {
+    .masteryPage.mainInfoWrapper {
+        @include mainInfoWrapper_Mobile;
         .masteries_table_container {
             border-radius: 15px;
             background-color: $cardColor_1;

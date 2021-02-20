@@ -1,7 +1,7 @@
 import React from 'react';
 import { Footer, NavbarComp, SearchResultWrapper, SideAdvertisement } from '../components/index';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { MainPage } from '../pages/index'
+import { ChampionDetailPage, ChampionsPage, MainPage, RankPage } from '../pages/index'
 import lolLogo from '../images/lol-logo.png';
 import { useSelector } from 'react-redux';
 import { initialAppStateType } from '../store';
@@ -33,7 +33,9 @@ export default () => {
                     }
                     <Route path="/search/userInfo/" component={SideAdvertisement} />
                 </div>
-
+                <Route path="/champions/detail/" component={ChampionDetailPage} />
+                <Route path="/champions" component={ChampionsPage} exact />
+                <Route path="/rank" component={RankPage} />
                 <Route path="/" component={MainPage} exact />
             </div>
             <Footer />

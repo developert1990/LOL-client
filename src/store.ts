@@ -1,3 +1,4 @@
+import { getRankInitialState, getRankInitialStateType, getRankReducer } from './reducers/getRankReducer';
 import { getGameDetailsInitialState, GetGameDetailsInitialStateType, getGameDetailsReducer } from './reducers/getGamesDetailReducer';
 import { GetGames100InitialStateType, getGames100InitialState, getGames100Reducer } from './reducers/getGames100Reducer';
 import { GetSummonerDetailInitialStateType, getSummonerDetailInitialState, getSummonerDetailReducer } from './reducers/getSummonerDetailReducer';
@@ -21,6 +22,7 @@ export interface initialAppStateType {
     getSummonerDetailStore: GetSummonerDetailInitialStateType,
     getGames100Store: GetGames100InitialStateType,
     getGameDetailStore: GetGameDetailsInitialStateType,
+    getRankStore: getRankInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -32,6 +34,7 @@ export const initialAppState: initialAppStateType = {
     getSummonerDetailStore: getSummonerDetailInitialState,
     getGames100Store: getGames100InitialState,
     getGameDetailStore: getGameDetailsInitialState,
+    getRankStore: getRankInitialState,
 }
 
 const reducer = combineReducers({
@@ -43,6 +46,7 @@ const reducer = combineReducers({
     getSummonerDetailStore: getSummonerDetailReducer,
     getGames100Store: getGames100Reducer,
     getGameDetailStore: getGameDetailsReducer,
+    getRankStore: getRankReducer,
 });
 
 

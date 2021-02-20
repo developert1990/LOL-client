@@ -39,15 +39,10 @@
 }
 
 @include desktop {
-    .summoner-info {
-        margin-bottom: 60px;
-        padding: 25px;
+    .mainInfoWrapper {
+        @include mainInfoWrapper_Desktop;
 
-        .summoner_info_bottom {
-            display: grid;
-            grid-template-columns: 2fr 4fr;
-            column-gap: 4rem;
-        }
+        @include summoner_info_bottom_Desktop;
     }
 
     .custom_card {
@@ -65,7 +60,7 @@
             padding-top: $margin_padding15;
 
             .detail_title {
-                font-size:$fontSize_20px;
+                font-size: $fontSize_20px;
                 font-weight: bolder;
                 display: flex;
                 padding-left: $margin_padding15;
@@ -84,7 +79,7 @@
                     // margin-top: 80px;
                 }
 
-               @include summonerCardDetail;
+                @include summonerCardDetail;
             }
         }
 
@@ -95,15 +90,10 @@
 }
 
 @include tablet {
-    .summoner-info {
-        margin-bottom: 60px;
-        padding: 25px;
+    .mainInfoWrapper {
+        @include mainInfoWrapper_Desktop;
 
-        .summoner_info_bottom {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+        @include summoner_info_bottom_Tablet;
     }
 
     .custom_card {
@@ -121,7 +111,7 @@
             padding-top: $margin_padding15;
 
             .detail_title {
-                font-size:$fontSize_20px;
+                font-size: $fontSize_20px;
                 font-weight: bolder;
                 display: flex;
                 padding-left: $margin_padding15;
@@ -151,11 +141,8 @@
 }
 
 @include mobile {
-    .summoner-info {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 60px;
-        padding: $margin_padding5;
+    .mainInfoWrapper {
+        @include mainInfoWrapper_Mobile;
     }
 
     .custom_card {
@@ -191,7 +178,7 @@
                     height: 90px;
                 }
 
-               @include summonerCardDetail;
+                @include summonerCardDetail;
             }
         }
 

@@ -31,7 +31,7 @@ export const NavbarComp = () => {
                 <Link className="link" to="/champions">
                     <li>Champions</li>
                 </Link>
-                <Link className="link" to="/ranks">
+                <Link className="link" to="/rank">
                     <li>Ranks</li>
                 </Link>
             </nav>

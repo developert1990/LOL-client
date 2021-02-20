@@ -1,7 +1,7 @@
 // 언더바를 붙이게 되면 파일단위로 분리되서 컴파일이 되지 않는다.
 // 별도의 css 파일로 컴파일 될 필요가 없기 때문에 성능, 관리상의 이득을 얻을 수 있다.
 
-@import './_variables';
+@import "./_variables";
 
 @mixin mobile {
     @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
@@ -20,8 +20,6 @@
         @content;
     }
 }
-
-
 
 @mixin baseTierColor {
     .C {
@@ -53,26 +51,21 @@
     }
 }
 
-
 @mixin matchedGameDetailBGColor {
-        .won {
-      background:linear-gradient(135deg,rgba(50,115,250,.2),rgba(50,115,250,0)),#191937;
-
-}
+    .won {
+        background: linear-gradient(135deg, rgba(50, 115, 250, 0.2), rgba(50, 115, 250, 0)), #191937;
+    }
 
     .lost {
-        background: linear-gradient(135deg,rgba(255,78,80,.16),rgba(255,78,80,0)),#191937;
-      
+        background: linear-gradient(135deg, rgba(255, 78, 80, 0.16), rgba(255, 78, 80, 0)), #191937;
     }
     .sameUser {
         border: 1px solid #ff9b00;
         background: linear-gradient(90deg, #ad6d0a 0, rgba(255, 155, 0, 0) 42%), #473518 !important;
     }
-    
 }
 
 @mixin cardBodyBG {
-
     .card-body {
         position: relative;
         z-index: 1;
@@ -116,31 +109,59 @@
 
 @mixin Masteries {
     .th_tr {
-            height: 80px;
-        }
+        height: 80px;
+    }
 
-        .tb_tr {
-            height: 50px;
-            line-height: 50px;
-        }
+    .tb_tr {
+        height: 50px;
+        line-height: 50px;
+    }
 
-        .mastery_Champion {
+    .mastery_Champion {
+        display: flex;
+        height: 80px;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .mastery_champImgAndID {
+        display: grid;
+        grid-template-columns: 0.2fr 0.4fr;
+        align-items: center;
+        .champ-image {
+            width: 30px;
+            height: 30px;
+        }
+        .mastery_championId {
             display: flex;
-            height: 80px;
-            flex-direction: row;
-            align-items: center;
         }
+    }
+}
 
-        .mastery_champImgAndID {
-            display: grid;
-            grid-template-columns: 0.2fr 0.4fr;
-            align-items: center;
-            .champ-image {
-                width: 30px;
-                height: 30px;
-            }
-            .mastery_championId {
-                display: flex;
-            }
-        }
+@mixin summoner_info_bottom_Desktop {
+    .summoner_info_bottom {
+        display: grid;
+        grid-template-columns: 2fr 4fr;
+        column-gap: 4rem;
+    }
+}
+
+@mixin summoner_info_bottom_Tablet {
+    .summoner_info_bottom {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+@mixin mainInfoWrapper_Desktop {
+    margin-bottom: 60px;
+    padding: 25px;
+}
+
+@mixin mainInfoWrapper_Mobile {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+    padding: $margin_padding5;
 }

@@ -50,3 +50,9 @@ export interface ErrorType {
     "Error": string;
     "message": string;
 }
+
+getRankAction
+export interface getRankAction {
+    payload: any;
+    type: string;
+}

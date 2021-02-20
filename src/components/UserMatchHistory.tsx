@@ -11,7 +11,7 @@ import { initialAppStateType } from '../store';
 import { GameImageType } from '../types';
 import { getChampsData, getRunesData, getSpellsData } from '../libs/index';
 import { OneGameHistoryBar } from './small_components/index';
-import { getMatchHistory } from '../constants/constants';
+import { MATCHHISTORY_LENGTH } from '../config/index';
 export interface LocationType {
     gameIdInfo: number[];
     accountId: string;
@@ -48,7 +48,7 @@ const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start
 
     const handleStartClicked = () => {
         setLoadMore(true);
-        setStart(start + getMatchHistory);
+        setStart(start + MATCHHISTORY_LENGTH);
     }
 
 

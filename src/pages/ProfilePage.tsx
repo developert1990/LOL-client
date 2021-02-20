@@ -38,7 +38,7 @@ export const ProfilePage: React.FC<ProfilePagePropsType> = ({ summonerDetail, ge
 
 
     return (
-        <div className="summoner-info">
+        <div className="summoner-info mainInfoWrapper">
             {
                 !summonerDetail && getSummonerDetailLoading ?
                     <Loading /> : (

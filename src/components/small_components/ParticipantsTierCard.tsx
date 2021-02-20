@@ -2,6 +2,7 @@ import React from 'react';
 import { API } from '../../config';
 import { mixedArrType } from '../../libs';
 import { GameImageType } from '../../types';
+import { EmblemCard } from './index';
 
 
 export interface ParticipantsTierCardPropsType {
@@ -41,7 +42,8 @@ export const ParticipantsTierCard: React.FC<ParticipantsTierCardPropsType> = ({ 
     const tier = otherParticipants[index].tier;
     return (
         <div className="participantRank">
-            <img style={{ width: "35px", height: "35px" }} className="emblem-img" src={require(`../../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" />
+            <EmblemCard tier={tier} />
+            {/* <img style={{ width: "35px", height: "35px" }} className="emblem-img" src={require(`../../images/ranked-emblems/${tier}.png`).default} alt="tier-emblem" /> */}
             <div className={`initialTier ${getInitialTier()}`}>{getInitialTier()}</div>
         </div>
     )

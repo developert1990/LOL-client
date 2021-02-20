@@ -1,4 +1,4 @@
-import { getMatchHistory } from './../constants/constants';
+import { MATCHHISTORY_LENGTH } from '../config/index';
 import { API_BASE } from './../config/index';
 import { MatchedGameType } from './../types.d';
 import { THREE_GAMES_DETAIL_REQUEST, THREE_GAMES_DETAIL_FAIL, THREE_GAMES_DETAIL_SUCCESS } from './../constants/getGamesDetailConstants';
@@ -11,7 +11,7 @@ export const getGameDetail = (start: number, gameIdInfo: number[], region: strin
     dispatch({ type: THREE_GAMES_DETAIL_REQUEST });
     const matchesData: MatchedGameType[] = [];
     try {
-        for (let i = start; i < start + getMatchHistory; i++) {
+        for (let i = start; i < start + MATCHHISTORY_LENGTH; i++) {
             const response = await fetch(`${API_BASE}/lol/match/v4/matches/${gameIdInfo[i]}?region=${region}`);
             const data = await response.json();
             matchesData.push(data);

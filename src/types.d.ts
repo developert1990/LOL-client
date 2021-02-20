@@ -52,17 +52,53 @@ export interface SummonerReduxtype {
 
 // 챔피언 정보 타입
 export interface ChampDetailType {
+    allytips: string[];
     blurb: string;
+    enemytips: string[];
     id: string;
     image: ChampImageType;
     info: ChampInfo;
     key: string;
+    lore: string;
     name: string;
     partype: string;
+    passive: ChampionInnerPassiveType;
+    skins: ChampionSkinsType[];
+    spells: ChampionSpellsType[];
     stats: ChampStatsType;
     tags: string[];
     title: string;
-    version: string;
+}
+
+export interface ChampionInnerPassiveType {
+    description: string;
+    image: ChampionInnerImgType;
+}
+
+export interface ChampionSkinsType {
+    chromas: boolean;
+    id: string;
+    name: string;
+    num: number;
+}
+
+export interface ChampionSpellsType {
+    cooldown: number[];
+    cost: number[];
+    description: string;
+    id: string;
+    image: ChampionInnerImgType;
+    name: string;
+    range: number[];
+    resource: string;
+}
+
+export interface ChampionInnerImgType {
+
+    full: string;
+    group: string;
+    sprite: string;
+
 }
 
 export interface ChampInfoType {

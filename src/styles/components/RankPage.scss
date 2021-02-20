@@ -1,0 +1,123 @@
+@import "./constants/mixin";
+@import "./constants/variables";
+
+.rank_pagination {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+@include desktop {
+    .rankPage_title {
+        font-size: $fontSize_md_rem;
+        color: white;
+        margin: 30px auto;
+    }
+    .rankTable_container {
+        color: $lightBlueFontColor;
+        font-size: $fontSize_15px;
+
+        width: 1200px;
+        margin: 0 auto;
+        .MuiPaginationItem-root {
+            color: $lightBlueFontColor;
+        }
+
+        .rank-table {
+            margin: 0 auto;
+            background-color: $cardColor_1;
+            border-radius: 15px;
+        }
+
+        th,
+        td {
+            width: 200px;
+            height: 55px;
+        }
+
+        .wins {
+            color: $killsColor;
+        }
+        .losses {
+            color: $deathsColor;
+        }
+    }
+}
+
+@include tablet {
+    .rankPage_title {
+        font-size: $fontSize_sm_rem;
+        color: white;
+        margin: 20px auto;
+    }
+    .rankTable_container {
+        color: $lightBlueFontColor;
+        font-size: $fontSize_xxsm_rem;
+
+        width: 800px;
+        margin: 0 auto;
+        .MuiPaginationItem-root {
+            color: $lightBlueFontColor;
+        }
+
+        .rank-table {
+            margin: 0 auto;
+            background-color: $cardColor_1;
+            border-radius: 15px;
+        }
+
+        th,
+        td {
+            width: 100px;
+            height: 55px;
+        }
+
+        .wins {
+            color: $killsColor;
+        }
+        .losses {
+            color: $deathsColor;
+        }
+    }
+}
+
+@include mobile {
+    .rankPage_title {
+        font-size: $fontSize_md_rem;
+        color: white;
+        margin: 30px auto;
+    }
+    .rankTable_container {
+        color: $lightBlueFontColor;
+        font-size: $fontSize_xxxsm_rem;
+
+        width: 450px;
+        margin: 0 auto;
+        .MuiPaginationItem-root {
+            color: $lightBlueFontColor;
+        }
+
+        .rank-table {
+            margin: 0 auto;
+            background-color: $cardColor_1;
+            border-radius: 15px;
+        }
+
+        th,
+        td {
+            width: 200px;
+            height: 55px;
+        }
+
+        .tierName {
+            display: none;
+        }
+
+        .wins {
+            color: $killsColor;
+        }
+        .losses {
+            color: $deathsColor;
+        }
+    }
+}
