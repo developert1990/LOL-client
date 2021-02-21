@@ -17,7 +17,7 @@ export const ChampionRotationCard = () => {
                 setRotateChampObj(rotationChampResult);
             }
         )();
-    }, [])
+    }, [region])
 
 
     return (
