@@ -20,18 +20,22 @@ export const NavbarComp = () => {
         setActive(!active);
     }
 
+    const clickLink = () => {
+        setActive(!active);
+    }
+
     return (
         <div className="navbarComp">
             <Link className="link" to="/"><img src={logo} style={{ width: "30px", height: "$with_height40", marginRight: "$margin_padding20" }} alt="cat" />H.gg</Link>
 
             <nav className={`menus  ${active ? "active" : "inActive"}`}>
-                <Link className="link" to="/search">
+                <Link className="link" to="/search" onClick={() => clickLink()}>
                     <li>Search</li>
                 </Link>
-                <Link className="link" to="/champions">
+                <Link className="link" to="/champions" onClick={() => clickLink()}>
                     <li>Champions</li>
                 </Link>
-                <Link className="link" to="/rank">
+                <Link className="link" to="/rank" onClick={() => clickLink()}>
                     <li>Ranks</li>
                 </Link>
             </nav>

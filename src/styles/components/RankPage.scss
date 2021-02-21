@@ -29,6 +29,10 @@
             border-radius: 15px;
         }
 
+        tbody tr:nth-child(odd){
+            background-color: $subBackgroundColor;
+        }
+
         th,
         td {
             width: 200px;

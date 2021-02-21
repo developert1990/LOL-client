@@ -30,14 +30,13 @@ export const RankTable: React.FC<RankTablePropsType> = ({ pageData, dataLimit, p
                         <th>Rates</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     {
 
                         pageData.map((user, index) => {
                             const winRate = Math.round(user.wins / (user.wins + user.losses) * 100);
                             return (
-                                <tr key={index} style={{ backgroundColor: `${index % 2 === 0 ? "#11112A" : null}` }}>
+                                <tr key={index} >
                                     <td>{rank.indexOf(user) + 1}</td>
                                     <td>{user.summonerName}</td>
                                     <td className="tier">

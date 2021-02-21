@@ -13,3 +13,5 @@ export * from './getParticipantTiers';
 export * from './getMasteries';
 export * from './getURLs';
 export * from './getRanksByTier';
+export * from './getRotationChamp';
+export * from './Material-ui-tooltip';

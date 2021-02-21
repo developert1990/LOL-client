@@ -1,6 +1,5 @@
 import React from 'react'
 import { API } from '../../config';
-import { GameImageType, MasteriesType } from '../../types';
 
 interface RunesCardCardPropsType {
     data: any;
@@ -17,8 +16,8 @@ export const ChampImgCard: React.FC<RunesCardCardPropsType> = ({ data }) => {
     }
 
     return (
-        <>
+        <div className="ChampImgCard">
             <img className="champ-image" src={`${API.GET_CHAMPION_SQUARE_IMG}/${checkImage(data)}`} alt="images" />
-        </>
+        </div>
     )
 }

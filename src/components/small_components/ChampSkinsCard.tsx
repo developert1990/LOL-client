@@ -11,12 +11,14 @@ export const ChampSkinsCard: React.FC<ChampSkinsCardProps> = ({ skins, champ }) 
     return (
         <div className="ChampSkinsCard">
             {
-                skins.map((skin) => {
+                skins.map((skin, index) => {
                     return (
-                        <>
-                            <img className="champ-skin" src={`${API.GET_SKINS}/${champ}_${skin.num}.jpg`} alt={`${skin.name}`} />
-                            <div>{skin.name === "default" ? champ : skin.name}</div>
-                        </>
+                        <div className="skin_sell" key={index}>
+                            <div className="champSkin_img">
+                                <img className="champ-skin" src={`${API.GET_SKINS}/${champ}_${skin.num}.jpg`} alt={`${skin.name}`} />
+                            </div>
+                            <span>{skin.name === "default" ? champ : skin.name}</span>
+                        </div>
                     )
                 })
             }

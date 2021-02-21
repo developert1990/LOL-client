@@ -1,5 +1,5 @@
-@import './components/constants/mixin';
-@import './components/constants/variables';
+@import './components/constants/_mixin';
+@import './components/constants/_variables';
 @import './components/NavbarComp.scss';
 @import './components/MainPage.scss';
 @import './components/UserMatchHistory.scss';
@@ -14,7 +14,11 @@
 @import './components/Masteries.scss';
 @import './components/ChampionsPage.scss';
 @import './components/RankPage.scss';
-
+@import './components/ChampDetailPage.scss';
+@import './components/ChampDetailPageTop.scss';
+@import './components/ChampDetailPageMiddle.scss';
+@import './components/ChampDetailPageBottom.scss';
+@import './components/ChampionRotationCard.scss';
 
 
 

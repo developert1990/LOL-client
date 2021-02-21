@@ -18,7 +18,8 @@ export const API = {
     GET_PROFILEICON: `https://ddragon.leagueoflegends.com/cdn/${GAME_VERSION}/img/profileicon`,
     GET_MATCH_ID: `${API_BASE}/lol/match/v4/matchlists/by-account`,
     GET_MATCH_DETAILS: `${API_BASE}/lol/match/v4/matches`,
-    GET_MASTERY: `${API_BASE}/lol/champion-mastery/v4/champion-masteries/by-summoner`
+    GET_MASTERY: `${API_BASE}/lol/champion-mastery/v4/champion-masteries/by-summoner`,
+    GET_CHAMP_ROTATION: `${API_BASE}/lol/platform/v3/champion-rotations`,
 }
 
 export enum TIER {

@@ -456,3 +456,19 @@ export interface MasteriesType {
     tokensEarned: number;
     summonerId: string;
 }
+
+
+export interface RotationChampType {
+    freeChampionIds: number[];
+    freeChampionIdsForNewPlayers: number[];
+}
+
+export interface RotationChampEachType {
+    id: string;
+    name: string;
+    tags: string[];
+}
+export interface RotationChampResultType {
+    freeChampForAll: RotationChampEachType[];
+    freeChampForNew: RotationChampEachType[];
+}

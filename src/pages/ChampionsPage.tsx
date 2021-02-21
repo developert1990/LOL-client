@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChampImgCard } from '../components/small_components';
-import champs from '../data/allChamps.json';
-import { ChampDetailType } from '../types';
+import { getChampsData } from '../libs';
 
 export const ChampionsPage = () => {
-    const typedAllChamps: any = champs;
-    const allChamps: ChampDetailType[] = Object.values(typedAllChamps.data);
-    // const test = getChampsData();
+    const allChamps = getChampsData();
     return (
         <div className="championsPage">
             <div className="championsPage_title">

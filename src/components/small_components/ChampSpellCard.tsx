@@ -1,16 +1,31 @@
-import { url } from 'inspector'
+import { Tooltip } from '@material-ui/core'
 import React from 'react'
-import { API } from '../../config'
-
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { theme } from '../../libs';
 interface ChampSpellCardProps {
     URL: string;
     data: any;
 }
 export const ChampSpellCard: React.FC<ChampSpellCardProps> = ({ data, URL }) => {
+
+
+    const spellDes = (data: any) => {
+
+        return (
+            <>
+                <div className="spellName" style={{ color: "#3273fa", fontSize: "15px", marginBottom: "20px" }}>{data.name}</div>
+                <span className="spellDescription">{data.description}</span>
+            </>
+        )
+    }
+
     return (
         <div className="champSpellCard">
-            <img className="champ-image" src={`${URL}/${data.image.full}`} alt="images" />
-            <div className="passive__description"></div>
+            <MuiThemeProvider theme={theme}>
+                <Tooltip title={spellDes(data)} arrow>
+                    <img className="champ-image" src={`${URL}/${data.image.full}`} alt="images" />
+                </Tooltip>
+            </MuiThemeProvider>
         </div>
     )
 }
