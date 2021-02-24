@@ -58,6 +58,7 @@ export const NavbarComp = () => {
                     <option value="la2">Latin South</option>
                 </select>
             </div>
+            <Link to="/signin">Sign In</Link>
             <Link to="#" className={`hamburger_link `} onClick={() => toggleHandle()}>
                 <i className={`fas fa-bars hamburger_bar`}></i>
             </Link>

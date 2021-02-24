@@ -1,3 +1,4 @@
+import { userType } from './userReducer';
 import { GameImageType } from './../types.d';
 export interface regionActionType {
     payload: string;
@@ -55,4 +56,10 @@ getRankAction
 export interface getRankAction {
     payload: any;
     type: string;
+}
+
+
+export interface userActionType {
+    type: string;
+    payload: userType | string;
 }

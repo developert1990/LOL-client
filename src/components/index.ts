@@ -8,3 +8,4 @@ export * from './SummonerProfile';
 export * from './RankTable';
 export * from './ChampionRotationCard';
 export * from './ChampionRotationCardView';
+export * from './MessageBox';

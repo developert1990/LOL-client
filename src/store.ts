@@ -10,6 +10,7 @@ import promise from 'redux-promise-middleware';
 // import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import { userSigninInitialState, userSigninInitialStateType, userSigninReducer } from './reducers/userReducer';
 
 
 
@@ -23,6 +24,7 @@ export interface initialAppStateType {
     getGames100Store: GetGames100InitialStateType,
     getGameDetailStore: GetGameDetailsInitialStateType,
     getRankStore: getRankInitialStateType,
+    userStore: userSigninInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -35,6 +37,7 @@ export const initialAppState: initialAppStateType = {
     getGames100Store: getGames100InitialState,
     getGameDetailStore: getGameDetailsInitialState,
     getRankStore: getRankInitialState,
+    userStore: userSigninInitialState,
 }
 
 const reducer = combineReducers({
@@ -47,6 +50,7 @@ const reducer = combineReducers({
     getGames100Store: getGames100Reducer,
     getGameDetailStore: getGameDetailsReducer,
     getRankStore: getRankReducer,
+    userStore: userSigninReducer
 });
 
 

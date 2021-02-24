@@ -57,7 +57,6 @@ export const SearchPage = () => {
         <div className="wrap" data-testid="searchPage">
 
             <div className="search">
-                {/* <input type="text" className="summoner-id" placeholder="Enter the Summoner's ID" onChange={e => setSummonerID(e.target.value)} value={summonerID} /> */}
                 <input data-testid="userNameChange" type="text" className="searchTerm" placeholder="Enter the Summoner's ID" onChange={(e: ChangeEvent<HTMLInputElement>) => setSummonerID(e.target.value)} onKeyPress={
                     (e) => {
                         if (e.key === 'Enter')
