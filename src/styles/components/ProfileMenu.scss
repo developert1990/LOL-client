@@ -1,0 +1,195 @@
+@import "./constants/mixin";
+@import "./constants/variables";
+
+.summoner_info_top {
+    color: $whiteColor;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.summoner_profile {
+    position: relative;
+    display: flex;
+    margin: $margin_padding20;
+    padding: 10px;
+    border-radius: 10px;
+    flex: 1;
+}
+
+
+
+@include desktop {
+    .summoner_info_top {
+        .summoner_profile {
+            .level_img {
+                position: relative;
+                display: inline-block;
+                .logo-img {
+                    width: 80px;
+                    border-radius: 10px;
+                    border: 4px solid rgb(245, 35, 20);
+                }
+
+                .level {
+                    position: absolute;
+                    right: 24px;
+                    top: -11px;
+                    font-weight: bolder;
+                    background-color: black;
+                    padding: 3px 5px;
+                    border: 2px solid red;
+                    border-radius: 10px;
+                    font-size: 13px;
+                }
+            }
+
+            .name {
+                font-size: $fontSize_lg_rem;
+                margin-left: $margin_padding20;
+            }
+        }
+
+        .summoner_menu {
+            margin-left: $margin_padding20;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
+
+            .user-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                a {
+                    margin-right: 25px;
+                    height: $with_height40;
+                }
+
+                a:hover {
+                    border-bottom: 2px solid red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@include tablet {
+    .summoner_info_top {
+        .summoner_profile {
+            .level_img {
+                position: relative;
+                display: inline-block;
+
+                .logo-img {
+                    width: 80px;
+                    border-radius: 10px;
+                    border: 4px solid rgb(245, 35, 20);
+                }
+
+                .level {
+                    position: absolute;
+                    right: 24px;
+                    top: -11px;
+                    font-weight: bolder;
+                    background-color: black;
+                    padding: 3px 5px;
+                    border: 2px solid red;
+                    border-radius: 10px;
+                    font-size: 13px;
+                }
+            }
+
+            .name {
+                font-size: $fontSize_md_rem;
+                margin-left: $margin_padding20;
+            }
+        }
+
+        .summoner_menu {
+            margin-left: $margin_padding20;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
+
+            .user-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                a {
+                    margin-right: 25px;
+                    height: $with_height40;
+                }
+
+                a:hover {
+                    border-bottom: 2px solid red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@include mobile {
+    .summoner_info_top {
+        .summoner_profile {
+            .level_img {
+                position: relative;
+                display: inline-block;
+
+                .logo-img {
+                    width: 60px;
+                    border-radius: 10px;
+                    border: 4px solid rgb(245, 35, 20);
+                }
+
+                .level {
+                    position: absolute;
+                    right: 18px;
+                    top: -9px;
+                    font-weight: bolder;
+                    background-color: black;
+                    padding: 1px 3px;
+                    border: 1px solid red;
+                    border-radius: 10px;
+                    font-size: 10px;
+                }
+            }
+
+            .name {
+                font-size: $fontSize_sm_rem;
+                margin-left: $margin_padding20;
+            }
+        }
+
+        .summoner_menu {
+            margin-left: $margin_padding20;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 15px;
+            font-size: $fontSize_xsm_rem;
+            .user-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                a {
+                    margin-right: 25px;
+                    height: $with_height40;
+                }
+
+                a:hover {
+                    border-bottom: 2px solid red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

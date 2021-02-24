@@ -1,0 +1,72 @@
+    @import './constants/mixin';
+    @import './constants/variables';
+
+    @include desktop{
+
+        .side_add_container {
+            display: inline;
+            flex-direction: column;
+            width: 362px;
+            box-sizing: content-box;
+            z-index: 97;
+    
+            .ad_section {
+                display: flex;
+                position: sticky;
+                flex-direction: column;
+                align-items: flex-start;
+                top: 84px;
+    
+                .ad_box1 {
+                    display: flex;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    width: auto;
+                    position: relative;
+    
+                    .ad-contents1 {
+                        height: auto;
+                        min-width: 300px;
+                        min-height: 300px;
+                    }
+                }
+    
+                .ad_box2 {
+                    display: flex;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    align-items: center;
+                    height: auto;
+                    position: relative;
+                    margin-bottom: 30px;
+    
+                    .ad-contents2 {
+                        height: auto;
+                        min-width: 300px;
+                        min-height: 500px;
+                    }
+                }
+    
+                .ad_box_label {
+                    position: absolute;
+                    left: 21px;
+                    top: 8px;
+                    color: #5f5f7b;
+                    font-size: 1rem;
+                }
+    
+            }
+        }
+    }
+
+@include tablet{
+    .side_add_container{
+        display: none;
+    }
+}
+
+@include mobile{
+    .side_add_container{
+        display: none;
+    }
+}

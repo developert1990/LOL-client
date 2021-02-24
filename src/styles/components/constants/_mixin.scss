@@ -1,0 +1,178 @@
+// 언더바를 붙이게 되면 파일단위로 분리되서 컴파일이 되지 않는다.
+// 별도의 css 파일로 컴파일 될 필요가 없기 때문에 성능, 관리상의 이득을 얻을 수 있다.
+
+@import "./_variables";
+
+@mixin mobile {
+    @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+        @content; //미디어 쿼리 내부에는 믹스인이 사용될 때 넘겨받은 콘텐트(content)가 들어가도록
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+        @content;
+    }
+}
+
+@mixin desktop-tablet {
+    @media (min-width: #{$breakpoint-tablet}) {
+        @content;
+    }
+}
+
+
+
+
+
+
+@mixin baseTierColor {
+    .C {
+        color: yellow;
+    }
+    .GM {
+        color: red;
+    }
+    .M {
+        color: purple;
+    }
+    .D {
+        color: blue;
+    }
+    .P {
+        color: green;
+    }
+    .G {
+        color: gold;
+    }
+    .S {
+        color: silver;
+    }
+    .B {
+        color: #c49c48;
+    }
+    .IR {
+        color: rgb(129, 128, 128);
+    }
+}
+
+@mixin matchedGameDetailBGColor {
+    .won {
+        background: linear-gradient(135deg, rgba(50, 115, 250, 0.2), rgba(50, 115, 250, 0)), #191937;
+    }
+
+    .lost {
+        background: linear-gradient(135deg, rgba(255, 78, 80, 0.16), rgba(255, 78, 80, 0)), #191937;
+    }
+    .sameUser {
+        border: 1px solid #ff9b00;
+        background: linear-gradient(90deg, #ad6d0a 0, rgba(255, 155, 0, 0) 42%), #473518 !important;
+    }
+}
+
+@mixin cardBodyBG {
+    .card-body {
+        position: relative;
+        z-index: 1;
+    }
+
+    .card-body::after {
+        background-image: url("../../../images/newChamp_bg.webp");
+        // background-color: $mainBackgroundColor;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.9 !important;
+        filter: alpha(opacity=50);
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin OneGameCardHeader {
+    .card-header::after {
+        background-image: url(../../../images/newChamp_bg.webp);
+        top: 0;
+        left: 0;
+        position: absolute;
+        background-size: 100%;
+        opacity: 0.4 !important;
+        z-index: -1;
+        content: "";
+        width: 100%;
+        height: 100%;
+    }
+
+    .card-header {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+@mixin Masteries {
+    .th_tr {
+        height: 80px;
+    }
+
+    .tb_tr {
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .mastery_Champion {
+        display: flex;
+        height: 80px;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .mastery_champImgAndID {
+        display: grid;
+        grid-template-columns: 0.2fr 0.4fr;
+        align-items: center;
+        .champ-image {
+            width: 30px;
+            height: 30px;
+        }
+        .mastery_championId {
+            display: flex;
+        }
+    }
+}
+
+@mixin summoner_info_bottom_Desktop {
+    .summoner_info_bottom {
+        display: grid;
+        grid-template-columns: 2fr 4fr;
+        column-gap: 4rem;
+    }
+}
+
+@mixin summoner_info_bottom_Tablet {
+    .summoner_info_bottom {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+@mixin mainInfoWrapper_Desktop {
+    margin-bottom: 60px;
+    padding: 25px;
+}
+
+@mixin mainInfoWrapper_Mobile {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+    padding: $margin_padding5;
+}

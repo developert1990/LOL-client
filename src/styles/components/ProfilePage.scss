@@ -1,0 +1,189 @@
+@import "./constants/mixin";
+@import "./constants/variables";
+
+@mixin summonerCardDetail {
+    .detail {
+        margin-left: $margin_padding15;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        span {
+            margin-top: $margin_padding15;
+        }
+
+        .queue-type {
+            font-size: 13px;
+            color: $lightBlueFontColor;
+        }
+
+        .tier {
+            color: red;
+            font-weight: bolder;
+        }
+
+        .lp {
+            font-weight: bolder;
+        }
+
+        .winRate {
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .totalGame {
+            color: $lightBlueFontColor;
+        }
+    }
+}
+
+@include desktop {
+    .mainInfoWrapper {
+        @include mainInfoWrapper_Desktop;
+
+        @include summoner_info_bottom_Desktop;
+    }
+
+    .custom_card {
+        margin: $margin_padding5;
+        background-color: $cardColor_1;
+        color: white;
+        border-radius: $borderRadius;
+    }
+
+    .summoner_info_bottom_left {
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            font-size: $fontSize_15px;
+            padding-top: $margin_padding15;
+
+            .detail_title {
+                font-size: $fontSize_20px;
+                font-weight: bolder;
+                display: flex;
+                padding-left: $margin_padding15;
+            }
+
+            .detail-parent {
+                border-radius: 10px;
+                padding: $margin_padding15;
+                background-color: $mainBackgroundColor;
+                margin: $margin_padding15;
+                display: flex;
+
+                .emblem-img {
+                    width: 100px;
+                    height: 120px;
+                    // margin-top: 80px;
+                }
+
+                @include summonerCardDetail;
+            }
+        }
+
+        .detail_graph {
+            padding: $margin_padding15;
+        }
+    }
+}
+
+@include tablet {
+    .mainInfoWrapper {
+        @include mainInfoWrapper_Desktop;
+
+        @include summoner_info_bottom_Tablet;
+    }
+
+    .custom_card {
+        margin: $margin_padding5;
+        background-color: $cardColor_1;
+        color: white;
+        border-radius: $borderRadius;
+    }
+
+    .summoner_info_bottom_left {
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            font-size: $fontSize_15px;
+            padding-top: $margin_padding15;
+
+            .detail_title {
+                font-size: $fontSize_20px;
+                font-weight: bolder;
+                display: flex;
+                padding-left: $margin_padding15;
+            }
+
+            .detail-parent {
+                border-radius: 10px;
+                padding: $margin_padding15;
+                background-color: $mainBackgroundColor;
+                margin: $margin_padding15;
+                display: flex;
+
+                .emblem-img {
+                    width: 100px;
+                    height: 120px;
+                    // margin-top: 80px;
+                }
+
+                @include summonerCardDetail;
+            }
+        }
+
+        .detail_graph {
+            padding: $margin_padding15;
+        }
+    }
+}
+
+@include mobile {
+    .mainInfoWrapper {
+        @include mainInfoWrapper_Mobile;
+    }
+
+    .custom_card {
+        margin: $margin_padding5;
+        background-color: $cardColor_1;
+        color: white;
+        border-radius: $borderRadius;
+    }
+
+    .summoner_info_bottom_left {
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            padding-top: $margin_padding15;
+
+            .detail_title {
+                font-size: $fontSize_15px;
+                font-weight: bolder;
+                display: flex;
+                padding-left: $margin_padding15;
+            }
+
+            .detail-parent {
+                border-radius: 10px;
+                padding: $margin_padding15;
+                background-color: $mainBackgroundColor;
+                margin: $margin_padding15;
+                display: flex;
+
+                .emblem-img {
+                    width: 80px;
+                    height: 90px;
+                }
+
+                @include summonerCardDetail;
+            }
+        }
+
+        .detail_graph {
+            padding: $margin_padding15;
+        }
+    }
+}

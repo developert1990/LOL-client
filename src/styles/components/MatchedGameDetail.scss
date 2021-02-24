@@ -1,0 +1,336 @@
+@import "./constants/mixin";
+@import "./constants/variables";
+
+.matched-details {
+    border-radius: 10px;
+}
+
+.win-defeat1 {
+    color: $killsColor;
+}
+
+.win-defeat2 {
+    color:$deathsColor;
+}
+
+.team {
+    color: white;
+}
+
+@include desktop {
+    .users-info {
+        display: grid;
+        grid-template-columns: 1fr 2fr 0.7fr 0.7fr 1fr;
+        font-size: 10px;
+        font-weight: bolder;
+        color: white;
+        margin-left: $margin_padding15;
+        margin-right: $margin_padding15;
+
+        .img-level_spells_runes {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            .level {
+                position: absolute;
+                bottom: 0;
+                left: 30px;
+            }
+            .chammpionId {
+                display: none;
+            }
+
+            .spells img {
+                width: $with_height20;
+                height: $with_height20;
+            }
+
+            .runes img {
+                width: $with_height20;
+                height: $with_height20;
+                background-color: black;
+                border-radius: 5px;
+            }
+        }
+        .participantRank_id {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            .id {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 10px;
+            }
+        }
+        .img-level_spells_runes img {
+            width: $with_height40;
+            height: $with_height40;
+            margin: 1px;
+        }
+
+        .kda_kdaAv {
+            display: flex;
+            flex-direction: column;
+            font-size: $fontSize_xxsm_rem;
+
+            .kda {
+                .kills {
+                    color: $killsColor;
+                }
+
+                .deaths {
+                    color: $deathsColor;
+                }
+
+                .assists {
+                    color: $assistColor;
+                }
+            }
+        }
+
+        .kda > span {
+            color: darkgray;
+        }
+
+        .minion_gold {
+            display: flex;
+            flex-direction: column;
+            font-size: $fontSize_xxxsm_rem;
+            .cs {
+                color: white;
+            }
+
+            .gold {
+                color: gold;
+            }
+        }
+
+        .items {
+            display: flex;
+            .items__card {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        .items img {
+            width: $with_height20;
+            height: $with_height20;
+            margin-left: 1px;
+            border-radius: 5px;
+        }
+    }
+
+    @include matchedGameDetailBGColor;
+}
+
+@include tablet {
+    .users-info {
+        display: grid;
+        grid-template-columns: 1fr 2fr 0.7fr 0.7fr 1fr;
+        font-size: 10px;
+        font-weight: bolder;
+        color: white;
+        margin-left: $margin_padding15;
+        margin-right: $margin_padding15;
+
+        .img-level_spells_runes {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            .level {
+                position: absolute;
+                bottom: 0;
+                left: 30px;
+            }
+            .chammpionId {
+                display: none;
+            }
+
+            .spells img {
+                width: $with_height20;
+                height: $with_height20;
+            }
+
+            .runes img {
+                width: $with_height20;
+                height: $with_height20;
+                background-color: black;
+                border-radius: 5px;
+            }
+        }
+        .participantRank_id {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            .id {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 10px;
+            }
+        }
+        .img-level_spells_runes img {
+            width: $with_height40;
+            height: $with_height40;
+            margin: 1px;
+        }
+
+        .kda_kdaAv {
+            display: flex;
+            flex-direction: column;
+            font-size: $fontSize_xxxsm_rem;
+
+            .kda {
+                .kills {
+                    color: $killsColor;
+                }
+
+                .deaths {
+                    color: $deathsColor;
+                }
+
+                .assists {
+                    color: $assistColor;
+                }
+            }
+        }
+
+        .kda > span {
+            color: darkgray;
+        }
+
+        .minion_gold {
+            display: flex;
+            flex-direction: column;
+            font-size: $fontSize_xxxsm_rem;
+            .cs {
+                color: white;
+            }
+
+            .gold {
+                color: gold;
+            }
+        }
+
+        .items__card {
+            display: flex;
+        }
+        .items img {
+            width: $with_height20;
+            height: $with_height20;
+            margin-left: 1px;
+            border-radius: 5px;
+        }
+    }
+
+    @include matchedGameDetailBGColor;
+}
+
+@include mobile {
+    .users-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        font-size: 10px;
+        font-weight: bolder;
+        color: white;
+        margin-left: $margin_padding15;
+        margin-right: $margin_padding15;
+
+        .img-level_spells_runes {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            .level {
+                position: absolute;
+                bottom: 0;
+                left: 25px;
+            }
+            .chammpionId {
+                display: none;
+            }
+
+            .spells img {
+                width: 15px;
+                height: 15px;
+            }
+
+            .runes img {
+                width: 15px;
+                height: 15px;
+                background-color: black;
+                border-radius: 5px;
+            }
+        }
+        .img-level_spells_runes img {
+            width: 35px;
+            height: 35px;
+            margin: 1px;
+        }
+
+        .participantRank_id {
+            .id {
+                font-size: 10px;
+                font-weight: bolder;
+            }
+        }
+
+        .kda_kdaAv {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            .kda {
+                .kills {
+                    color: $killsColor;
+                }
+
+                .deaths {
+                    color: $deathsColor;
+                }
+
+                .assists {
+                    color: $assistColor;
+                }
+            }
+        }
+
+        .kda > span {
+            color: darkgray;
+        }
+
+        .minion_gold {
+            display: none;
+
+            .cs {
+                color: white;
+            }
+
+            .gold {
+                color: gold;
+            }
+        }
+        
+        .items{
+            display: flex;
+            align-items: center;
+        }
+
+        .items__card {
+            display: flex;
+        }
+
+        .items img {
+            width: 16px;
+            height: 16px;
+            margin-left: 1px;
+            border-radius: 5px;
+        }
+    }
+
+    @include matchedGameDetailBGColor;
+}

@@ -1,0 +1,121 @@
+@import './components/constants/_mixin';
+@import './components/constants/_variables';
+@import './components/NavbarComp.scss';
+@import './components/MainPage.scss';
+@import './components/UserMatchHistory.scss';
+@import './components/MatchedGameDetail.scss';
+@import './components/ProfileMenu.scss';
+@import './components/ProfilePage.scss';
+@import './components/SideAdvertisement.scss';
+@import './components/OneGameHistoryBar.scss';
+@import './components/itemsCard.scss';
+@import './components/OtherParticipantsCard.scss';
+@import './components/ParticipantsTierCard.scss';
+@import './components/Masteries.scss';
+@import './components/ChampionsPage.scss';
+@import './components/RankPage.scss';
+@import './components/ChampDetailPage.scss';
+@import './components/ChampDetailPageTop.scss';
+@import './components/ChampDetailPageMiddle.scss';
+@import './components/ChampDetailPageBottom.scss';
+@import './components/ChampionRotationCard.scss';
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    height: 100%;
+    max-width: 100%;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: $mainBackgroundColor;
+    font-family: 'Source Sans Pro', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.App {
+    position: relative;
+    min-height: 100vh;
+
+}
+
+.link {
+    color: $whiteColor;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.logo-img img {
+    margin-top: $margin_padding20;
+    width: 300px;
+}
+
+.footer {
+    border-top: $margin_padding5 solid $borderColor;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0.1rem;
+    color: $killsColor;
+
+    .jumbotron {
+        background-color: $mainBackgroundColor;
+    }
+}
+
+@include desktop {
+
+    body {
+        font-size: 1.3rem;
+    }
+
+    .searchOuter {
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+    }
+
+}
+
+@include tablet{
+    body {
+        font-size: 1.0rem;
+    }
+
+
+    .searchOuter {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@include mobile{
+    body {
+        font-size: 0.8rem;
+    }
+    
+
+    .searchOuter {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo-img img {
+    display: none;
+}
+
+}

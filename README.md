@@ -1,3 +1,18 @@
+<!-- This Application -->
+when this game is updated, I should change the version of items, champs and spells.. at config > index.ts
+# Set up to run this application
+Set up web browser security setting
+    - Chrome : Go to setting -> Privacy and security -> Click site setting -> Insecure content -> Add "https://hongleague.netlify.app/"
+    The reasone why you need to set up this part is that I hosted this application on the netlify, which is using https(protocal), but all API calls are accepted by http(AWS EC2).
+    So Mixed content error will be occurred. I will fix this issue to deploy this client app on the AWS soon.
+# Using this application
+    - Search korean summoner
+        1. Default region is 'kr' (korea)
+        2. Enter summoner's id. (ex hide on bush, haha, Gen G Clid and so on )
+    - Search North America summoner
+        1. Change region to 'north america'
+        2. Enter summoner's id. (ex My Dream LCS, dwg viper, JUGKING and so on )
+    - You can search any summoner in any region.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
