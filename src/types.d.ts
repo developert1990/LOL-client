@@ -486,3 +486,24 @@ export interface GoogleOAuth_Profile_Type {
     picture: string;
     verified_email: boolean;
 }
+
+
+export interface FaceBookOAuth_Profile_Type {
+    email: string;
+    first_name: string;
+    granted_scopes: string[];
+    id: string;
+    last_name: string;
+    name: string;
+}
+
+export interface GitHubOAuth_Profile_Type {
+    avatar_url: string;
+    bio: string;
+    email: string;
+    html_url: string;
+    id: number;
+    location: string;
+    login: string;
+    name: string;
+}
