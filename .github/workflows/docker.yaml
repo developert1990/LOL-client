@@ -1,0 +1,35 @@
+name: Build docker image and publish on docker hub
+
+on: workflow_dispatch
+jobs:
+  docker-build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v2
+
+        # https://github.com/marketplace/actions/build-and-push-docker-images 그대로 복붙하면됨
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}  # git hub 에 해당 리파지토리에 setting에서 설정할 수 있다. 이거 내 아이디 magicq6265 이다.
+          password: ${{ secrets.DOCKERHUB_TOKEN }} # 위와 같이 설정을 해주는데 token은 docker hub에서 받을 수 있다.
+
+      - name: Setting environment variables
+        run: |
+          chmod +x ./scripts/set-env.sh
+          ./scripts/set-env.sh
+
+        env:
+          # AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}} # amazon s3 에 접속을위한 key
+          # AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}} # amazon s3 에 접속을위한 secret key
+
+          REACT_APP_API_BASE: ${{secrets.REACT_APP_API_BASE}} # EC2 의 Public IPv4 DNS 값이다. 
+      - name: Building docker image
+        run: make build
+
+      - name: Publishing docker image
+        run: make push

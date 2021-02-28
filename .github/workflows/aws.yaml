@@ -1,0 +1,46 @@
+name: Deploying to EC2 instance
+
+on: 
+  workflow_dispatch:
+    inputs:
+      gitSha:
+        description: 'docker image tag'
+        required: true
+      containerName:
+        description: 'docker container name'
+        required: true
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v2
+
+      - name: Setting up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/ec2.key
+          chmod 600 ~/.ssh/ec2.key
+          cat >> ~/.ssh/config << END
+          Host aws
+            Hostname $SSH_HOST
+            user ubuntu
+            IdentityFile ~/.ssh/ec2.key
+            StrictHostKeyChecking no
+          END
+          cat ~/.ssh/config
+
+        env:
+          SSH_KEY: ${{secrets.SSH_KEY}} # 이건  local에 있는 aws_ec2_sangmean.pem 파일의 안에 내용값이다. 아마존ec2에서 받은 private ssh 키 값
+          SSH_HOST: ${{secrets.SSH_HOST}} # ec2에 public PIv4 address 이다.
+        
+      - name : Log into EC2 and deploy
+        run: |
+          export IMAGE_NAME=$IMAGE:${{ github.event.inputs.gitSha }}
+          export CONTAINER_NAME=${{github.event.inputs.containerName}}
+          ssh aws docker run --name $CONTAINER_NAME -d -p 8090:80 $IMAGE_NAME
+
+        env:
+          IMAGE: ${{secrets.DOCKER_IMAGE}} # Makefile에 DOCKER_USERNAME/APP_NAME 임
