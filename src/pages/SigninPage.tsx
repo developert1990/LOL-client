@@ -1,10 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { MessageBox } from '../components';
+import { MessageBox, OAuthButtons } from '../components';
 import { Loading } from '../components/Loading';
 import { initialAppStateType } from '../store';
 import { signin } from '../actions/userAction';
+
+
+
 
 
 export const SigninPage = () => {
@@ -31,6 +34,8 @@ export const SigninPage = () => {
 
         dispatch(signin(email, password))
     }
+
+
 
     return (
         <>
@@ -64,6 +69,7 @@ export const SigninPage = () => {
                         This page is protected by Canada to ensure you're not a bot. Learn more.
                     </div>
 
+                    <OAuthButtons />
 
                 </div>
             </div>

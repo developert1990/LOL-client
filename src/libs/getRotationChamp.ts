@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API } from '../config';
-import { ChampDetailType, RotationChampEachType, RotationChampResultType, RotationChampType } from '../types';
+import { ChampDetailType, RotationChampEachType, RotationChampType } from '../types';
 import { getChampsData } from './getChampsData';
 
 export const getRotationChamp = async (region: string) => {

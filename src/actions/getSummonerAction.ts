@@ -1,9 +1,7 @@
-import { THREE_GAMES_DETAIL_RESET } from './../constants/getGamesDetailConstants';
+
 import { MatchType, SummonerDetailType } from './../types.d';
-import { API_BASE } from './../config/index';
-import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL, GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL, GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET, GET_SUMMONER_DETAIL_REQUEST } from './../constants/getSummonerConstants';
+import { GET_SUMMONER_REQUEST, GET_SUMMONER_FAIL, GET_SUMMONER_SUCCESS, GET_SUMMONER_RESET, GET_SUMMONER_DETAIL_SUCCESS, GET_SUMMONER_DETAIL_FAIL, GET_SUMMONER_GAMES_100_SUCCESS, GET_SUMMONER_GAMES_100_FAIL, GET_SUMMONER_DETAIL_REQUEST } from './../constants/getSummonerConstants';
 import { ThunkDispatch } from 'redux-thunk';
-import Axios from 'axios';
 import { get100Games, getSummonerBasicInfo, getSummonerDetailData } from '../libs';
 
 

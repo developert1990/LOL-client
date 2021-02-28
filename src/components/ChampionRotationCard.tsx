@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getRotationChamp } from '../libs';
 import { initialAppStateType } from '../store';
-import { RotationChampType, RotationChampResultType, RotationChampEachType } from '../types';
+import { RotationChampResultType } from '../types';
 import { ChampionRotationCardView } from './ChampionRotationCardView';
-import { ChampImgCard } from './small_components';
 
 export const ChampionRotationCard = () => {
     const { region } = useSelector((state: initialAppStateType) => state.regionStore);

@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { getSummoner } from '../actions/getSummonerAction';
 import { GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET } from '../constants/getSummonerConstants';
 import { THREE_GAMES_DETAIL_RESET } from '../constants/getGamesDetailConstants';
-import { useQuery } from '../hooks';
 
 
 export const SearchPage = () => {
@@ -14,9 +13,7 @@ export const SearchPage = () => {
     const dispatch = useDispatch();
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);
     const { region } = regionStore;
-    const userFromLS = localStorage.getItem("userAccId");
     const [summonerID, setSummonerID] = useState<string>('');
-    const query = useQuery();
 
     // useEffect(() => {
     //     if (summonerID.length === 0 && userFromLS) {

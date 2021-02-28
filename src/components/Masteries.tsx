@@ -27,6 +27,7 @@ export const Masteries = () => {
                 setIsLoading(false);
             }
         )();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const setLevelColor = (level: number) => {

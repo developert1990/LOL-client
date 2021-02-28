@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react'
 import { GameImageType } from '../../types'
 import { GoldEarnedCard } from './GoldEarnedCard'

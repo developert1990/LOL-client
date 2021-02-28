@@ -10,7 +10,7 @@ import promise from 'redux-promise-middleware';
 // import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { userSigninInitialState, userSigninInitialStateType, userSigninReducer } from './reducers/userReducer';
+import { userRegisterInitialType, userSigninInitialState, userSigninInitialStateType, userSigninReducer, userRegisterInitailState, userRegisterReducer, checkIsAdminInitialStateType, checkIsAdminInitialState, checkIsAdminReducer } from './reducers/userReducer';
 
 
 
@@ -25,6 +25,8 @@ export interface initialAppStateType {
     getGameDetailStore: GetGameDetailsInitialStateType,
     getRankStore: getRankInitialStateType,
     userStore: userSigninInitialStateType,
+    registerStore: userRegisterInitialType,
+    checkAdminStore: checkIsAdminInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -38,6 +40,8 @@ export const initialAppState: initialAppStateType = {
     getGameDetailStore: getGameDetailsInitialState,
     getRankStore: getRankInitialState,
     userStore: userSigninInitialState,
+    registerStore: userRegisterInitailState,
+    checkAdminStore: checkIsAdminInitialState,
 }
 
 const reducer = combineReducers({
@@ -50,7 +54,9 @@ const reducer = combineReducers({
     getGames100Store: getGames100Reducer,
     getGameDetailStore: getGameDetailsReducer,
     getRankStore: getRankReducer,
-    userStore: userSigninReducer
+    userStore: userSigninReducer,
+    registerStore: userRegisterReducer,
+    checkAdminStore: checkIsAdminReducer,
 });
 
 

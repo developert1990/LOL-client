@@ -13,7 +13,7 @@ let rankArr: SummonerDetailType[] = [];
 
 export const RankPage = () => {
     const { region } = useSelector((state: initialAppStateType) => state.regionStore);
-    const { error, isLoading, rank } = useSelector((state: initialAppStateType) => state.getRankStore);
+    const { isLoading, rank } = useSelector((state: initialAppStateType) => state.getRankStore);
 
     const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ export const RankPage = () => {
             console.log('urls', urls)
             setUrls(getURLs(region));
         }
-    }, []);
+    }, [region, urls]);
 
     useEffect(() => {
         // 맨처음 랜더 된다, 리전을 바꿀때도 rank길이도 0 이되고 url도 다시 받아오기때문에 이곳이 랜더 된다.
@@ -61,14 +61,14 @@ export const RankPage = () => {
             rankArr = [];
             dispatch(getRankAction(urls, urlCount, rankArr));
         }
-    }, [urls, urlCount])
+    }, [urls, urlCount, rank.length, dispatch])
 
     useEffect(() => {
         // reset initial data when region is changed.
         setUrls(getURLs(region));
         setUrlCount(0);
         dispatch({ type: RANKING_RESET });
-    }, [region])
+    }, [dispatch, region])
 
     return (
         <div className="rank-page">

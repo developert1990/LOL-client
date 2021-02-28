@@ -15,7 +15,7 @@ export const getSummonerMatchDetail = async (games: MatchedGameType[], accountId
 
         // participantsData 추가해줌
         summonorMatchDetail.map((data, index) => {
-            data.otherParticipants = participantsData[index];
+            return data.otherParticipants = participantsData[index];
         });
     }
     return summonorMatchDetail;

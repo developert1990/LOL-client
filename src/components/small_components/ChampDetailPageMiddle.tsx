@@ -3,7 +3,7 @@ import { ChampDetailPageTopProps } from './ChampDetailPageTop'
 
 export const ChampDetailPageMiddle: React.FC<ChampDetailPageTopProps> = ({ selectedChampDetails }) => {
     console.log('selectedChampDetails', selectedChampDetails);
-    const { armor, crit, hp, attackdamage, attackspeed, movespeed, mp, spellblock, armorperlevel, attackdamageperlevel, attackrange, attackspeedperlevel, critperlevel, hpperlevel, hpregen, hpregenperlevel, mpperlevel, mpregen, mpregenperlevel, spellblockperlevel } = selectedChampDetails.stats;
+    const { armor, crit, hp, attackdamage, attackspeed, movespeed, mp, spellblock } = selectedChampDetails.stats;
     return (
         <div className="champDetailPage__middle">
             <div className="top">

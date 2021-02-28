@@ -1,4 +1,4 @@
-import { ChampDetailType } from '../types';
+
 import allChamps from '../data/allChamps.json';
 
 

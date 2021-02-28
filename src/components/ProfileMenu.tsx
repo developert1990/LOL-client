@@ -1,10 +1,6 @@
 
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSummoner } from '../actions/getSummonerAction';
-import { THREE_GAMES_DETAIL_RESET } from '../constants/getGamesDetailConstants';
-import { GET_SUMMONER_DETAIL_RESET, GET_SUMMONER_GAMES_100_RESET } from '../constants/getSummonerConstants';
-import { useQuery } from '../hooks';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { ErrorType } from '../reducers/types';
 import { initialAppStateType } from '../store';
 import { SummonerReduxtype } from '../types';

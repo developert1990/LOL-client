@@ -1,5 +1,6 @@
-import { userActionType } from './types.d';
-import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_RESET, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from '../constants/userConstants';
+
+import { userActionType, checkIsAdminActionType } from './types.d';
+import { CHECK_ISADMIN_FAIL, CHECK_ISADMIN_REQUEST, CHECK_ISADMIN_SUCCESS, CHECK_ISADMIN_RESET, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_RESET, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from '../constants/userConstants';
 import { cartItemType } from './cartReducer';
 
 
@@ -8,10 +9,8 @@ export interface userType {
     name: string;
     email: string;
     isAdmin: boolean;
-    isSeller: boolean;
     tokenExp: string | number;
     refreshTokenExp: string | number;
-    token: string;
     cart: cartItemType[];
 }
 
@@ -30,11 +29,11 @@ export const userSigninInitialState: userSigninInitialStateType = {
 export const userSigninReducer = (state = userSigninInitialState, action: userActionType) => {
     switch (action.type) {
         case USER_SIGNIN_REQUEST:
-            return { loading: true }
+            return { ...state, loading: true }
         case USER_SIGNIN_SUCCESS:
-            return { loading: false, userInfo: action.payload };
+            return { ...state, loading: false, userInfo: action.payload };
         case USER_SIGNIN_FAIL:
-            return { loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.payload };
         case USER_SIGNOUT:
             return {}
         default:
@@ -70,6 +69,37 @@ export const userRegisterReducer = (state = userRegisterInitailState, action: us
         case USER_REGISTER_FAIL:
             return { loading: false, error: action.payload };
         case USER_REGISTER_RESET:
+            return {};
+        default:
+            return state;
+    }
+}
+
+
+
+
+
+export interface checkIsAdminInitialStateType {
+    error: string;
+    loading: boolean;
+    isAdmin: boolean;
+}
+
+export const checkIsAdminInitialState: checkIsAdminInitialStateType = {
+    error: '',
+    loading: false,
+    isAdmin: false,
+}
+
+export const checkIsAdminReducer = (state = checkIsAdminInitialState, action: checkIsAdminActionType) => {
+    switch (action.type) {
+        case CHECK_ISADMIN_REQUEST:
+            return { ...state, loading: true }
+        case CHECK_ISADMIN_SUCCESS:
+            return { ...state, loading: false, isAdmin: action.payload };
+        case CHECK_ISADMIN_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        case CHECK_ISADMIN_RESET:
             return {};
         default:
             return state;

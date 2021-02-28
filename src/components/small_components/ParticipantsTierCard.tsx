@@ -1,7 +1,5 @@
 import React from 'react';
-import { API } from '../../config';
 import { mixedArrType } from '../../libs';
-import { GameImageType } from '../../types';
 import { EmblemCard } from './index';
 
 

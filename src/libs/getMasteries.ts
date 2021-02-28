@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import axios from 'axios';
 import { API_BASE } from '../config';
 import { MasteriesType, SummonerReduxtype } from '../types';

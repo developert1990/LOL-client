@@ -52,7 +52,6 @@ export interface ErrorType {
     "message": string;
 }
 
-getRankAction
 export interface getRankAction {
     payload: any;
     type: string;
@@ -62,4 +61,10 @@ export interface getRankAction {
 export interface userActionType {
     type: string;
     payload: userType | string;
+}
+
+
+export interface checkIsAdminActionType {
+    type: string;
+    payload: any;
 }

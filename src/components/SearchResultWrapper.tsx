@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { ProfileMenu } from '../components/index';
 import { Route } from 'react-router-dom';
@@ -13,14 +14,14 @@ export const SearchResultWrapper = () => {
     const { isLoading, error, summonerDetail } = useSelector((state: initialAppStateType) => state.getSummonerDetailStore);
 
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
-    const { isLoading: getSummonerIsLoading, error: summonerInfoError, summonerInfo } = getSummonerStore;
+    const { summonerInfo } = getSummonerStore;
 
 
     const getGames100Store = useSelector((state: initialAppStateType) => state.getGames100Store);
-    const { error: games100Error, games100, matchIds } = getGames100Store;
+    const { games100, matchIds } = getGames100Store;
 
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
-    const { detailedImageData, error: gameDetailError, games, isLoading: summoerMatchDetailLoading, summonerMatchDetail } = getGamesDetailStore;
+    const { detailedImageData } = getGamesDetailStore;
 
 
     const regionStore = useSelector((state: initialAppStateType) => state.regionStore);

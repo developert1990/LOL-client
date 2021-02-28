@@ -24,6 +24,7 @@ export const Use_3MatchedGames = (start: number, gameIdInfo: number[], region: s
                 setMatchesInfo(matchesData);
             }
         )();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return matchesInfo;

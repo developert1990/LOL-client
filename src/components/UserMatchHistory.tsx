@@ -37,7 +37,7 @@ export interface UserMatchHistoryPropsType {
 const UserMatchHistory: React.FC<UserMatchHistoryPropsType> = ({ setStart, start, information, loadMore, setLoadMore }) => {
 
     const getGamesDetailStore = useSelector((state: initialAppStateType) => state.getGameDetailStore);
-    const { error: gamesDetailError, games, isLoading: gamesDetailLoading, detailedImageData, summonerMatchDetail } = getGamesDetailStore;
+    const { games, isLoading: gamesDetailLoading } = getGamesDetailStore;
 
 
     // 커스텀훅을 리덕스 내부에서 사용불가능 해서 일반 함수호출로 바꿔줫음

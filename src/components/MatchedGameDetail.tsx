@@ -1,9 +1,7 @@
 
 import React from 'react';
-import { API } from '../config';
-import { ChampDetailType, GameImageType, MatchedGameType, ParticipantIdentitiesType, ParticipantsType, RuneBigType, SpellDetailType } from '../types';
-import darkgery from '../images/darkgrey.png';
-import { ChampImgCard, GoldEarnedCard, ItemsCard, KDA_Card, MatchedDetailedCard, MinionKillsCard, ParticipantsTierCard, RunesCard, SpellsCard } from './small_components/index';
+import { ChampDetailType, GameImageType, MatchedGameType, ParticipantsType, RuneBigType, SpellDetailType } from '../types';
+import { MatchedDetailedCard } from './small_components/index';
 
 export interface MatchedGameDetailPropsType {
     games: MatchedGameType;

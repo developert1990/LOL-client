@@ -2,7 +2,7 @@ import { getRunesData } from './getRunesData';
 import { getSpellsData } from './getSpellsData';
 import { getChampsData } from './getChampsData';
 
-import { SpellsIngameType, RunesIngameType, ParticipantsType, GameImageType, MatchedGameType, ChampDetailType, SpellDetailType, RuneBigType } from './../types.d';
+import { SpellsIngameType, RunesIngameType, ParticipantsType, GameImageType, MatchedGameType } from './../types.d';
 import { MATCHHISTORY_LENGTH } from '../config/index';
 
 // 성공

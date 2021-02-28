@@ -10,6 +10,7 @@ export const getSummonerDetailData = async (id: string, region: string) => {
         const summonerDetail: SummonerDetailType[] = data;
         return summonerDetail;
     } else {
+        // eslint-disable-next-line no-throw-literal
         throw { message: "No rank information for current filters." };
     }
 }

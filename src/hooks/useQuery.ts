@@ -4,9 +4,9 @@ interface QueryStringObj {
     [key: string]: string;
 }
 
-interface queryType {
-    name: string;
-}
+// interface queryType {
+//     name: string;
+// }
 
 export const useQuery = () => {
     const [query, setQuery] = useState<QueryStringObj>({});

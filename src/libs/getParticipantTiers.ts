@@ -1,4 +1,4 @@
-import { SummonerDetailType } from '../types';
+
 import { API_BASE } from '../config/index';
 import Axios from 'axios';
 

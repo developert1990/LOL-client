@@ -1,15 +1,21 @@
-import React, { ChangeEvent, useState } from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import { useDispatch } from 'react-redux';
-import { Link } from "react-router-dom";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
 import { changeRegion } from '../actions/regionAction';
+import { checkIsAdmin, signout } from '../actions/userAction';
 import logo from '../images/cat.png';
 import { SearchPage } from '../pages';
+import { initialAppStateType } from '../store';
+import { NavbarAdmin } from './NavbarAdmin';
+import { NavbarUser } from './NavbarUser';
 
 export const NavbarComp = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const [active, setActive] = useState<boolean>(false);
+    const { userInfo } = useSelector((state: initialAppStateType) => state.userStore);
+    const { isAdmin } = useSelector((state: initialAppStateType) => state.checkAdminStore);
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const selectedRegion = e.target.value;
@@ -23,6 +29,20 @@ export const NavbarComp = () => {
     const clickLink = () => {
         setActive(!active);
     }
+
+    const signoutHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault();
+        dispatch(signout());
+        history.push('/')
+    }
+
+    useEffect(() => {
+        // userInfo 바꾸면 다시 랜더
+        if (userInfo) {
+            console.log("어드민 체크하러 들어옴")
+            dispatch(checkIsAdmin());
+        }
+    }, [dispatch, userInfo])
 
     return (
         <div className="navbarComp">
@@ -58,7 +78,15 @@ export const NavbarComp = () => {
                     <option value="la2">Latin South</option>
                 </select>
             </div>
-            <Link to="/signin">Sign In</Link>
+            {
+                userInfo ? (
+                    isAdmin ?
+                        <NavbarAdmin signoutHandler={signoutHandler} /> :
+                        <NavbarUser signoutHandler={signoutHandler} />
+                ) :
+                    <Link to="/signin">Sign In</Link>
+
+            }
             <Link to="#" className={`hamburger_link `} onClick={() => toggleHandle()}>
                 <i className={`fas fa-bars hamburger_bar`}></i>
             </Link>

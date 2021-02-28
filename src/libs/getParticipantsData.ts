@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 
 import { MatchedGameType } from './../types.d';
 import { getChampsData } from './getChampsData';
@@ -42,7 +43,7 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
             return acc;
         }, []);
 
-        playerNameInThreeGamesArr.push(inner);
+        return playerNameInThreeGamesArr.push(inner);
     });
 
     const encryptedIdInThreeGamesArr: encrypedIdInGameType[][] = [];
@@ -54,7 +55,7 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
             acc.push(obj);
             return acc;
         }, []);
-        encryptedIdInThreeGamesArr.push(inner);
+        return encryptedIdInThreeGamesArr.push(inner);
     });
 
 
@@ -73,7 +74,7 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
             return acc;
 
         }, []);
-        playChampsIdInTreeGamesArr.push(inner);
+        return playChampsIdInTreeGamesArr.push(inner);
     });
 
     const deepCopyEncryped: string[][] = JSON.parse(JSON.stringify(encrypedId));
@@ -88,7 +89,7 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
     resultArr = playerNameInThreeGamesArr.map((eachGame: playerNameInGameType[], outerIndex: number) => {
         const resultInnerArr: any[] = [];
         eachGame.map((players, innerIndex: number) => {
-            resultInnerArr.push({
+            return resultInnerArr.push({
                 playerName: players.playerName,
                 championId: playChampsIdInTreeGamesArr[outerIndex][innerIndex].championId,
                 encryptedSummonerId: encryptedIdInThreeGamesArr[outerIndex][innerIndex].encryptedSummonerId,
@@ -99,7 +100,7 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
     });
 
 
-    resultArr.map((data, index) => {
+    resultArr.map((data) => {
         data.map((outerData: mixedArrType) => {
             champsData.map((innerData) => {
                 if (innerData.key === outerData.championId.toString()) {
@@ -108,16 +109,6 @@ export const getParticipantsData = async (games: MatchedGameType[], region: stri
             })
         })
     });
-
-
-
-
-
-
-
-
-
-
 
 
     return resultArr;

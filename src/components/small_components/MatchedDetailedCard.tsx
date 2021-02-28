@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { initialAppStateType } from '../../store';
@@ -15,7 +16,7 @@ interface MatchedDetailedCardPropsType {
 }
 
 export const MatchedDetailedCard: React.FC<MatchedDetailedCardPropsType> = ({ participantsInfo, clickedData, participantIdentities, index, allChampsData, allRunesData, allSpellsData }) => {
-    const { assists, champLevel, deaths, doubleKills, goldEarned, item0, item1, item2, item3, item4, item5, item6, kills, totalMinionsKilled, tripleKills, wardsPlaced } = participantsInfo.stats;
+    const { assists, champLevel, deaths, kills, totalMinionsKilled } = participantsInfo.stats;
     let { perkPrimaryStyle, perkSubStyle } = participantsInfo.stats;
 
     const getSummonerStore = useSelector((state: initialAppStateType) => state.getSummonerStore);
