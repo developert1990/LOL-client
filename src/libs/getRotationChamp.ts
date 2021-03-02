@@ -9,7 +9,8 @@ export const getRotationChamp = async (region: string) => {
         console.log('API.GET_CHAMP_ROTATION', API.GET_CHAMP_ROTATION)
         const { data } = await axios.get(`${API.GET_CHAMP_ROTATION}?region=${region}`);
         const typedData: RotationChampType = data;
-
+        console.log('data ==> ', data)
+        console.log('typedData ===>> ', typedData)
         const allChamps = getChampsData();
 
         const freeChampForAll = typedData.freeChampionIds.reduce((acc: RotationChampEachType[], curr) => {
