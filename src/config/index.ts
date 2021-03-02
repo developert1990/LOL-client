@@ -1,6 +1,6 @@
-
+// aws ec2 docker address : "http://ec2-3-80-79-7.compute-1.amazonaws.com:7080";
 export const USER_BASE = 'https://react-lol-app.herokuapp.com/user';
-export const API_AWS_BASE = "http://ec2-3-80-79-7.compute-1.amazonaws.com:7080";
+export const API_AWS_BASE = "https//server.leagueoflegend.ml";
 export const API_BASE_LOCAL = 'http://localhost:7080';
 export const API_BASE = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_BASE : API_BASE_LOCAL;
 export const GAME_VERSION = "11.4.1";

@@ -12,7 +12,7 @@ export const ChampionRotationCard = () => {
     useEffect(() => {
         (
             async () => {
-                const rotationChampResult: RotationChampResultType = await getRotationChamp(region);
+                const rotationChampResult = await getRotationChamp(region);
                 setRotateChampObj(rotationChampResult);
             }
         )();

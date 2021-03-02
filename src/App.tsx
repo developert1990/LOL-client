@@ -10,9 +10,11 @@ import { refresh, signout } from './actions/userAction';
 
 import firebase from 'firebase';
 import { firebaseConfig } from './libs/firebase';
+import { API_BASE } from './config';
 
 
 function App() {
+  console.log('API_BASE ==>> ', API_BASE)
   getChampsData();
   const { userInfo } = useSelector((state: initialAppStateType) => state.userStore);
   const [open, setOpen] = useState<boolean>(false);
