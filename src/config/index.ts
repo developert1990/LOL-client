@@ -41,6 +41,6 @@ export const DIVISIONS = [
     'IV'
 ]
 
-export const MATCHHISTORY_LENGTH: number = 3
+export const MATCHHISTORY_LENGTH: number = 2
 
 export const EMAIL_REG_EXP = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
