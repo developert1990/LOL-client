@@ -5,3 +5,7 @@ export * from './RankPage';
 export * from './ChampionDetailPage';
 export * from './SigninPage';
 export * from './SignUpPage';
+
+export * from './shopPage/AdminProductListPage';
+export * from './shopPage/AdminProductCreatePage';
+export * from './shopPage/ProductPage';

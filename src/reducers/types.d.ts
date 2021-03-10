@@ -1,3 +1,4 @@
+import { ProductType } from './../productTypes.d';
 import { userType } from './userReducer';
 import { GameImageType } from './../types.d';
 export interface regionActionType {
@@ -67,4 +68,11 @@ export interface userActionType {
 export interface checkIsAdminActionType {
     type: string;
     payload: any;
+}
+
+
+export interface ProductActionType {
+    type: string;
+    payload: ProductType[];
+    reDirectUrl: string;
 }
