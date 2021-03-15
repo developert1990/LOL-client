@@ -14,3 +14,5 @@ export * from './NavbarAdmin';
 export * from './TokenExpMessage';
 export * from './OAuthButtons';
 export * from './AdminRoute';
+export * from './AllProductList';
+export * from './ProductListTable';

@@ -76,3 +76,5 @@ export interface ProductActionType {
     payload: ProductType[];
     reDirectUrl: string;
 }
+
+

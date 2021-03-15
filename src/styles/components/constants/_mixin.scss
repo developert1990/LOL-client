@@ -27,11 +27,6 @@
     }
 }
 
-
-
-
-
-
 @mixin baseTierColor {
     .C {
         color: yellow;
@@ -177,77 +172,215 @@
     padding: $margin_padding5;
 }
 
-
 @mixin form {
+    .form {
+        display: flex;
+        flex-direction: column;
+        min-height: 660px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 100%;
+        margin: auto;
+        max-width: 450px;
+        padding: 60px 68px 40px;
+        margin-bottom: 100px;
+    }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    min-height: 660px;
-    border-radius: 5px;
-    box-sizing: border-box;
-    width: 100%;
-    margin: auto;
-    max-width: 450px;
-    padding: 60px 68px 40px;
-    margin-bottom: 100px;
+    .form__base {
+        display: flex;
+        flex-direction: column;
+        max-width: 450px;
+        width: 100%;
+    }
 
+    .form__title {
+        color: rgb(87, 85, 85);
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 28px;
+    }
 
-}
+    .form__error {
+        background: #e87c03;
+        border-radius: 4px;
+        font-size: 14px;
+        margin: 0 0 16px;
+        color: white;
+        padding: 15px 20px;
+    }
 
-.form__base {
-    display: flex;
-    flex-direction: column;
-    max-width: 450px;
-    width: 100%;
-}
+    .form__input {
+        background: #333;
+        border-radius: 4px;
+        width: 100%;
+        border: 0;
+        color: white;
+        height: 50px;
+        line-height: 50px;
+        padding: 5px 20px;
+        margin-bottom: 20px;
 
-.form__title {
-    color: rgb(87, 85, 85);
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 28px;
-}
+        &:last-of-type {
+            margin-bottom: 30px;
+        }
+    }
 
-.form__error {
-    background: #e87c03;
-    border-radius: 4px;
-    font-size: 14px;
-    margin: 0 0 16px;
-    color: white;
-    padding: 15px 20px;
-}
+    .form__submit {
+        background: #603bbb;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 24px 0 12px;
+        padding: 16px;
+        border: 0;
+        color: white;
+        cursor: pointer;
 
-
-.form__input {
-    background: #333;
-    border-radius: 4px;
-    width: 100%;
-    border: 0;
-    color: white;
-    height: 50px;
-    line-height: 50px;
-    padding: 5px 20px;
-    margin-bottom: 20px;
-
-    &:last-of-type {
-        margin-bottom: 30px;
+        &:disabled {
+            opacity: 0.5;
+        }
     }
 }
 
-.form__submit {
-    background: #603bbb;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 24px 0 12px;
-    padding: 16px;
-    border: 0;
-    color: white;
-    cursor: pointer;
 
-    &:disabled {
-        opacity: 0.5;
+@mixin adminPage {
+    .pagination {
+        display: flex;
+        justify-content: center;
+        padding: 30px;
     }
-}
+
+    .table_top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .actionBtn{
+        cursor: pointer;
+    }
+    .actionBtn_edit:hover{
+        color: $highResultColor;
+    }
+    .actionBtn_delete:hover{
+        color:$deathsColor
+    }
+
+    @include desktop {
+        .table_title {
+            font-size: $fontSize_md_rem;
+            color: white;
+            margin: 30px auto;
+        }
+        .button_Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .table_container {
+            color: $lightBlueFontColor;
+            font-size: $fontSize_15px;
+
+            width: 1200px;
+            margin: 0 auto;
+            .MuiPaginationItem-root {
+                color: $lightBlueFontColor;
+            }
+
+            .inner_table {
+                margin: 10px auto;
+                background-color: $cardColor_1;
+                border-radius: 15px;
+            }
+
+            tbody tr:nth-child(odd) {
+                background-color: $subBackgroundColor;
+            }
+
+            th,
+            td {
+                width: 200px;
+                height: 55px;
+            }
+        }
+    }
+
+    @include tablet {
+        .table_title {
+            font-size: $fontSize_md_rem;
+            color: white;
+            margin: 30px auto;
+        }
+        .button_Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-right: $margin_padding15;
+        }
+        .table_container {
+            color: $lightBlueFontColor;
+            font-size: $fontSize_xxsm_rem;
+
+            width: 800px;
+            margin: 0 auto;
+            .MuiPaginationItem-root {
+                color: $lightBlueFontColor;
+            }
+
+            .inner_table {
+                margin: 10px auto;
+                background-color: $cardColor_1;
+                border-radius: 15px;
+            }
+
+            th,
+            td {
+                width: 100px;
+                height: 55px;
+            }
+        }
+    }
+
+    @include mobile {
+        .table_title {
+            font-size: $fontSize_sm_rem;
+            color: white;
+            margin: 30px auto;
+        }
+        .button_Container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .table_container {
+            color: $lightBlueFontColor;
+            font-size: $fontSize_xxxsm_rem;
+
+            width: 450px;
+            margin: 0 auto;
+            .MuiPaginationItem-root {
+                color: $lightBlueFontColor;
+            }
+
+            .inner_table {
+                margin: 10px auto;
+                background-color: $cardColor_1;
+                border-radius: 15px;
+            }
+
+            th,
+            td {
+                width: 200px;
+                height: 55px;
+            }
+
+            .actionBtn{
+                max-width: 20px;
+                max-height: 20px;
+            }
+
+        }
+    }
 }

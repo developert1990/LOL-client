@@ -1,0 +1,21 @@
+@import "./constants/mixin";
+
+@include adminPage;
+
+@include desktop {
+    .prodcut_img_admin {
+        width: 40px;
+    }
+}
+
+@include tablet {
+    .prodcut_img_admin {
+        width: 40px;
+    }
+}
+
+@include mobile {
+    .prodcut_img_admin {
+        width: 20px;
+    }
+}

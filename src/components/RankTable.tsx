@@ -17,8 +17,8 @@ export const RankTable: React.FC<RankTablePropsType> = ({ pageData, dataLimit, p
     const { rank } = useSelector((state: initialAppStateType) => state.getRankStore);
 
     return (
-        <div className="rankTable_container">
-            <table className="rank-table">
+        <div className="table_container">
+            <table className="inner_table">
                 <thead>
                     <tr>
                         <th>Rank</th>
@@ -61,7 +61,7 @@ export const RankTable: React.FC<RankTablePropsType> = ({ pageData, dataLimit, p
                     }
                 </tbody>
             </table>
-            <Pagination className="rank_pagination" count={Math.ceil(rank.length / dataLimit)} color="primary" onChange={handlePageChange} page={page} />
+            <Pagination className="pagination" count={Math.ceil(rank.length / dataLimit)} color="primary" onChange={handlePageChange} page={page} />
         </div>
     )
 }

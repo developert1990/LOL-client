@@ -1,7 +1,7 @@
 @import "./constants/mixin";
 @import "./constants/variables";
 
-.rank_pagination {
+.pagination {
     display: flex;
     justify-content: center;
     padding: 50px;
@@ -13,7 +13,7 @@
         color: white;
         margin: 30px auto;
     }
-    .rankTable_container {
+    .table_container {
         color: $lightBlueFontColor;
         font-size: $fontSize_15px;
 
@@ -23,7 +23,7 @@
             color: $lightBlueFontColor;
         }
 
-        .rank-table {
+        .inner_table {
             margin: 0 auto;
             background-color: $cardColor_1;
             border-radius: 15px;
@@ -54,7 +54,7 @@
         color: white;
         margin: 20px auto;
     }
-    .rankTable_container {
+    .table_container {
         color: $lightBlueFontColor;
         font-size: $fontSize_xxsm_rem;
 
@@ -64,7 +64,7 @@
             color: $lightBlueFontColor;
         }
 
-        .rank-table {
+        .inner_table {
             margin: 0 auto;
             background-color: $cardColor_1;
             border-radius: 15px;
@@ -91,7 +91,7 @@
         color: white;
         margin: 30px auto;
     }
-    .rankTable_container {
+    .table_container {
         color: $lightBlueFontColor;
         font-size: $fontSize_xxxsm_rem;
 
@@ -101,7 +101,7 @@
             color: $lightBlueFontColor;
         }
 
-        .rank-table {
+        .inner_table {
             margin: 0 auto;
             background-color: $cardColor_1;
             border-radius: 15px;

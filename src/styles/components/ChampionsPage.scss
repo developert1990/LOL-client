@@ -2,7 +2,7 @@
 @import "./constants/variables";
 
 @mixin ChampionPageMain {
-    .championsPage_title {
+    .table_title {
         color: #fff;
         font-size: $fontSize_lg_rem;
     }
@@ -49,7 +49,7 @@
 }
 
 @include mobile {
-    .championsPage_title {
+    .table_title {
         color: #fff;
         font-size: $fontSize_lg_rem;
     }
