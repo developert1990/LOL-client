@@ -7,7 +7,7 @@ export const ChampionsPage = () => {
     const allChamps = getChampsData();
     return (
         <div className="championsPage">
-            <div className="championsPage_title">
+            <div className="table_title">
                 LoL Champions
             </div>
             <div className="championsPage_container">

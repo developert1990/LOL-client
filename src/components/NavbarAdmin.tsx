@@ -13,7 +13,7 @@ export const NavbarAdmin: React.FC<NavbarAdminPropsType> = ({ signoutHandler }) 
                 <div className="dropdown-content">
                     <NavDropdown.Item><Link to="/Admin/dashboard">Dashboard</Link> </NavDropdown.Item>
                     <NavDropdown.Item><Link to="/Admin/productList">Products</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link to="/Admin/orderList">Orders</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link to="/Admin/orderList">Orders</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link to="/Admin/userList">Users</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link to="#signout" onClick={signoutHandler}>Sign Out</Link></NavDropdown.Item>
                 </div>

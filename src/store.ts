@@ -1,4 +1,4 @@
-import { productCreateInitialState, productCreateInitialStateType, productCreateReducer } from './reducers/productReducer';
+import { productCreateInitialState, productCreateInitialStateType, productCreateReducer, productListInitialState, ProductListInitialStateType, productListReducer } from './reducers/productReducer';
 import { getRankInitialState, getRankInitialStateType, getRankReducer } from './reducers/getRankReducer';
 import { getGameDetailsInitialState, GetGameDetailsInitialStateType, getGameDetailsReducer } from './reducers/getGamesDetailReducer';
 import { GetGames100InitialStateType, getGames100InitialState, getGames100Reducer } from './reducers/getGames100Reducer';
@@ -29,6 +29,7 @@ export interface initialAppStateType {
     registerStore: userRegisterInitialType,
     checkAdminStore: checkIsAdminInitialStateType,
     productCreateStore: productCreateInitialStateType,
+    productListStore: ProductListInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -45,6 +46,7 @@ export const initialAppState: initialAppStateType = {
     registerStore: userRegisterInitailState,
     checkAdminStore: checkIsAdminInitialState,
     productCreateStore: productCreateInitialState,
+    productListStore: productListInitialState,
 }
 
 const reducer = combineReducers({
@@ -61,6 +63,7 @@ const reducer = combineReducers({
     registerStore: userRegisterReducer,
     checkAdminStore: checkIsAdminReducer,
     productCreateStore: productCreateReducer,
+    productListStore: productListReducer,
 });
 
 

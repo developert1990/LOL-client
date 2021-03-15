@@ -58,6 +58,9 @@ export const NavbarComp = () => {
                 <Link className="link" to="/rank" onClick={() => clickLink()}>
                     <li>Ranks</li>
                 </Link>
+                <Link className="link" to="/shops" onClick={() => clickLink()}>
+                    <li>Shops</li>
+                </Link>
             </nav>
             <div className="search_box">
                 <SearchPage />
