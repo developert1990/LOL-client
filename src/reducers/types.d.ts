@@ -77,4 +77,21 @@ export interface ProductActionType {
     reDirectUrl: string;
 }
 
+export interface userListActionType {
+    type: string;
+    payload: any;
+}
 
+export interface userDetailActionType {
+    type: string;
+    payload: userType | string;
+}
+
+export interface userProfileUpdateActionType {
+    type: string;
+    payload: any;
+}
+export interface userDeleteActionType {
+    type: string;
+    payload: any;
+}

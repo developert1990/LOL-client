@@ -1,4 +1,4 @@
-import { productCreateInitialState, productCreateInitialStateType, productCreateReducer, productListInitialState, ProductListInitialStateType, productListReducer } from './reducers/productReducer';
+import { productCreateInitialState, productCreateInitialStateType, productCreateReducer, productDeleteInitialStateType, productDeleteInitialState, productDeleteReducer, productListInitialState, productListInitialStateType, productListReducer, productUpdateInitialStateType, productUpdateInitialState, productUpdateReducer } from './reducers/productReducer';
 import { getRankInitialState, getRankInitialStateType, getRankReducer } from './reducers/getRankReducer';
 import { getGameDetailsInitialState, GetGameDetailsInitialStateType, getGameDetailsReducer } from './reducers/getGamesDetailReducer';
 import { GetGames100InitialStateType, getGames100InitialState, getGames100Reducer } from './reducers/getGames100Reducer';
@@ -11,7 +11,7 @@ import promise from 'redux-promise-middleware';
 // import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { userRegisterInitialType, userSigninInitialState, userSigninInitialStateType, userSigninReducer, userRegisterInitailState, userRegisterReducer, checkIsAdminInitialStateType, checkIsAdminInitialState, checkIsAdminReducer } from './reducers/userReducer';
+import { userRegisterInitialType, userSigninInitialState, userSigninInitialStateType, userSigninReducer, userRegisterInitailState, userRegisterReducer, checkIsAdminInitialStateType, checkIsAdminInitialState, checkIsAdminReducer, userListInitialStateType, userListInitialState, userListReducer, userDetailInitialStateType, userDetailInitialState, userDetailReducer, userUpdateInitialStateType, userUpdateInitialState, userUpdateReducer, userDeleteInitialStateType, userDeleteInitialState, userDeleteReducer } from './reducers/userReducer';
 
 
 
@@ -29,7 +29,13 @@ export interface initialAppStateType {
     registerStore: userRegisterInitialType,
     checkAdminStore: checkIsAdminInitialStateType,
     productCreateStore: productCreateInitialStateType,
-    productListStore: ProductListInitialStateType,
+    productListStore: productListInitialStateType,
+    productDeleteStore: productDeleteInitialStateType,
+    productUpdateStore: productUpdateInitialStateType,
+    userListStore: userListInitialStateType,
+    userDetailStore: userDetailInitialStateType,
+    userUpdateStore: userUpdateInitialStateType,
+    userDeleteStore: userDeleteInitialStateType,
 }
 
 export const initialAppState: initialAppStateType = {
@@ -47,6 +53,12 @@ export const initialAppState: initialAppStateType = {
     checkAdminStore: checkIsAdminInitialState,
     productCreateStore: productCreateInitialState,
     productListStore: productListInitialState,
+    productDeleteStore: productDeleteInitialState,
+    productUpdateStore: productUpdateInitialState,
+    userListStore: userListInitialState,
+    userDetailStore: userDetailInitialState,
+    userUpdateStore: userUpdateInitialState,
+    userDeleteStore: userDeleteInitialState,
 }
 
 const reducer = combineReducers({
@@ -64,6 +76,13 @@ const reducer = combineReducers({
     checkAdminStore: checkIsAdminReducer,
     productCreateStore: productCreateReducer,
     productListStore: productListReducer,
+    productDeleteStore: productDeleteReducer,
+    productUpdateStore: productUpdateReducer,
+    userListStore: userListReducer,
+    userDetailStore: userDetailReducer,
+    userUpdateStore: userUpdateReducer,
+    userDeleteStore: userDeleteReducer,
+
 });
 
 

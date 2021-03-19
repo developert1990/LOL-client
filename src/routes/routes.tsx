@@ -1,7 +1,7 @@
 import React from 'react';
 import { AdminRoute, Footer, NavbarComp, SearchResultWrapper, SideAdvertisement } from '../components/index';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { AdminProductCreatePage, AdminProductListPage, ChampionDetailPage, ChampionsPage, MainPage, ProductPage, RankPage, SigninPage, SignUpPage } from '../pages/index'
+import { AdminProductCreatePage, AdminProductListPage, AdminUserEditPage, AdminUserListPage, ChampionDetailPage, ChampionsPage, MainPage, ProductPage, RankPage, SigninPage, SignUpPage } from '../pages/index'
 import lolLogo from '../images/lol-logo.png';
 import { useSelector } from 'react-redux';
 import { initialAppStateType } from '../store';
@@ -39,6 +39,8 @@ export default () => {
                 <Route path="/register" component={SignUpPage} />
                 <AdminRoute path="/Admin/productList" component={AdminProductListPage} />
                 <AdminRoute path="/Admin/productCreate" component={AdminProductCreatePage} />
+                <AdminRoute path="/Admin/userList" component={AdminUserListPage} />
+                <AdminRoute path="/user/:id/edit" component={AdminUserEditPage} />
                 <Route path="/" component={MainPage} exact />
             </div>
             <Footer />
