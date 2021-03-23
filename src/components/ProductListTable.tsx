@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Pagination, { UsePaginationProps } from '@material-ui/lab/Pagination';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import { ProductType } from '../productTypes';
+import { deleteProduct } from '../actions/productAction';
+import { useDispatch } from 'react-redux';
 
 
 export interface ProductListTableProps {
@@ -13,9 +15,14 @@ export interface ProductListTableProps {
 
 export const ProductListTable: React.FC<ProductListTableProps> = ({ products }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+
     const deleteHandler = (product: ProductType) => {
-        // dispatch(deleteProduct(product));
-        console.log("삭제한다.")
+        if (window.confirm("Are you sure?")) {
+            dispatch(deleteProduct(product));
+            console.log("삭제한다.")
+        }
     }
     const createHandler = () => {
         history.push('/Admin/productCreate');
@@ -30,6 +37,8 @@ export const ProductListTable: React.FC<ProductListTableProps> = ({ products }) 
     const handlePageChange: UsePaginationProps["onChange"] = (event: React.ChangeEvent<unknown>, page: number) => {
         setPage(page);
     }
+
+
 
     useEffect(() => {
         if (products) {

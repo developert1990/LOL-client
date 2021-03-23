@@ -1,3 +1,4 @@
+import { USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LIST_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL, USER_DELETE_REQUEST, USER_DELETE_FAIL, USER_DELETE_SUCCESS } from './../constants/userConstants';
 import axios from 'axios';
 import { ThunkDispatch } from 'redux-thunk';
 import { API_BASE } from '../config';
@@ -101,10 +102,6 @@ export const checkIsAdmin = () => async (dispatch: ThunkDispatch<any, any, any>)
 
 
 
-
-
-
-
 export const refresh = () => async (dispatch: ThunkDispatch<any, any, any>) => {
     dispatch({ type: USER_SIGNIN_REQUEST });
     // console.log('API_BASE는==>>  ', `${API_BASE}/lolUser/signin`);
@@ -134,5 +131,92 @@ export const refresh = () => async (dispatch: ThunkDispatch<any, any, any>) => {
                     : error.message
         })
         dispatch(signout());
+    }
+}
+
+
+
+
+
+
+
+
+// Admin 계정으로 모든 유저 list 가져오기
+export const userList = () => async (dispatch: ThunkDispatch<any, any, any>) => {
+    dispatch({ type: USER_LIST_REQUEST });
+    try {
+        const { data } = await axios.get(`${API_BASE}/lolUser/admin/allUserList`, {
+            withCredentials: true
+        });
+        dispatch({ type: USER_LIST_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: USER_LIST_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// user detail Action
+export const userDetails = (userId: string) => async (dispatch: ThunkDispatch<any, any, any>, getState: () => any) => {
+    dispatch({ type: USER_DETAILS_REQUEST });
+    // const { userStore: { userInfo } } = getState();
+    try {
+        const { data } = await axios.get(`${API_BASE}/lolUser/admin/${userId}/userDetail`, {
+            withCredentials: true
+        });
+        // console.log(' 유저 디테일 받는 data', data);
+        dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
+    } catch (error) {
+        const message = error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        dispatch({ type: USER_DETAILS_FAIL, payload: message });
+    }
+}
+
+interface userUpdateByAdminType {
+    _id: string;
+    name: string;
+    email: string;
+    isAdmin: boolean;
+}
+
+// Admin 계정에서 다른 유저의 정보 변경
+export const userUpdate = (updateInfo: userUpdateByAdminType) => async (dispatch: ThunkDispatch<any, any, any>, getState: () => any) => {
+    dispatch({ type: USER_UPDATE_REQUEST });
+    // const { userStore: { userInfo } } = getState();
+    console.log(`updateInfo ==> `, updateInfo)
+    try {
+        const { data } = await axios.put(`${API_BASE}/lolUser/admin/${updateInfo._id}/userUpdate`, updateInfo, {
+            withCredentials: true,
+        });
+        dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+
+    } catch (error) {
+        const message = error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        dispatch({ type: USER_UPDATE_FAIL, payload: message });
+    }
+};
+
+
+// Admin 계정으로 클릭 유저 삭제
+export const userDelete = (userId: string) => async (dispatch: ThunkDispatch<any, any, any>) => {
+    dispatch({ type: USER_DELETE_REQUEST });
+    try {
+        const { data } = await axios.delete(`${API_BASE}/lolUser/admin/${userId}/userDelete`, {
+            withCredentials: true
+        });
+        dispatch({ type: USER_DELETE_SUCCESS, payload: data });
+    } catch (error) {
+        const message = error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        dispatch({ type: USER_DELETE_FAIL, payload: message });
     }
 }

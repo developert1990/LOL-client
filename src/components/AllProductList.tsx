@@ -5,7 +5,7 @@ import { ProductListTable } from './ProductListTable';
 
 export interface AllProductListProps {
     error: string;
-    products: ProductType[]
+    products: ProductType[];
 }
 export const AllProductList: React.FC<AllProductListProps> = ({ error, products }) => {
 
