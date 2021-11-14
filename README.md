@@ -1,3 +1,4 @@
+<!-- updated to new instance named AWS_EC2_Jaden. -->
 <!-- This Application -->
 when this game is updated, I should change the version of items, champs and spells.. at config > index.ts
 # Set up to run this application
